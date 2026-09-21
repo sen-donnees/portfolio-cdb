@@ -1,6 +1,7 @@
 # Profil GitHub `beyecheikh` — textes prêts à coller
 
-Rédigé le 2026-09-21. Tout ce qui est écrit ici est vérifié (CV, code des projets, pages publiques).
+Rédigé le 2026-09-21, révisé le même jour : **le français passe en premier** (niveau d'anglais : B2, on n'affiche pas « bilingue »).
+Tout ce qui est écrit ici est vérifié (CV, code des projets, pages publiques).
 Les champs entre `[crochets]` sont à compléter avant publication.
 Rien ici ne contient de téléphone ni d'adresse.
 
@@ -8,16 +9,16 @@ Rien ici ne contient de téléphone ni d'adresse.
 
 ## 1. Bio du profil (160 caractères maximum)
 
-**Recommandée (anglais, GitHub est international) — 126 caractères :**
-
-```
-Data Scientist & Full-Stack Developer. Co-founder & CTO of YoonuJob, founder of DocuSen. Statistics, machine learning, Django.
-```
-
-**Variante française — 148 caractères :**
+**Recommandée (français) — 148 caractères :**
 
 ```
 Data Scientist & Développeur Full-Stack. Cofondateur & directeur technique de YoonuJob, fondateur de DocuSen. Statistique, machine learning, Django.
+```
+
+**Variante anglaise, plus courte — 126 caractères :**
+
+```
+Data Scientist & Full-Stack Developer. Co-founder & CTO of YoonuJob, founder of DocuSen. Statistics, machine learning, Django.
 ```
 
 Autres champs du profil (Settings → Profile) :
@@ -40,41 +41,41 @@ Remplacer son contenu par le texte ci-dessous.
 ```markdown
 # Cheikh Darou Beye
 
-**Data Scientist × Full-Stack Developer**
+**Data Scientist × Développeur Full-Stack**
 
-Statistician by training (Master 2 Statistics & Data Science, Université Grenoble Alpes),
-builder by habit. I turn data into products that ship.
+Statisticien de formation (Master 2 Statistiques et Science des Données, Université Grenoble Alpes),
+bâtisseur par habitude. Je transforme la donnée en produits qui fonctionnent.
 
-**What I build**
+**Ce que je construis**
 
-- **[YoonuJob](https://www.yoonujob.com)** — co-founder & CTO. A recruitment platform for
-  candidates, companies and field ambassadors. I designed and built the whole platform.
-- **[DocuSen](https://www.getdocusen.com)** — founder & sole developer. 27 professional
-  document templates, one clean PDF each.
-- **Machine learning & statistics** — neural networks for microbial subtype detection,
-  spatial statistics, R Shiny applications.
+- **[YoonuJob](https://www.yoonujob.com)** — cofondateur & directeur technique. Une plateforme de
+  recrutement pour les candidats, les entreprises et des ambassadeurs de terrain. J'ai conçu et
+  développé toute la plateforme.
+- **[DocuSen](https://www.getdocusen.com)** — fondateur & développeur unique. 27 modèles de
+  documents professionnels, un PDF propre pour chacun.
+- **Machine learning & statistique** — réseaux de neurones pour la détection de sous-types
+  microbiens, statistique spatiale, applications R Shiny.
 
-**Public work** — [Banques-Cooperatives](https://github.com/beyecheikh/Banques-Cooperatives)
-(R Shiny, spatial data) · [Reconnaissance-de-chiffres](https://github.com/beyecheikh/Reconnaissance-de-chiffres)
-(SVM and CNN).
+**Travaux publics** — [Banques-Cooperatives](https://github.com/beyecheikh/Banques-Cooperatives)
+(R Shiny, données spatiales) · [Reconnaissance-de-chiffres](https://github.com/beyecheikh/Reconnaissance-de-chiffres)
+(SVM et CNN).
 
-Most of my recent work lives in private repositories.
-**Portfolio:** `[adresse du portfolio]` · **Contact:** cheikhdaroubeye@gmail.com
+La plupart de mes travaux récents sont dans des dépôts privés.
+**Portfolio :** `[adresse du portfolio]` · **Contact :** cheikhdaroubeye@gmail.com
 
 Python · R · SQL · Django · PostgreSQL
 
 ---
 
-**Data Scientist × Développeur Full-Stack** · Statisticien de formation (Master 2 Statistiques
-et Science des Données, Université Grenoble Alpes), bâtisseur par habitude. Je transforme la
-donnée en produits qui fonctionnent. La plupart de mes travaux récents sont dans des dépôts
-privés : voir mon portfolio.
+*English:* Data Scientist × Full-Stack Developer. Statistician by training, I build products
+from data. Most of my recent work is in private repositories: see my portfolio.
 ```
 
 Pourquoi ce texte est comme ça :
-- Il **explique le vide** (« la plupart de mon travail est privé ») au lieu de le laisser interpréter.
-- Il cite seulement des choses **vérifiables** : les deux sites sont publics, et le stack est celui de votre CV.
+- Il **explique le vide** (« la plupart de mes travaux récents sont privés ») au lieu de le laisser interpréter.
+- Il cite seulement des choses **vérifiables** : les deux sites sont publics, et la stack est celle de votre CV.
 - Pas de mur de badges ni d'emojis, comme votre portfolio.
+- L'anglais est réduit à **deux phrases simples** que vous maîtrisez.
 
 ---
 
@@ -103,7 +104,7 @@ Sur la page de chaque dépôt : roue crantée à droite de « About ».
 
 ## 4. Ordre des opérations
 
-1. **Envoyer le dépôt du portfolio** (privé) — voir le README du projet ou la conversation.
+1. **Envoyer le dépôt du portfolio** (privé).
 2. Créer le dépôt `beyecheikh` (public) avec le README de la section 2.
 3. Remplir la bio et le nom (section 1).
 4. Ajouter description et topics aux deux dépôts (section 3), puis les **épingler** (Profile → Customize your pins).
