@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Design system — CDB v1</title>
+<meta name="theme-color" content="#070B14">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent-hi);outline-offset:3px;border-radius:4px}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+.x{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--accent-hi)}
+.mono{font-family:var(--mono)}
+
+.page{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter)}
+.top{display:flex;justify-content:space-between;align-items:center;height:80px}
+.logo{display:inline-flex;align-items:center;gap:10px;font-weight:600;letter-spacing:.14em;font-size:14px}
+.logo-mark{width:8px;height:8px;background:var(--accent);display:block}
+.backlink{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--subtle);transition:color var(--t-fast)}
+.backlink:hover{color:var(--ink)}
+
+.hero{padding:clamp(24px,6vh,64px) 0 clamp(32px,6vh,64px)}
+.hero .eb{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--subtle)}
+.hero h1{font-weight:600;font-size:clamp(3rem,9vw,8.5rem);line-height:.9;letter-spacing:-.06em;margin:16px 0 20px -.03em}
+.hero h1 span:not(.x){color:var(--dim)}
+.hero h1 .x{font-size:1.15em;line-height:0}
+.hero p{max-width:38em;color:var(--muted);font-size:clamp(1rem,1.3vw,1.15rem);line-height:1.6}
+
+.ds{display:grid;grid-template-columns:200px minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:start}
+.idx{position:sticky;top:24px;display:flex;flex-direction:column;gap:2px;padding-top:6px}
+.idx a{display:flex;gap:12px;align-items:baseline;padding:7px 0;font-size:14px;color:var(--muted);border-bottom:1px solid var(--line);transition:color var(--t-fast)}
+.idx a i{font-family:var(--mono);font-style:normal;font-size:11px;letter-spacing:.06em;color:var(--subtle)}
+.idx a:hover{color:var(--ink)}
+
+.sec{padding:clamp(32px,6vh,64px) 0;border-top:1px solid var(--line)}
+.sec:first-child{border-top:0;padding-top:0}
+.sec h2{display:flex;align-items:baseline;gap:14px;font-weight:600;font-size:clamp(1.8rem,3.6vw,3rem);line-height:1;letter-spacing:-.045em}
+.sec h2 i{font-family:var(--mono);font-style:normal;font-weight:400;font-size:12px;letter-spacing:.08em;color:var(--accent-hi)}
+.lead{margin:14px 0 24px;max-width:44em;color:var(--muted);line-height:1.6}
+.sub{margin:clamp(24px,4vh,40px) 0 12px;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--subtle)}
+.rule{margin-top:14px;padding:14px 16px;border:1px solid var(--line);border-left:2px solid var(--accent);border-radius:var(--r-sm);background:rgba(91,108,255,.05);font-size:.95rem;color:var(--muted);line-height:1.55;max-width:52em}
+.rule b{color:var(--ink);font-weight:500}
+.no{border-left-color:var(--dim);background:rgba(236,234,228,.03)}
+ul.list{margin-top:12px;padding-left:1.1em;color:var(--muted);line-height:1.7;max-width:52em}
+ul.list li::marker{color:var(--subtle)}
+ul.list b{color:var(--ink);font-weight:500}
+code,.code{font-family:var(--mono);font-size:.86em;color:var(--accent-hi)}
+pre.code{display:block;overflow-x:auto;margin-top:12px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface);font-size:12.5px;line-height:1.7;color:var(--muted)}
+
+/* frame (composant) */
+.frame{position:relative;border:1px solid var(--line);border-radius:var(--r-md);background:radial-gradient(110% 80% at 80% 0%,rgba(91,108,255,.06),transparent 60%),var(--surface);padding:clamp(16px,2.4vw,28px)}
+.c{position:absolute;width:14px;height:14px;border:0 solid var(--line-strong);pointer-events:none}
+.c.tl{top:-1px;left:-1px;border-top-width:1px;border-left-width:1px}.c.tr{top:-1px;right:-1px;border-top-width:1px;border-right-width:1px}
+.c.bl{bottom:-1px;left:-1px;border-bottom-width:1px;border-left-width:1px}.c.br{bottom:-1px;right:-1px;border-bottom-width:1px;border-right-width:1px}
+
+/* palette */
+.sw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.sw{border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;background:var(--surface)}
+.sw .chip{height:74px;border-bottom:1px solid var(--line);background-image:linear-gradient(45deg,rgba(255,255,255,.05) 25%,transparent 25%,transparent 75%,rgba(255,255,255,.05) 75%),linear-gradient(45deg,rgba(255,255,255,.05) 25%,transparent 25%,transparent 75%,rgba(255,255,255,.05) 75%);background-size:12px 12px;background-position:0 0,6px 6px;position:relative}
+.sw .chip i{position:absolute;inset:0}
+.sw .meta{padding:12px 14px 14px}
+.sw .nm{font-weight:500;font-size:14.5px}
+.sw .tk{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--subtle);margin-top:2px}
+.sw .use{margin-top:8px;font-size:12.5px;line-height:1.45;color:var(--muted)}
+.sw .cr{display:inline-block;margin-top:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;padding:3px 7px;border-radius:999px;border:1px solid var(--line-strong);color:var(--muted)}
+.cr.ok{color:#9be3b8;border-color:rgba(155,227,184,.4)}
+.cr.mid{color:#f1d38a;border-color:rgba(241,211,138,.4)}
+.cr.ko{color:#f0a3a3;border-color:rgba(240,163,163,.4)}
+
+/* type */
+.ty{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,15em);gap:8px 24px;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--line)}
+.ty .spec{font-family:var(--mono);font-size:11px;letter-spacing:.03em;line-height:1.6;color:var(--subtle)}
+.ty .spec b{display:block;font-weight:500;color:var(--muted);letter-spacing:.1em;margin-bottom:2px}
+.t-xl{font-weight:600;font-size:clamp(2.4rem,6vw,4.6rem);line-height:.92;letter-spacing:-.055em}
+.t-l{font-weight:600;font-size:clamp(2rem,4vw,3.2rem);line-height:1;letter-spacing:-.045em}
+.t-st{font-size:clamp(1.3rem,2.2vw,1.95rem);line-height:1.28;letter-spacing:-.02em;font-weight:450;max-width:22em}
+.t-body{color:var(--muted);max-width:34em;line-height:1.6}
+.t-lab{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--subtle)}
+.t-meta{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--muted)}
+.two{color:var(--dim)}
+
+/* grille */
+.gr{display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+.gbox{position:relative;border:1px dashed var(--line-strong);border-radius:var(--r-sm);padding:14px;font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--subtle)}
+.gpage{background:rgba(91,108,255,.04);padding:0}
+.gpage .gut{display:grid;grid-template-columns:34px minmax(0,1fr) 34px;min-height:112px}
+.gpage .gut > div:first-child,.gpage .gut > div:last-child{background:repeating-linear-gradient(135deg,rgba(236,234,228,.07) 0 4px,transparent 4px 8px);display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;font-size:10px;letter-spacing:.14em}
+.gpage .gut > div:nth-child(2){padding:12px;display:grid;place-items:center;text-align:center;line-height:1.5}
+.pat{display:grid;gap:22px;margin-top:6px}
+.pat .p{display:grid;gap:8px;align-items:stretch}
+.pat .p > span{display:block;padding:14px 8px;border:1px solid var(--line-strong);border-radius:var(--r-sm);text-align:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--muted);background:rgba(7,11,20,.5)}
+.pat .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--subtle);margin-bottom:6px}
+
+/* espacements */
+.sp{display:grid;gap:8px}
+.sp div{display:grid;grid-template-columns:70px 60px minmax(0,1fr);gap:14px;align-items:center;font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--muted)}
+.sp b{font-weight:500;color:var(--ink)}
+.sp i{display:block;height:10px;background:var(--accent);opacity:.75;border-radius:2px}
+
+/* boutons */
+.btn{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 24px;border-radius:var(--r-pill);font-size:15px;font-weight:500;border:1px solid var(--line-strong);transition:background var(--t-fast),border-color var(--t-fast),color var(--t-fast)}
+.btn .arr{display:inline-block;transition:transform var(--t-med) var(--ease)}
+@media (hover:hover){.btn:hover .arr{transform:translateX(4px)}}
+.btn-primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn-primary:hover{background:#fff}
+.btn-ghost:hover{border-color:var(--ink);background:rgba(236,234,228,.05)}
+.pill{display:inline-flex;align-items:center;height:36px;padding:0 16px;border:1px solid var(--line-strong);border-radius:var(--r-pill);font-size:13px;transition:border-color var(--t-fast),background var(--t-fast)}
+.pill:hover{border-color:var(--ink);background:rgba(236,234,228,.05)}
+.lnk{font-family:var(--mono);font-size:12.5px;letter-spacing:.02em;color:var(--subtle);transition:color var(--t-fast)}
+.lnk:hover{color:var(--ink)}
+.lnk-u{border-bottom:1px solid var(--line-strong);color:var(--ink);transition:color var(--t-fast),border-color var(--t-fast)}
+.lnk-u:hover{color:var(--accent-hi);border-color:var(--accent-hi)}
+.menu-btn{display:inline-flex;align-items:center;gap:10px;height:36px;padding:0 14px;border:1px solid var(--line-strong);border-radius:var(--r-pill);font-family:var(--mono);font-size:12px;letter-spacing:.06em}
+.mb-i{position:relative;width:14px;height:8px;display:block}
+.mb-i::before,.mb-i::after{content:"";position:absolute;left:0;right:0;height:1px;background:currentColor}
+.mb-i::before{top:1px}.mb-i::after{top:7px}
+.row-flex{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.cell{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.cell small{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--subtle)}
+
+/* navigation */
+.navmock{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:64px}
+.navmock .links{display:flex;gap:30px}
+.navmock .links a{font-size:14px;color:var(--muted);position:relative;padding:6px 0}
+.navmock .links a[aria-current]{color:var(--ink)}
+.navmock .links a[aria-current]::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ink)}
+.navmock .r{display:flex;justify-content:flex-end;align-items:center;gap:18px}
+.lang{display:flex;gap:2px;font-family:var(--mono);font-size:12px}
+.lang span{padding:6px 8px;color:var(--subtle)}.lang span.on{color:var(--ink)}
+.phones{display:flex;flex-wrap:wrap;gap:20px}
+.phone{width:min(100%,272px);border:1px solid var(--line-strong);border-radius:22px;overflow:hidden;background:var(--bg)}
+.phone .bar{display:flex;justify-content:space-between;align-items:center;gap:8px;height:54px;padding:0 12px;border-bottom:1px solid var(--line)}
+.phone .bar > *{flex:none}
+.phone .lgm{display:inline-flex;align-items:center;gap:8px;font-weight:600;letter-spacing:.14em;font-size:12px}
+.phone .lgm i{width:7px;height:7px;background:var(--accent);display:block}
+.phone .body{height:250px;padding:16px 14px}
+.phone .body h4{font-weight:600;font-size:1.9rem;line-height:.95;letter-spacing:-.05em}
+.phone .body h4 span{color:var(--dim)}
+.phone .body p{margin-top:10px;font-size:12px;line-height:1.5;color:var(--muted)}
+.phone .ov a{display:block;padding:11px 0;border-bottom:1px solid var(--line);font-weight:600;font-size:1.7rem;letter-spacing:-.05em;line-height:1.05}
+.phone .ov a.cur{color:var(--accent-hi)}
+.phone .ov small{position:absolute}
+.pl{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--subtle);margin-bottom:8px}
+
+/* projets */
+.rowdemo{display:grid;grid-template-columns:68px minmax(0,1fr) auto 96px 28px;gap:8px 24px;align-items:center;padding:24px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.rowdemo .rn{font-family:var(--mono);font-size:12px;color:var(--accent-hi)}
+.rowdemo strong{display:block;font-weight:600;font-size:clamp(1.6rem,3vw,2.6rem);line-height:1;letter-spacing:-.045em}
+.rowdemo em{display:block;margin-top:8px;font-style:normal;color:var(--muted);font-size:.95rem;max-width:34em}
+.rowdemo .rk{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--subtle);text-align:right;white-space:nowrap}
+.rowdemo .rk b{font-weight:500;color:var(--muted)}
+.rb{display:flex;height:4px;gap:2px}.rb i{display:block;height:100%}
+.rb i:nth-child(1){background:var(--accent-hi)}.rb i:nth-child(2){background:rgba(236,234,228,.55)}.rb i:nth-child(3){background:rgba(236,234,228,.2)}
+.rowdemo .ra{font-family:var(--serif);font-style:italic;font-size:1.9rem;line-height:1;color:var(--accent-hi);text-align:right}
+.nodes{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:22px}
+.node{position:relative;border:1px solid var(--line-strong);border-radius:var(--r-sm);padding:14px 14px 13px;background:rgba(7,11,20,.55);color:var(--muted);font-size:13px;line-height:1.35;min-height:76px}
+.node b{display:block;font-weight:500;font-size:14.5px;color:var(--ink);margin-bottom:5px}
+.node small{display:block;font-family:var(--mono);font-size:10.5px;color:var(--subtle)}
+.node + .node::before{content:"→";position:absolute;left:-19px;top:50%;transform:translateY(-50%);width:16px;text-align:center;font-family:var(--serif);font-style:italic;font-size:17px;color:var(--subtle)}
+.node.on{border-color:var(--accent-hi);background:rgba(91,108,255,.10)}
+.node.bo{border-style:dashed}
+.fact3{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}
+.fact3 div{padding:18px 16px 0 0}.fact3 div + div{padding-left:18px;border-left:1px solid var(--line)}
+.fact3 b{display:block;font-weight:600;font-size:clamp(2.4rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}
+.fact3 span{display:block;margin-top:8px;font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--muted)}
+.anat{display:grid;gap:0;border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden}
+.anat div{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;padding:11px 14px;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+.anat div:last-child{border-bottom:0}
+.anat i{font-family:var(--mono);font-style:normal;font-size:11px;color:var(--accent-hi);padding-top:2px}
+.anat b{color:var(--ink);font-weight:500}
+
+/* mouvement */
+.mt{display:grid;gap:0;border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden}
+.mt div{display:grid;grid-template-columns:130px 100px minmax(0,1fr);gap:14px;padding:11px 14px;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+.mt div:last-child{border-bottom:0}
+.mt b{font-family:var(--mono);font-weight:500;font-size:12px;color:var(--ink)}
+.mt i{font-family:var(--mono);font-style:normal;font-size:12px;color:var(--accent-hi)}
+.demo{display:grid;gap:8px;margin-top:6px}
+.demo .it{height:34px;border:1px solid var(--line-strong);border-radius:var(--r-sm);background:rgba(7,11,20,.5);display:flex;align-items:center;padding:0 12px;font-family:var(--mono);font-size:11.5px;color:var(--muted);opacity:0;transform:translateY(14px)}
+.demo.play .it{animation:rv var(--t-slow) var(--ease) forwards;animation-delay:calc(var(--i)*90ms + 100ms)}
+@keyframes rv{to{opacity:1;transform:none}}
+.replay{margin-top:12px}
+
+/* responsive */
+.bp{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.bp div{border:1px solid var(--line);border-radius:var(--r-md);padding:14px;background:var(--surface)}
+.bp b{display:block;font-family:var(--mono);font-weight:500;font-size:13px;color:var(--accent-hi);letter-spacing:.04em}
+.bp span{display:block;margin-top:6px;font-size:13px;line-height:1.5;color:var(--muted)}
+
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:clamp(24px,5vh,56px);padding:24px 0 36px;border-top:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--subtle)}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.demo .it{opacity:1;transform:none;animation:none!important}}
+@media (max-width:980px){
+  .ds{grid-template-columns:minmax(0,1fr)}
+  .idx{position:static;flex-direction:row;flex-wrap:wrap;gap:6px 14px;padding:0 0 18px;border-bottom:1px solid var(--line)}
+  .idx a{border-bottom:0;padding:4px 0}
+  .rowdemo{grid-template-columns:minmax(0,1fr) 28px;grid-template-areas:"rn ra" "rt rt" "rk rk" "rb rb";gap:6px 12px}
+  .rowdemo .rn{grid-area:rn}.rowdemo .rt{grid-area:rt}.rowdemo .rk{grid-area:rk;text-align:left}.rowdemo .rb{grid-area:rb;max-width:220px}.rowdemo .ra{grid-area:ra;font-size:1.6rem}
+}
+@media (max-width:640px){
+  .gbox{min-width:0;overflow-wrap:anywhere}
+  .pat .p{grid-template-columns:minmax(0,1fr)!important}
+  .gpage .gut{grid-template-columns:22px minmax(0,1fr) 22px}
+  .gpage .gut > div:nth-child(2){padding:10px 6px;min-width:0}
+  .ty{grid-template-columns:minmax(0,1fr)}
+  .mt div{grid-template-columns:minmax(0,1fr);gap:2px}
+  .sp div{grid-template-columns:54px 50px minmax(0,1fr)}
+  .node + .node::before{content:"↓";left:14px;top:-15px;transform:none}
+  .nodes{grid-template-columns:minmax(0,1fr)}
+  .hero h1{font-size:clamp(2.4rem,13vw,3.4rem)}
+  .navmock .links{display:none}.navmock{grid-template-columns:1fr auto}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <a class="logo" href="hero-v1.html"><span class="logo-mark"></span>CDB</a>
+    <a class="backlink" href="hero-v1.html">← Retour au site</a>
+  </header>
+
+  <section class="hero">
+    <div class="eb">DESIGN SYSTEM · v1 · 2026</div>
+    <h1>Data <span class="x">×</span> Code<br><span class="x">×</span> <span>Product</span></h1>
+    <p>La direction artistique du portfolio de Cheikh Darou Beye, écrite comme un système : tout ce qui est ici est utilisé par le site. Les couleurs et les mesures de cette page sont lues dans <code>tokens.css</code>, donc elles ne peuvent pas se contredire.</p>
+  </section>
+
+  <div class="ds">
+    <nav class="idx" aria-label="Sommaire">
+      <a href="#palette"><i>01</i>Palette</a>
+      <a href="#typo"><i>02</i>Typographie</a>
+      <a href="#grille"><i>03</i>Grille</a>
+      <a href="#espace"><i>04</i>Espacements</a>
+      <a href="#boutons"><i>05</i>Boutons</a>
+      <a href="#nav"><i>06</i>Navigation</a>
+      <a href="#projets"><i>07</i>Projets</a>
+      <a href="#mouvement"><i>08</i>Animations</a>
+      <a href="#dark"><i>09</i>Dark mode</a>
+      <a href="#mobile"><i>10</i>Mobile</a>
+      <a href="#regles"><i>11</i>Règles</a>
+    </nav>
+
+    <main>
+
+      <!-- 01 -->
+      <section class="sec" id="palette">
+        <h2><i>01</i>Palette</h2>
+        <p class="lead">Un fond bleu nuit, un blanc cassé chaud, des gris bleutés, et <b>un seul accent</b> bleu-violet. Les swatches ci-dessous lisent les variables réelles ; le rapport de contraste WCAG est calculé sur le fond du site.</p>
+        <div class="sw-grid" id="sw"></div>
+        <div class="rule"><b>L'accent est un signal, pas un décor.</b> Il n'apparaît que pour : la page en cours, la donnée mise en évidence (point, barre, valeur), le « × » italique et les liens au survol. Jamais en grande surface.</div>
+        <div class="rule no"><b>Interdits :</b> dégradés violets, glassmorphism, ombres portées, une couleur par projet (testé avec un « Job » vert, refusé), logos de marques.</div>
+        <div class="sub">ACCESSIBILITÉ · CONTRASTES</div>
+        <div class="rule" id="dimnote"></div>
+      </section>
+
+      <!-- 02 -->
+      <section class="sec" id="typo">
+        <h2><i>02</i>Typographie</h2>
+        <p class="lead">Trois voix. <b>Geist</b> pour tout ce qui se lit, <b>Geist Mono</b> pour les détails techniques, <b>Instrument Serif italique</b> uniquement pour le « × » et de rares mots d'accent. Le serif ne devient jamais un style de page.</p>
+        <div class="ty"><div class="t-xl">Cheikh Darou <span class="two">Beye</span></div><div class="spec"><b>DISPLAY XL · nom du hero</b>Geist 600 · clamp(3.1rem, 7.4vw, 7.6rem)<br>interligne .92 · interlettre −.055em<br>mobile ≤520 px : clamp(2.3rem, 12.6vw, 3.4rem)</div></div>
+        <div class="ty"><div class="t-xl">Docu<span class="two">Sen</span></div><div class="spec"><b>DISPLAY XXL · titre de projet</b>Geist 600 · clamp(4rem, 15vw, 15rem)<br>interligne .86 · −.06em · 2e moitié en gris<br>mobile : clamp(2.6rem, 16.4vw, 4rem)</div></div>
+        <div class="ty"><div class="t-l">Data <span class="x">×</span> Code <span class="x">×</span> Product</div><div class="spec"><b>TITRE DE SECTION</b>Geist 600 · clamp(2rem, 4.2vw, 3.8rem)<br>−.045em · × en Instrument Serif italique</div></div>
+        <div class="ty"><div class="t-st">Trois rôles, une plateforme, un back-office sur mesure.</div><div class="spec"><b>ÉNONCÉ</b>Geist 450 · clamp(1.3rem, 2.2vw, 1.95rem)<br>interligne 1.28 · −.02em · largeur max 30em</div></div>
+        <div class="ty"><div class="t-body">Statisticien de formation, bâtisseur par habitude. Je transforme la donnée en produits qui fonctionnent, de l'analyse statistique aux plateformes en production.</div><div class="spec"><b>CORPS</b>Geist 400 · 1rem · interligne 1.6<br>couleur --muted · largeur max 44em</div></div>
+        <div class="ty"><div class="t-lab">01 · CONTEXTE</div><div class="spec"><b>ÉTIQUETTE</b>Geist Mono 11,5 px · MAJUSCULES<br>interlettre .14em · couleur --subtle</div></div>
+        <div class="ty"><div class="t-meta">django · postgresql · tailwind · docker</div><div class="spec"><b>MÉTA / DONNÉES</b>Geist Mono 12 px · interlettre .06em<br>couleur --muted</div></div>
+        <div class="rule"><b>Titres à deux tons :</b> une première moitié en encre, la seconde en <code>--dim</code> (Docu·Sen, Yoonu·Job, Cheikh Darou·Beye). C'est la signature typographique avec le « × » italique.</div>
+      </section>
+
+      <!-- 03 -->
+      <section class="sec" id="grille">
+        <h2><i>03</i>Grille</h2>
+        <p class="lead">Pas de grille de 12 colonnes : quelques <b>gabarits nommés</b>, tous dans un conteneur de 1440 px maximum avec une gouttière fluide de 20 à 56 px.</p>
+        <div class="gr">
+          <div class="gbox gpage"><div class="gut"><div>gouttière</div><div>conteneur <b style="color:var(--ink)">max 1440 px</b><br>gouttière = clamp(20px, 4vw, 56px)</div><div>gouttière</div></div></div>
+          <div class="pat">
+            <div><div class="lbl">A · HERO — 1,12fr / 0,88fr</div><div class="p" style="grid-template-columns:1.12fr .88fr"><span>texte + nom géant</span><span>signature interactive</span></div></div>
+            <div><div class="lbl">B · BLOC D'ÉTUDE DE CAS — 200 px / 1fr</div><div class="p" style="grid-template-columns:200px 1fr"><span>étiquette</span><span>énoncé (30em max) + paragraphe (44em max)</span></div></div>
+            <div><div class="lbl">C · LISTE DES PROJETS — 1,5fr / 0,8fr, colonne droite collante</div><div class="p" style="grid-template-columns:1.5fr .8fr"><span>lignes de projets</span><span>ternaire + lecture</span></div></div>
+            <div><div class="lbl">D · CHIFFRES — 3 à 4 colonnes séparées par un filet</div><div class="p" style="grid-template-columns:repeat(4,1fr)"><span>27</span><span>690+</span><span>0</span><span>3</span></div></div>
+          </div>
+        </div>
+        <div class="rule"><b>Règle d'or des grilles :</b> toute colonne fluide s'écrit <code>minmax(0,1fr)</code>, jamais <code>1fr</code>. Sinon un bloc de code ou un long mot élargit la colonne et la page glisse horizontalement.</div>
+      </section>
+
+      <!-- 04 -->
+      <section class="sec" id="espace">
+        <h2><i>04</i>Espacements</h2>
+        <p class="lead">Une échelle de 4 px pour les composants, et des rythmes verticaux fluides (en <code>vh</code>) pour les sections, afin que la page respire sur grand écran sans s'étirer sur mobile.</p>
+        <div class="sp" id="spx"></div>
+        <pre class="code">rythme entre sections    clamp(28px, 5vh, 56px)   haut/bas d'un bloc
+grand écart de section   clamp(48px, 9vh, 96px)   avant/après un visuel signature
+texte                    largeur en em, pas en px  (énoncé 30em · paragraphe 44em)</pre>
+      </section>
+
+      <!-- 05 -->
+      <section class="sec" id="boutons">
+        <h2><i>05</i>Boutons et liens</h2>
+        <p class="lead">Des pilules sobres. Le bouton principal est <b>blanc cassé plein</b>, pas bleu : le bleu reste réservé au signal. Une seule action principale par écran.</p>
+        <div class="row-flex">
+          <div class="cell"><a class="btn btn-primary" href="#boutons">Voir les projets <span class="arr">→</span></a><small>PRINCIPAL · 48 px</small></div>
+          <div class="cell"><a class="btn btn-ghost" href="#boutons">Télécharger le CV <span class="arr">↓</span></a><small>SECONDAIRE · contour</small></div>
+          <div class="cell"><a class="pill" href="#boutons">CV ↗</a><small>PASTILLE · 36 px (barre)</small></div>
+          <div class="cell"><button class="menu-btn" type="button">Menu <span class="mb-i" aria-hidden="true"></span></button><small>MENU MOBILE</small></div>
+        </div>
+        <div class="sub">LIENS</div>
+        <div class="row-flex">
+          <div class="cell"><a class="lnk" href="#boutons">GitHub ↗</a><small>LIEN DISCRET · mono</small></div>
+          <div class="cell"><a class="lnk-u" href="#boutons">yoonujob.com ↗</a><small>LIEN DE DONNÉE · souligné</small></div>
+        </div>
+        <ul class="list">
+          <li><b>Lien externe ou PDF</b> : nouvel onglet, <code>target="_blank" rel="noopener noreferrer"</code>, flèche ↗. <b>Lien interne</b> : même onglet.</li>
+          <li>La flèche d'un bouton avance de 4 px au survol, <b>seulement sur appareils à souris</b> (<code>@media (hover:hover)</code>).</li>
+          <li>Focus clavier visible : contour 2 px en <code>--accent-hi</code>. Ne jamais le retirer.</li>
+          <li>Sur mobile ≤520 px, les boutons passent en pleine largeur.</li>
+        </ul>
+      </section>
+
+      <!-- 06 -->
+      <section class="sec" id="nav">
+        <h2><i>06</i>Navigation</h2>
+        <p class="lead">Minimaliste : le nom en monogramme, quatre liens, la langue, le CV. Sur mobile, un seul bouton « Menu » ouvre un panneau plein écran.</p>
+        <div class="frame"><span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+          <div class="pl">BUREAU</div>
+          <div class="navmock"><a class="logo" href="#nav"><span class="logo-mark"></span>CDB</a>
+            <div class="links"><a aria-current="page" href="#nav">Projets</a><a href="#nav">Approche</a><a href="#nav">À propos</a><a href="#nav">Contact</a></div>
+            <div class="r"><div class="lang"><span>EN</span><span class="on">FR</span></div><a class="pill" href="#nav">CV ↗</a></div></div>
+        </div>
+        <div class="sub">MOBILE</div>
+        <div class="phones">
+          <div><div class="pl">FERMÉ</div><div class="phone"><div class="bar"><span class="lgm"><i></i>CDB</span><span class="mono" style="font-size:11px;color:var(--muted)">EN <b style="color:var(--ink);font-weight:500">FR</b></span><button class="menu-btn" style="height:30px;padding:0 11px;font-size:11px" type="button">Menu <span class="mb-i"></span></button></div><div class="body"><h4>Cheikh Darou<br><span>Beye</span></h4><p>La barre du haut reste collée pendant le défilement.</p></div></div></div>
+          <div><div class="pl">OUVERT</div><div class="phone"><div class="bar"><span class="lgm"><i></i>CDB</span><span class="mono" style="font-size:11px;color:var(--muted)">EN <b style="color:var(--ink);font-weight:500">FR</b></span><button class="menu-btn" style="height:30px;padding:0 11px;font-size:11px" type="button">Fermer ×</button></div><div class="body ov"><a class="cur" href="#nav">Projets</a><a href="#nav">Approche</a><a href="#nav">À propos</a><a href="#nav">Contact</a></div></div></div>
+        </div>
+        <ul class="list">
+          <li>Page en cours : <b>soulignée</b> sur bureau, <b>en accent</b> dans le panneau mobile. Aucun numéro dans le menu.</li>
+          <li>Chaque page projet a « ← Tous les projets » en haut et « Projet suivant » en bas, en très grand.</li>
+          <li>Le panneau se ferme au clic sur un lien, avec Échap, et si l'écran redevient large.</li>
+        </ul>
+      </section>
+
+      <!-- 07 -->
+      <section class="sec" id="projets">
+        <h2><i>07</i>Projets</h2>
+        <p class="lead">Jamais de grille de petites cartes. Chaque projet a une <b>ligne</b> dans l'index et une <b>étude de cas</b> avec son propre visuel signature, dans le même langage : cadres à angles, étapes, tuiles, chiffres.</p>
+        <div class="sub">LIGNE DE L'INDEX</div>
+        <div class="rowdemo"><span class="rn">N°05</span><div class="rt"><strong>YoonuJob</strong><em>Une plateforme de recrutement : candidats, entreprises, candidatures et créateur de CV.</em></div><div class="rk"><b>PRODUIT</b><br>En ligne</div><div class="rb"><i style="flex:.1"></i><i style="flex:.3"></i><i style="flex:.6"></i></div><div class="ra">→</div></div>
+        <div class="sub">CADRE + ÉTAPES (visuel signature)</div>
+        <div class="frame"><span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+          <div class="nodes"><div class="node"><b>Profil</b><small>compétences, expériences</small></div><div class="node on"><b>CV builder</b><small>gratuit pour tous</small></div><div class="node"><b>Postuler</b><small>à une offre</small></div><div class="node bo"><b>Valider</b><small>back-office · pointillé</small></div></div>
+        </div>
+        <div class="sub">CHIFFRES</div>
+        <div class="fact3"><div><b>27</b><span>modèles de documents</span></div><div><b>690+</b><span>tests automatisés</span></div><div><b>14</b><span>régions couvertes</span></div></div>
+        <div class="sub">ANATOMIE D'UNE ÉTUDE DE CAS</div>
+        <div class="anat">
+          <div><i>01</i><span><b>En-tête</b> — N° / statut, titre géant à deux tons, accroche avec un mot en serif italique, 4 métadonnées (rôle, type, stack, lien)</span></div>
+          <div><i>02</i><span><b>Visuel signature</b> — propre au projet : planche des 27 documents, schéma des 3 rôles + back-office, etc.</span></div>
+          <div><i>03</i><span><b>Chiffres</b> — 3 ou 4 valeurs vérifiées dans le code</span></div>
+          <div><i>04</i><span><b>Blocs</b> — Contexte, Problème, Solution, Ingénierie, Rôle, Stack, Résultat (étiquette à gauche, énoncé à droite)</span></div>
+          <div><i>05</i><span><b>Ternaire</b> — position du projet entre Data, Code et Product</span></div>
+          <div><i>06</i><span><b>Projet suivant</b> — nom géant cliquable</span></div>
+        </div>
+        <div class="rule no"><b>Pas de logos, pas de captures inventées.</b> Un visuel est soit dessiné à partir de données réelles du code, soit une vraie capture avec des données fictives fournie par Cheikh.</div>
+      </section>
+
+      <!-- 08 -->
+      <section class="sec" id="mouvement">
+        <h2><i>08</i>Animations</h2>
+        <p class="lead">Une seule courbe pour tout le site, quelques durées, et des mouvements qui ont une raison. Aucun effet décoratif en boucle, hormis la dérive très lente du graphique du hero.</p>
+        <div class="mt">
+          <div><b>--ease</b><i>cubic-bezier</i><span>(.2, .7, .2, 1) — départ vif, arrivée douce, pour tout</span></div>
+          <div><b>--t-fast</b><i>.25 s</i><span>couleurs, bordures, fonds au survol</span></div>
+          <div><b>--t-med</b><i>.4 s</i><span>déplacements au survol (flèche +4 à +12 px, carte −3 à −4 px)</span></div>
+          <div><b>--t-slow</b><i>.9 s</i><span>apparition à l'arrivée : montée de 14 px + fondu, décalage de 90 ms par élément</span></div>
+          <div><b>défilement</b><i>.8 s</i><span>apparition des blocs quand ils entrent à l'écran (une fois)</span></div>
+        </div>
+        <div class="sub">APPARITION EN CASCADE</div>
+        <div class="demo" id="demo"><div class="it" style="--i:0">eyebrow</div><div class="it" style="--i:1">nom</div><div class="it" style="--i:2">rôle</div><div class="it" style="--i:3">accroche</div></div>
+        <button class="btn btn-ghost replay" id="replay" type="button">Rejouer <span class="arr">↻</span></button>
+        <ul class="list">
+          <li><b>Réagit au curseur</b> : le nuage de points du hero (position = fenêtre, hauteur = largeur de fenêtre), le schéma des rôles, les tuiles de documents, le ternaire.</li>
+          <li><b>Au toucher</b> : les mêmes informations s'obtiennent par un appui (« Touchez un point »). Tout effet de déplacement horizontal est limité à <code>@media (hover:hover)</code>.</li>
+          <li><b>Accessibilité</b> : <code>prefers-reduced-motion</code> coupe les apparitions et la dérive.</li>
+          <li><b>Interdit</b> : animer la largeur, la hauteur ou la position de mise en page ; parallaxe ; particules ; rebonds.</li>
+        </ul>
+      </section>
+
+      <!-- 09 -->
+      <section class="sec" id="dark">
+        <h2><i>09</i>Dark mode</h2>
+        <p class="lead"><b>Le sombre est l'identité, pas une option.</b> Le site est sombre uniquement pour la v1 (<code>color-scheme:dark</code>, <code>theme-color:#070B14</code>). Un thème clair est préparé sur le papier ci-dessous, à ne construire que si un lecteur en a vraiment besoin (impression, éclairage fort).</p>
+        <div class="sub">PROPOSITION DE THÈME CLAIR — NON APPLIQUÉE</div>
+        <div class="sw-grid" id="light"></div>
+        <ul class="list">
+          <li>Même structure, mêmes noms de variables : un thème = un bloc <code>:root[data-theme="light"]</code>.</li>
+          <li>Le CV et le PDF public doivent, eux, rester lisibles à l'impression : c'est le vrai cas d'usage du clair.</li>
+        </ul>
+      </section>
+
+      <!-- 10 -->
+      <section class="sec" id="mobile">
+        <h2><i>10</i>Mobile</h2>
+        <p class="lead">Le mobile n'est pas une version réduite : c'est la première chose que voit un recruteur. Trois points de rupture, et des règles apprises en testant.</p>
+        <div class="bp">
+          <div><b>≤ 980 px</b><span>menu « Menu ≡ », barre du haut collante, 1 colonne pour les gabarits</span></div>
+          <div><b>≤ 760 px</b><span>schéma des rôles : une étape par ligne, flèches vers le bas</span></div>
+          <div><b>≤ 520 px</b><span>titres géants en <code>clamp(…vw…)</code> propres, boutons pleine largeur, pastille CV dans le panneau</span></div>
+        </div>
+        <ul class="list">
+          <li><b>Aucun défilement horizontal, à aucune largeur.</b> Vérifié de 300 à 1100 px, en FR et en EN, avant chaque livraison.</li>
+          <li>Colonnes en <code>minmax(0,1fr)</code> ; contenus larges (code) avec leur propre <code>overflow-x:auto</code> ; lignes de « stack » avec des points de coupure.</li>
+          <li><code>html, body { overflow-x: clip }</code> en filet de sécurité (les iPhone ignorent <code>hidden</code>).</li>
+          <li>Pas d'information cachée derrière un survol : un équivalent tactile existe toujours.</li>
+          <li>Cible tactile minimale de 36 px de haut pour les pastilles et 48 px pour les boutons principaux.</li>
+        </ul>
+      </section>
+
+      <!-- 11 -->
+      <section class="sec" id="regles">
+        <h2><i>11</i>Règles éditoriales</h2>
+        <p class="lead">Le design serait inutile avec un contenu douteux. Ces règles viennent des décisions déjà prises.</p>
+        <ul class="list">
+          <li><b>Vérité d'abord.</b> Aucune technologie, aucun chiffre non vérifié dans le code. Pas de PostgreSQL ou de Tailwind sur DocuSen, pas de CI sur YoonuJob.</li>
+          <li><b>Confidentialité.</b> ITSAP / Miellée et bioMérieux : méthode et technologies seulement, jamais de données, de captures, de noms de constructeurs ou de partenaire. Clients nommés seulement avec leur accord.</li>
+          <li><b>Vie privée.</b> Ni téléphone ni adresse en public. Contact : e-mail, GitHub, LinkedIn.</li>
+          <li><b>Rôles exacts.</b> « Cofondateur & directeur technique (CTO) » pour YoonuJob ; « Fondateur & développeur unique » pour DocuSen.</li>
+          <li><b>Bilingue à égalité.</b> Chaque texte existe en français et en anglais, testé dans les deux (le français est souvent plus long).</li>
+          <li><b>États honnêtes.</b> « En ligne », « Bientôt prêt », « Livré » : le back-office de YoonuJob tourne en local et le dit.</li>
+          <li><b>Signature.</b> Data × Code × Product, le « × » italique, les titres à deux tons, et le diagramme ternaire dont les pondérations sont auto-évaluées.</li>
+        </ul>
+      </section>
+
+    </main>
+  </div>
+
+  <footer class="foot"><span>© 2026 Cheikh Darou Beye · design system v1</span><span>tokens.css</span></footer>
+</div>
+
+<script>
+/* ═══ contraste WCAG ═══ */
+const lum=h=>{const [r,g,b]=[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*r+.7152*g+.0722*b};
+const ratio=(a,b)=>{const [x,y]=[lum(a),lum(b)].sort((p,q)=>q-p);return (x+.05)/(y+.05)};
+const grade=r=>r>=7?['AAA','ok']:r>=4.5?['AA','ok']:r>=3?['AA gros texte','mid']:['insuffisant','ko'];
+const tok=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+/* ═══ palette ═══ */
+const SW=[
+ ['--bg','Fond','Page, barre collante, panneau mobile',0],
+ ['--surface','Surface','Cadres, blocs de code, panneaux',0],
+ ['--ink','Encre','Titres, texte principal, bouton principal',1],
+ ['--muted','Gris texte','Paragraphes et descriptions',1],
+ ['--subtle','Gris étiquette','Petit texte : étiquettes, métadonnées, légendes',1],
+ ['--dim','Gris discret','Décor et 2e ton des GRANDS titres seulement',1],
+ ['--line','Filet','Séparateurs de 1 px',0],
+ ['--line-strong','Filet marqué','Contours de boutons, cadres, étapes',0],
+ ['--accent','Accent','Fonds et graphiques : monogramme, point, barres',1],
+ ['--accent-hi','Accent texte','× italique, liens actifs, valeurs mises en évidence',1]
+];
+const bg=tok('--bg');
+document.getElementById('sw').innerHTML=SW.map(([t,n,u,c])=>{
+  const v=tok(t);let badge='';
+  if(c&&v.startsWith('#')){const r=ratio(v,bg),g=grade(r);badge=`<span class="cr ${g[1]}">${r.toFixed(1)} : 1 · ${g[0]}</span>`}
+  return `<div class="sw"><div class="chip"><i style="background:var(${t})"></i></div><div class="meta"><div class="nm">${n}</div><div class="tk">${t} · ${v}</div><div class="use">${u}</div>${badge}</div></div>`}).join('');
+const rd=ratio(tok('--dim'),bg),rs=ratio(tok('--subtle'),bg);
+document.getElementById('dimnote').innerHTML=`<b>Appliqué le 21/09/2026.</b> <code>--dim</code> (${tok('--dim')}) fait ${rd.toFixed(1)} : 1 sur le fond : sous le seuil de 4,5 : 1 pour du petit texte. Il est donc réservé au décor et au 2e ton des <b>grands</b> titres (lisibles à partir de 3 : 1). Tout le petit texte (étiquettes en 11 px, métadonnées, légendes) utilise <code>--subtle</code> (${tok('--subtle')}, ${rs.toFixed(1)} : 1). Règle : <b>jamais <code>--dim</code> pour du texte de moins de 24 px.</b>`;
+
+/* ═══ espacements ═══ */
+document.getElementById('spx').innerHTML=[1,2,3,4,5,6,7,8,9,10].map(i=>{const v=parseInt(tok('--s-'+i));return `<div><b>--s-${i}</b><span>${v} px</span><i style="width:${v*2}px;max-width:100%"></i></div>`}).join('');
+
+/* ═══ thème clair proposé ═══ */
+const LT=[['bg','#F6F4EF','Fond'],['surface','#FFFFFF','Surface'],['ink','#0B1020','Encre'],['muted','#4A5570','Gris texte'],['dim','#6B7690','Gris discret'],['accent','#3D4FE0','Accent'],['accent-hi','#2E3FCF','Accent texte']];
+document.getElementById('light').innerHTML=LT.map(([k,h,n])=>{
+  let badge='';if(!['bg','surface'].includes(k)){const r=ratio(h,'#F6F4EF'),g=grade(r);badge=`<span class="cr ${g[1]}">${r.toFixed(1)} : 1 · ${g[0]}</span>`}
+  return `<div class="sw"><div class="chip"><i style="background:${h}"></i></div><div class="meta"><div class="nm">${n}</div><div class="tk">--${k} · ${h}</div>${badge}</div></div>`}).join('');
+
+/* ═══ démo d'apparition ═══ */
+const demo=document.getElementById('demo');
+const play=()=>{demo.classList.remove('play');void demo.offsetWidth;demo.classList.add('play')};
+document.getElementById('replay').addEventListener('click',play);
+if('IntersectionObserver' in window){const io=new IntersectionObserver(e=>{if(e[0].isIntersecting){play();io.disconnect()}},{threshold:.4});io.observe(demo)}else play();
+</script>
+</body>
+</html>

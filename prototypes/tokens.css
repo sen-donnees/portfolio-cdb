@@ -1,0 +1,45 @@
+/* ─────────────────────────────────────────────────────────────
+   CDB — design tokens (source unique de vérité)
+   Utilisés par prototypes/design-system-v1.html.
+   À déplacer dans static/css/tokens.css quand le site passera en
+   templates Django. Les pages prototypes ont encore ces valeurs
+   recopiées dans leur <style> : toute modification doit être
+   reportée aux deux endroits jusqu'à la migration.
+   ───────────────────────────────────────────────────────────── */
+:root{
+  /* Couleur — thème sombre (identité) */
+  --bg:#070B14;                       /* fond de page */
+  --surface:#0E1424;                  /* cadres, blocs de code, panneaux */
+  --ink:#ECEAE4;                      /* texte principal, bouton principal */
+  --muted:#8A93A8;                    /* paragraphes, descriptions */
+  --dim:#5E6A85;                      /* décor, 2e ton des GRANDS titres (3,6:1 : jamais pour du petit texte) */
+  --subtle:#7480A0;                   /* petit texte : étiquettes, métadonnées, légendes (5,0:1) */
+  --line:rgba(236,234,228,.10);       /* filet 1 px */
+  --line-strong:rgba(236,234,228,.22);/* contours boutons, cadres */
+  --accent:#5B6CFF;                   /* fonds / graphiques */
+  --accent-hi:#8E9BFF;                /* texte d'accent, ×, liens actifs */
+
+  /* Typographie */
+  --sans:'Geist',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'Geist Mono',ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+
+  /* Mise en page */
+  --maxw:1440px;
+  --gutter:clamp(20px,4vw,56px);
+
+  /* Espacement (échelle de 4 px) */
+  --s-1:4px;  --s-2:8px;  --s-3:12px; --s-4:16px; --s-5:24px;
+  --s-6:32px; --s-7:48px; --s-8:64px; --s-9:96px; --s-10:128px;
+
+  /* Rayons */
+  --r-sm:3px;      /* étapes, tuiles */
+  --r-md:4px;      /* cadres */
+  --r-pill:999px;  /* boutons, pastilles */
+
+  /* Mouvement */
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --t-fast:.25s;   /* couleurs, bordures */
+  --t-med:.4s;     /* déplacements au survol */
+  --t-slow:.9s;    /* apparition */
+}

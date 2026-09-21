@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DocuSen — Case study prototype v1</title>
+<meta name="theme-color" content="#070B14">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070B14; --surface:#0E1424; --ink:#ECEAE4; --muted:#8A93A8; --dim:#5E6A85; --subtle:#7480A0;
+  --line:rgba(236,234,228,.10); --line-strong:rgba(236,234,228,.22);
+  --accent:#5B6CFF; --accent-hi:#8E9BFF;
+  --sans:'Geist',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'Geist Mono',ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --gutter:clamp(20px,4vw,56px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent-hi);outline-offset:3px;border-radius:4px}
+.page{max-width:1440px;margin:0 auto;padding:0 var(--gutter)}
+.mono{font-family:var(--mono)}
+.x{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--accent-hi)}
+
+/* nav (same as hero) */
+.nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:80px}
+.logo{display:inline-flex;align-items:center;gap:10px;font-weight:600;letter-spacing:.14em;font-size:14px}
+.logo-mark{width:8px;height:8px;background:var(--accent);display:block}
+.nav-links{display:flex;gap:36px}
+.nav-links a{font-size:14px;color:var(--muted);position:relative;padding:6px 0;transition:color .25s}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.nav-links a:hover,.nav-links a[aria-current]{color:var(--ink)}
+.nav-links a:hover::after,.nav-links a[aria-current]::after{transform:scaleX(1)}
+.nav-r{display:flex;justify-content:flex-end;align-items:center;gap:20px}
+.lang{display:flex;gap:2px;font-family:var(--mono);font-size:12px}
+.lang button{padding:6px 8px;color:var(--subtle);letter-spacing:.06em;transition:color .2s}
+.lang button:hover{color:var(--muted)}
+.lang button[aria-pressed="true"]{color:var(--ink)}
+.pill{display:inline-flex;align-items:center;height:36px;padding:0 16px;border:1px solid var(--line-strong);border-radius:999px;font-size:13px;transition:border-color .25s,background .25s}
+.pill:hover{border-color:var(--ink);background:rgba(236,234,228,.05)}
+
+/* mobile menu */
+.menu-btn{display:none;align-items:center;gap:10px;height:36px;padding:0 14px;border:1px solid var(--line-strong);border-radius:999px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;transition:border-color .25s}
+.menu-btn:hover{border-color:var(--ink)}
+.mb-i{position:relative;width:14px;height:8px;display:block}
+.mb-i::before,.mb-i::after{content:"";position:absolute;left:0;right:0;height:1px;background:currentColor;transition:transform .3s cubic-bezier(.2,.7,.2,1),top .3s cubic-bezier(.2,.7,.2,1)}
+.mb-i::before{top:1px}.mb-i::after{top:7px}
+.menu-btn[aria-expanded="true"] .mb-i::before{top:4px;transform:rotate(45deg)}
+.menu-btn[aria-expanded="true"] .mb-i::after{top:4px;transform:rotate(-45deg)}
+.mnav{position:fixed;inset:0;z-index:55;background:var(--bg);padding:104px var(--gutter) 28px;display:flex;flex-direction:column;justify-content:space-between;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.mnav.open{opacity:1;visibility:visible}
+.mnav-links{display:flex;flex-direction:column}
+.mnav-links a{display:flex;align-items:baseline;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);font-weight:600;font-size:clamp(2.2rem,11vw,3.4rem);letter-spacing:-.05em;line-height:1.05}
+.mnav-links a[aria-current]{color:var(--accent-hi)}
+.mnav-foot{display:flex;flex-direction:column;align-items:flex-start;gap:16px;font-family:var(--mono);font-size:13px;color:var(--muted)}
+html.menu-open{overflow:hidden}
+@media (min-width:981px){.mnav{display:none}}
+@media (max-width:980px){
+  .menu-btn{display:inline-flex}
+  .nav{position:sticky;top:0;z-index:60;background:var(--bg);margin:0 calc(-1*var(--gutter));padding:0 var(--gutter);border-bottom:1px solid var(--line)}
+}
+@media (max-width:520px){.nav-r .pill{display:none}.nav-r{gap:12px}}
+
+/* header */
+.back{display:inline-flex;gap:8px;margin-top:clamp(12px,3vh,32px);font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--subtle);transition:color .2s}
+.back:hover{color:var(--ink)}
+.case-top{display:flex;justify-content:space-between;align-items:center;margin-top:clamp(28px,6vh,64px);font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--subtle)}
+.case-top .live{display:inline-flex;align-items:center;gap:10px;color:var(--muted)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--accent-hi)}
+.case-title{font-weight:600;font-size:clamp(4rem,15vw,15rem);line-height:.86;letter-spacing:-.06em;margin:clamp(14px,2.6vh,28px) 0 clamp(18px,3vh,32px);margin-left:-.04em}
+.case-title .t2{color:var(--dim)}
+.case-sub{font-size:clamp(1.2rem,2.3vw,2.1rem);font-weight:500;letter-spacing:-.025em;max-width:22em;line-height:1.2}
+.case-sub .x{font-size:1.25em;line-height:0}
+.meta{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:clamp(32px,6vh,64px);border-top:1px solid var(--line)}
+.meta > div{padding:18px 24px 0 0}
+.meta > div + div{padding-left:24px;border-left:1px solid var(--line)}
+.meta dt{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--subtle);margin-bottom:8px}
+.meta dd{font-size:15px;color:var(--ink)}
+.meta a{border-bottom:1px solid var(--line-strong);transition:border-color .2s,color .2s}
+.meta a:hover{color:var(--accent-hi);border-color:var(--accent-hi)}
+
+/* specimen */
+.spec{margin-top:clamp(48px,9vh,96px)}
+.frame{position:relative;border:1px solid var(--line);border-radius:4px;background:radial-gradient(110% 80% at 80% 0%,rgba(91,108,255,.06),transparent 60%),var(--surface);padding:clamp(20px,3vw,40px)}
+.c{position:absolute;width:14px;height:14px;border:0 solid var(--line-strong);pointer-events:none}
+.c.tl{top:-1px;left:-1px;border-top-width:1px;border-left-width:1px}
+.c.tr{top:-1px;right:-1px;border-top-width:1px;border-right-width:1px}
+.c.bl{bottom:-1px;left:-1px;border-bottom-width:1px;border-left-width:1px}
+.c.br{bottom:-1px;right:-1px;border-bottom-width:1px;border-right-width:1px}
+.spec-head{display:flex;justify-content:space-between;gap:16px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--subtle);margin-bottom:clamp(18px,3vw,32px)}
+.spec-head b{font-weight:500;color:var(--ink)}
+.fam{display:grid;grid-template-columns:200px 1fr;gap:16px 24px;align-items:center;padding:16px 0;border-top:1px solid var(--line)}
+.fam:first-of-type{border-top:0;padding-top:0}
+.fam-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--muted)}
+.fam-label span{display:block;margin-top:4px;color:var(--subtle);letter-spacing:.06em}
+.tiles{display:flex;flex-wrap:wrap;align-items:flex-start;gap:18px 14px}
+.tile{display:block;width:clamp(84px,7.6vw,104px);text-align:left;color:rgba(236,234,228,.38);border-radius:3px;transition:color .25s,transform .35s cubic-bezier(.2,.7,.2,1)}
+.tile svg{display:block;width:62%;height:auto;aspect-ratio:60/78;overflow:visible;padding:0}
+.tile .tn{display:block;margin-top:10px;font-size:11.5px;line-height:1.3;letter-spacing:-.005em;color:var(--muted);transition:color .25s}
+.tile .tn i{display:block;font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--subtle);margin-bottom:2px;transition:color .25s}
+.tile:hover,.tile:focus-visible,.tile.on{color:var(--accent-hi);transform:translateY(-4px)}
+.tile:hover .tn,.tile:focus-visible .tn{color:var(--ink)}
+.tile:hover .tn i,.tile:focus-visible .tn i{color:var(--accent-hi)}
+.spec-cap{display:flex;justify-content:space-between;gap:16px;margin-top:20px;padding-top:16px;border-top:1px solid var(--line);font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--subtle);min-height:38px}
+.spec-cap b{font-weight:500;color:var(--ink)}
+.pipe{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-top:22px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--muted)}
+.pipe i{font-style:normal;color:var(--accent-hi)}
+.pipe em{font-style:normal;color:var(--ink)}
+
+/* facts */
+.facts{display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(48px,8vh,88px);border-top:1px solid var(--line)}
+.fact{padding:28px 24px 0 0}
+.fact + .fact{padding-left:24px;border-left:1px solid var(--line)}
+.fact b{display:block;font-weight:600;font-size:clamp(3rem,6.4vw,6.4rem);line-height:1;letter-spacing:-.05em}
+.fact span{display:block;margin-top:12px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--muted);max-width:22em}
+
+/* case blocks */
+.blocks{margin-top:clamp(56px,10vh,120px)}
+.blk{display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px 24px;padding:clamp(28px,5vh,56px) 0;border-top:1px solid var(--line)}
+.blk-k{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--subtle)}
+.blk-k i{font-style:normal;color:var(--accent-hi);margin-right:10px}
+.blk-b{min-width:0}
+.blk-b p.big{font-size:clamp(1.3rem,2.2vw,1.95rem);line-height:1.28;letter-spacing:-.02em;font-weight:450}
+.blk-b p.big em{font-style:normal;color:var(--muted)}
+.blk-b p + p{margin-top:18px}
+.blk-b p.big{max-width:30em}
+.blk-b p.sm{max-width:44em}
+.blk-b p.sm{color:var(--muted);font-size:1.02rem;line-height:1.6}
+.stack{font-family:var(--mono);font-size:13px;letter-spacing:.02em;color:var(--muted);line-height:2}
+.stack b{font-weight:500;color:var(--ink)}
+.stack s{text-decoration:none;color:var(--subtle);margin:0 .5em}
+.stack s::after{content:"\200b"}
+.code{max-width:46em;margin-top:26px;border:1px solid var(--line);border-radius:4px;background:var(--surface);overflow:hidden}
+.code-h{display:flex;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--subtle)}
+.code pre{padding:16px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.75;color:var(--muted);tab-size:2}
+.code .k{color:var(--ink)} .code .s{color:var(--accent-hi)} .code .cm{color:var(--subtle)}
+
+/* ternary */
+.tern-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:center;padding:clamp(28px,5vh,56px) 0;border-top:1px solid var(--line)}
+.tern-wrap h2{font-weight:600;font-size:clamp(2rem,4.2vw,3.8rem);line-height:1;letter-spacing:-.045em}
+.tern-wrap h2 .x{font-size:1.2em;line-height:0}
+.tern-wrap p{margin-top:20px;color:var(--muted);max-width:30em;line-height:1.6}
+.tern-note{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--subtle);margin-top:18px}
+.tern{position:relative}
+.tern svg{display:block;width:100%;height:auto;max-height:560px;overflow:visible}
+.tern .vl{font-family:var(--mono);font-size:11px;letter-spacing:.16em;fill:var(--muted)}
+.tern .tri{fill:none;stroke:rgba(236,234,228,.28);stroke-width:1}
+.tern .gl{stroke:rgba(236,234,228,.07);stroke-width:1}
+.tern .pt{cursor:pointer}
+.tern .pt circle.d{fill:rgba(236,234,228,.5);transition:fill .25s,r .25s}
+.tern .pt circle.h{fill:none;stroke:var(--accent-hi);stroke-width:1;opacity:0;transition:opacity .25s}
+.tern .pt text{font-family:var(--mono);font-size:11px;letter-spacing:.06em;fill:var(--muted);transition:fill .25s}
+.tern .pt.cur circle.d{fill:var(--accent-hi)}
+.tern .pt.cur circle.h{opacity:1}
+.tern .pt.cur text,.tern .pt:hover text{fill:var(--ink)}
+.tern .pt:hover circle.d{fill:var(--accent-hi)}
+.tern-read{display:flex;justify-content:space-between;gap:12px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted);min-height:44px}
+.tern-read b{font-weight:500;color:var(--ink)}
+
+/* next + footer */
+.next{display:block;padding:clamp(40px,8vh,88px) 0;border-top:1px solid var(--line)}
+.next small{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--subtle);margin-bottom:14px}
+.next strong{display:flex;align-items:baseline;gap:.25em;font-weight:600;font-size:clamp(2.6rem,9vw,9rem);line-height:.95;letter-spacing:-.055em;transition:color .3s}
+.next strong .a{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--accent-hi);transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+@media (hover:hover){.next:hover strong .a{transform:translateX(12px)}}
+.next .t2{color:var(--dim)}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:24px 0 36px;border-top:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--subtle)}
+.foot a:hover{color:var(--ink)}
+
+/* motion */
+.rv{opacity:0;transform:translateY(14px);animation:rv .9s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--i,0)*90ms + 100ms)}
+@keyframes rv{to{opacity:1;transform:none}}
+.js .sr{opacity:0;transform:translateY(18px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.js .sr.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{animation:none;opacity:1;transform:none}.js .sr{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+/* responsive */
+@media (max-width:520px){
+  .case-title{font-size:clamp(2.6rem,16.4vw,4rem)}
+  .next strong{font-size:clamp(2rem,10vw,2.8rem);flex-wrap:wrap}
+}
+@media (max-width:980px){
+  .nav-links{display:none}.nav{grid-template-columns:1fr auto}
+  .meta{grid-template-columns:1fr 1fr}
+  .meta > div,.meta > div + div{padding:16px 16px 0 0;border-left:0}
+  .meta > div:nth-child(even){padding-left:16px;border-left:1px solid var(--line)}
+  .fam,.blk{grid-template-columns:minmax(0,1fr)}
+  .facts{grid-template-columns:minmax(0,1fr)}
+  .fact,.fact + .fact{padding:24px 0;border-left:0}
+  .fact + .fact{border-top:1px solid var(--line)}
+  .tern-wrap{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){.tiles{gap:16px 10px}.tile{width:calc((100% - 20px)/3)}.spec-head,.spec-cap{flex-direction:column;gap:6px}}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<div class="page">
+
+  <header class="nav">
+    <a class="logo" href="hero-v1.html" aria-label="Cheikh Darou Beye"><span class="logo-mark"></span>CDB</a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="work-v1.html" aria-current="page" data-i18n="nav_work">Work</a>
+      <a href="#" data-i18n="nav_approach">Approach</a>
+      <a href="#" data-i18n="nav_about">About</a>
+      <a href="#" data-i18n="nav_contact">Contact</a>
+    </nav>
+    <div class="nav-r">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+      </div>
+      <a class="pill" href="#" data-i18n="nav_cv">CV ↗</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav"><span class="mb-l">Menu</span><span class="mb-i" aria-hidden="true"></span></button>
+    </div>
+  </header>
+
+  <main>
+    <a class="back rv" style="--i:0" href="work-v1.html"><span>←</span><span data-i18n="back">All work</span></a>
+
+    <div class="case-top rv" style="--i:1">
+      <span>N°04 / 06</span>
+      <span class="live"><span class="dot"></span><span data-i18n="tag">Product · Live in production</span></span>
+    </div>
+    <h1 class="case-title rv" style="--i:2">Docu<span class="t2">Sen</span></h1>
+    <p class="case-sub rv" style="--i:3"><span data-i18n="sub1">Professional documents,</span> <span class="x" data-i18n="sub2">ready in minutes.</span></p>
+
+    <dl class="meta rv" style="--i:4">
+      <div><dt data-i18n="m_role">ROLE</dt><dd data-i18n="m_role_v">Founder &amp; sole developer</dd></div>
+      <div><dt data-i18n="m_type">TYPE</dt><dd data-i18n="m_type_v">Web product · PDF generation</dd></div>
+      <div><dt data-i18n="m_stack">STACK</dt><dd>Django · WeasyPrint · SQLite · Docker · Render</dd></div>
+      <div><dt data-i18n="m_link">LINK</dt><dd><a href="https://www.getdocusen.com" target="_blank" rel="noopener noreferrer">getdocusen.com ↗</a></dd></div>
+    </dl>
+
+    <!-- Specimen -->
+    <section class="spec sr" aria-labelledby="spec-t">
+      <div class="frame">
+        <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+        <div class="spec-head"><span id="spec-t"><b>27</b> <span data-i18n="spec_t">document types · 5 families</span></span><span data-i18n="spec_h">Hover a document</span></div>
+        <div id="fams"></div>
+        <div class="spec-cap"><span id="cap" data-i18n="cap0">One form per type. One clean PDF out.</span><span id="capn"></span></div>
+        <div class="pipe" aria-label="Pipeline">
+          <em data-i18n="pp1">FORM</em><i>→</i><em data-i18n="pp2">HTML TEMPLATE</em><i>→</i><em>WEASYPRINT</em><i>→</i><em>PDF</em>
+        </div>
+      </div>
+    </section>
+
+    <!-- Facts -->
+    <section class="facts sr" aria-label="Key figures">
+      <div class="fact"><b>27</b><span data-i18n="f1">document templates, from invoices to employment contracts</span></div>
+      <div class="fact"><b>690+</b><span data-i18n="f2">automated tests, run on every push</span></div>
+      <div class="fact"><b>0</b><span data-i18n="f3">sign-ups required to generate a document</span></div>
+    </section>
+
+    <!-- Story -->
+    <section class="blocks">
+      <div class="blk sr">
+        <div class="blk-k"><i>01</i><span data-i18n="k_ctx">CONTEXT</span></div>
+        <div class="blk-b"><p class="big" data-i18n="b_ctx">DocuSen is my own product: conceived, designed, built and deployed alone. It now also lives inside YoonuJob, my second product.</p></div>
+      </div>
+      <div class="blk sr">
+        <div class="blk-k"><i>02</i><span data-i18n="k_prob">PROBLEM</span></div>
+        <div class="blk-b"><p class="big" data-i18n="b_prob">Invoices, contracts, HR letters, attestations: small businesses redo the same paperwork by hand, in templates that never quite look right. The documents that represent a company should look like they were made with care.</p></div>
+      </div>
+      <div class="blk sr">
+        <div class="blk-k"><i>03</i><span data-i18n="k_sol">SOLUTION</span></div>
+        <div class="blk-b">
+          <p class="big" data-i18n="b_sol">One clear form per document type, a live preview, and a clean PDF generated on the server.</p>
+          <p class="sm" data-i18n="b_sol2">Accounts are optional. Sign in to save your documents, reuse your company profile (logo, address, registration numbers) and share a document through a private link.</p>
+        </div>
+      </div>
+      <div class="blk sr">
+        <div class="blk-k"><i>04</i><span data-i18n="k_eng">ENGINEERING</span></div>
+        <div class="blk-b">
+          <p class="big" data-i18n="b_eng">27 document types, one engine.</p>
+          <p class="sm" data-i18n="b_eng2">Each type started as hand-written views. A generic engine now lets them migrate one by one to pure configuration, and a startup check fails loudly if a type is declared in one place and forgotten in the other. The catalogue can grow without drifting.</p>
+          <div class="code" role="img" aria-label="Excerpt of the document registry configuration">
+            <div class="code-h"><span>registry.py</span><span data-i18n="code_h">excerpt</span></div>
+<pre><span class="cm"># one source of truth for the catalogue</span>
+<span class="k">DOCUMENT_ENGINE_CONFIG</span> = {
+  <span class="s">'avoir'</span>: {
+    <span class="s">'form_template'</span>:    <span class="s">'documents/creer/avoir/avoir.html'</span>,
+    <span class="s">'pdf_template'</span>:     <span class="s">'documents/creer/avoir/avoir_pdf.html'</span>,
+    <span class="s">'preview_template'</span>: <span class="s">'documents/creer/avoir/avoir_preview.html'</span>,
+    <span class="s">'has_logo'</span>: <span class="k">True</span>,
+  },
+}
+<span class="cm"># a slug missing from DOCUMENT_TYPES raises at startup,</span>
+<span class="cm"># so `manage.py check` catches it before anything ships</span></pre>
+          </div>
+        </div>
+      </div>
+      <div class="blk sr">
+        <div class="blk-k"><i>05</i><span data-i18n="k_role">MY ROLE</span></div>
+        <div class="blk-b">
+          <p class="big" data-i18n="b_role">Everything: product, interface, back end, PDF templates, tests and deployment.</p>
+          <p class="sm" data-i18n="b_role2">Usage events and one-click feedback tell me which templates to improve next.</p>
+        </div>
+      </div>
+      <div class="blk sr">
+        <div class="blk-k"><i>06</i><span data-i18n="k_stack">STACK</span></div>
+        <div class="blk-b"><p class="stack"><b>Python</b><s>/</s><b>Django</b><s>/</s><b>WeasyPrint</b><s>/</s><b>SQLite</b><s>/</s><b>HTML</b><s>/</s><b>CSS</b><s>/</s><b>Bootstrap</b><s>/</s><b>JavaScript</b><s>/</s><b>Docker</b><s>/</s><b>Render</b><s>/</s><b>GitHub Actions</b></p></div>
+      </div>
+      <div class="blk sr">
+        <div class="blk-k"><i>07</i><span data-i18n="k_res">RESULT</span></div>
+        <div class="blk-b"><p class="big" data-i18n="b_res">Live at getdocusen.com with 27 templates, more than 690 automated tests, and now a building block of YoonuJob.</p></div>
+      </div>
+    </section>
+
+    <!-- Ternary -->
+    <section class="tern-wrap sr" aria-labelledby="tern-t">
+      <div>
+        <h2 id="tern-t">Data <span class="x">×</span> Code <span class="x">×</span> Product</h2>
+        <p data-i18n="tern_p">Every project sits somewhere between the three. DocuSen is mostly code and product; the machine-learning work sits at the other end.</p>
+        <p class="tern-note" data-i18n="tern_n">Positions are self-assessed. Placeholder weights, to calibrate.</p>
+      </div>
+      <div class="tern">
+        <svg id="tern" viewBox="0 0 440 400" role="img" aria-label="Ternary diagram positioning six projects between Data, Code and Product"></svg>
+        <div class="tern-read"><span id="tr-n"></span><span id="tr-v"></span></div>
+      </div>
+    </section>
+
+    <a class="next sr" href="case-study-yoonujob-v1.html">
+      <small data-i18n="next">NEXT PROJECT · N°05 / 06</small>
+      <strong><span>Yoonu<span class="t2">Job</span></span><span class="a">→</span></strong>
+    </a>
+  </main>
+
+  <footer class="foot">
+    <span>© 2026 Cheikh Darou Beye</span>
+    <a href="mailto:cheikhdaroubeye@gmail.com">cheikhdaroubeye@gmail.com</a>
+  </footer>
+</div>
+
+<script>
+/* ═══ i18n ═══ */
+const I18N={
+en:{nav_work:'Work',nav_approach:'Approach',nav_about:'About',nav_contact:'Contact',nav_cv:'CV ↗',back:'All work',
+tag:'Product · Live in production',sub1:'Professional documents,',sub2:'ready in minutes.',
+m_role:'ROLE',m_role_v:'Founder & sole developer',m_type:'TYPE',m_type_v:'Web product · PDF generation',m_stack:'STACK',m_link:'LINK',
+spec_t:'document types · 5 families',spec_h:'Hover a document',cap0:'One form per type. One clean PDF out.',pp1:'FORM',pp2:'HTML TEMPLATE',
+f1:'document templates, from invoices to employment contracts',f2:'automated tests, run on every push',f3:'sign-ups required to generate a document',
+k_ctx:'CONTEXT',b_ctx:'DocuSen is my own product: conceived, designed, built and deployed alone. It now also lives inside YoonuJob, my second product.',
+k_prob:'PROBLEM',b_prob:'Invoices, contracts, HR letters, attestations: small businesses redo the same paperwork by hand, in templates that never quite look right. The documents that represent a company should look like they were made with care.',
+k_sol:'SOLUTION',b_sol:'One clear form per document type, a live preview, and a clean PDF generated on the server.',
+b_sol2:'Accounts are optional. Sign in to save your documents, reuse your company profile (logo, address, registration numbers) and share a document through a private link.',
+k_eng:'ENGINEERING',b_eng:'27 document types, one engine.',
+b_eng2:'Each type started as hand-written views. A generic engine now lets them migrate one by one to pure configuration, and a startup check fails loudly if a type is declared in one place and forgotten in the other. The catalogue can grow without drifting.',
+code_h:'excerpt',k_role:'MY ROLE',b_role:'Everything: product, interface, back end, PDF templates, tests and deployment.',b_role2:'Usage events and one-click feedback tell me which templates to improve next.',
+k_stack:'STACK',k_res:'RESULT',b_res:'Live at getdocusen.com with 27 templates, more than 690 automated tests, and now a building block of YoonuJob.',
+tern_p:'Every project sits somewhere between the three. DocuSen is mostly code and product; the machine-learning work sits at the other end.',
+tern_n:'Positions are self-assessed. Placeholder weights, to calibrate.',next:'NEXT PROJECT · N°05 / 06',
+fam:['COMMERCIAL','CONTRACTS','PAYROLL','LETTERS','ATTESTATIONS'],
+docs:['Invoice','Credit note','Quote','Receipt','Purchase order','Delivery note',
+'Service contract','Fixed-term contract','Permanent contract','Lease agreement','Partnership agreement',
+'Payslip','Salary receipt',
+'Cover letter','Termination letter','Request letter','Resignation letter','Complaint letter','Recommendation letter','Thank-you letter',
+'Service certificate','Employment certificate','Payment certificate','Attendance certificate','Internship certificate','Salary certificate','Residence certificate'],
+pj:['Microbes / ML','Miellée','SenBioStat','DocuSen','YoonuJob','Client sites']},
+fr:{nav_work:'Projets',nav_approach:'Approche',nav_about:'À propos',nav_contact:'Contact',nav_cv:'CV ↗',back:'Tous les projets',
+tag:'Produit · En production',sub1:'Vos documents professionnels,',sub2:'prêts en quelques minutes.',
+m_role:'RÔLE',m_role_v:'Fondateur & développeur unique',m_type:'TYPE',m_type_v:'Produit web · Génération de PDF',m_stack:'STACK',m_link:'LIEN',
+spec_t:'types de documents · 5 familles',spec_h:'Survolez un document',cap0:'Un formulaire par type. Un PDF propre en sortie.',pp1:'FORMULAIRE',pp2:'TEMPLATE HTML',
+f1:'modèles de documents, de la facture au contrat de travail',f2:'tests automatisés, lancés à chaque push',f3:'inscription requise pour générer un document',
+k_ctx:'CONTEXTE',b_ctx:'DocuSen est mon propre produit : conçu, dessiné, développé et déployé seul. Il vit aussi désormais dans YoonuJob, mon second produit.',
+k_prob:'PROBLÈME',b_prob:'Factures, contrats, courriers RH, attestations : les petites entreprises refont les mêmes documents à la main, dans des modèles jamais tout à fait propres. Les documents qui représentent une entreprise devraient avoir l’air soignés.',
+k_sol:'SOLUTION',b_sol:'Un formulaire clair par type de document, un aperçu en direct, et un PDF propre généré côté serveur.',
+b_sol2:'Le compte est optionnel. Connecté, vous enregistrez vos documents, réutilisez le profil de votre entreprise (logo, adresse, numéros d’immatriculation) et partagez un document par lien privé.',
+k_eng:'INGÉNIERIE',b_eng:'27 types de documents, un seul moteur.',
+b_eng2:'Chaque type est né de vues écrites à la main. Un moteur générique permet maintenant de les migrer un à un vers de la simple configuration, et une vérification au démarrage échoue bruyamment si un type est déclaré à un endroit et oublié à l’autre. Le catalogue peut grandir sans dériver.',
+code_h:'extrait',k_role:'MON RÔLE',b_role:'Tout : produit, interface, back end, templates PDF, tests et déploiement.',b_role2:'Des événements d’usage et un retour en un clic me disent quels modèles améliorer en priorité.',
+k_stack:'STACK',k_res:'RÉSULTAT',b_res:'En ligne sur getdocusen.com avec 27 modèles, plus de 690 tests automatisés, et désormais une brique de YoonuJob.',
+tern_p:'Chaque projet se situe quelque part entre les trois. DocuSen est surtout du code et du produit ; le travail de machine learning est à l’autre extrémité.',
+tern_n:'Positions auto-évaluées. Pondérations provisoires, à calibrer.',next:'PROJET SUIVANT · N°05 / 06',
+fam:['COMMERCIAL','CONTRATS','PAIE','COURRIERS','ATTESTATIONS'],
+docs:['Facture','Avoir','Devis','Reçu','Bon de commande','Bon de livraison',
+'Contrat de prestation','Contrat CDD','Contrat CDI','Contrat de location','Contrat de partenariat',
+'Fiche de paie','Reçu de salaire',
+'Lettre de motivation','Lettre de résiliation','Lettre de demande','Lettre de démission','Lettre de réclamation','Lettre de recommandation','Lettre de remerciement',
+'Attestation de service','Attestation de travail','Attestation de paiement','Attestation de présence','Attestation de stage','Attestation de salaire','Attestation de domicile'],
+pj:['Microbes / ML','Miellée','SenBioStat','DocuSen','YoonuJob','Sites clients']}
+};
+let LANG='en';
+
+/* ═══ Specimen sheet ═══ */
+const FAM_SIZES=[6,5,2,7,7];
+const ln=(x1,y1,x2,y2,w)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"${w?` stroke-width="${w}"`:''}/>`;
+const PAGE='<rect x=".5" y=".5" width="59" height="77" rx="2"/>';
+const GLYPH=[
+ /*commercial*/ PAGE+'<rect x="8" y="8" width="20" height="5" fill="currentColor" stroke="none"/>'+ln(38,10,52,10)+ln(8,28,52,28)+ln(8,36,44,36)+ln(8,44,48,44)+ln(8,52,40,52)+ln(8,60,52,60,.6)+'<rect x="34" y="65" width="18" height="6" fill="currentColor" stroke="none" opacity=".8"/>',
+ /*contracts*/  PAGE+ln(14,11,46,11,1.6)+[22,28,34,40,46,52].map((y,i)=>ln(8,y,i%3===2?38:52,y)).join('')+ln(8,68,24,68)+ln(36,68,52,68),
+ /*payroll*/    PAGE+'<rect x="8" y="8" width="44" height="8" fill="currentColor" stroke="none" opacity=".7"/>'+[26,34,42,50].map(y=>ln(8,y,28,y)+ln(34,y,52,y)).join('')+'<rect x="8" y="62" width="44" height="6" fill="currentColor" stroke="none" opacity=".8"/>',
+ /*letters*/    PAGE+ln(8,10,24,10)+ln(8,15,20,15)+ln(40,10,52,10)+[30,36,42,48,54].map((y,i)=>ln(8,y,i===4?32:52,y)).join('')+ln(36,68,52,68),
+ /*attestations*/PAGE+ln(16,12,44,12,1.6)+ln(22,17,38,17,.6)+[28,34,40,46].map((y,i)=>ln(8,y,i===3?36:52,y)).join('')+'<circle cx="44" cy="62" r="7"/>'+ln(8,66,26,66)
+];
+function renderFams(){
+  const box=document.getElementById('fams'); const d=I18N[LANG]; let n=0,html='';
+  FAM_SIZES.forEach((size,fi)=>{
+    let tiles='';
+    for(let i=0;i<size;i++){ n++; tiles+=`<button class="tile" type="button" data-n="${n}" aria-label="${d.docs[n-1]}"><svg viewBox="0 0 60 78" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">${GLYPH[fi]}</svg><span class="tn"><i>${String(n).padStart(2,'0')}</i>${d.docs[n-1]}</span></button>`; }
+    html+=`<div class="fam"><div class="fam-label">${String(fi+1).padStart(2,'0')} · ${d.fam[fi]}<span>${size} ${LANG==='fr'?'modèles':'templates'}</span></div><div class="tiles">${tiles}</div></div>`;
+  });
+  box.innerHTML=html;
+  const cap=document.getElementById('cap'),capn=document.getElementById('capn');
+  const show=t=>{const n=+t.dataset.n;cap.innerHTML=`<b>${d.docs[n-1]}</b>`;capn.textContent=`${String(n).padStart(2,'0')} / 27`};
+  const reset=()=>{cap.textContent=d.cap0;capn.textContent=''};
+  box.querySelectorAll('.tile').forEach(t=>{
+    t.addEventListener('mouseenter',()=>show(t));t.addEventListener('focus',()=>show(t));
+    t.addEventListener('mouseleave',reset);t.addEventListener('blur',reset);
+  });
+}
+
+/* ═══ Ternary ═══ */
+const V={d:[220,44],c:[52,344],p:[388,344]};
+const PROJ=[{d:.75,c:.20,p:.05},{d:.45,c:.30,p:.25},{d:.35,c:.35,p:.30},{d:.05,c:.45,p:.50},{d:.10,c:.30,p:.60},{d:0,c:.65,p:.35}];
+const CUR=3;
+const pos=w=>[w.d*V.d[0]+w.c*V.c[0]+w.p*V.p[0], w.d*V.d[1]+w.c*V.c[1]+w.p*V.p[1]];
+function renderTern(){
+  const svg=document.getElementById('tern'),d=I18N[LANG];
+  let s='';
+  for(const t of [.25,.5,.75]){
+    const a=pos({d:t,c:1-t,p:0}),b=pos({d:t,c:0,p:1-t}); s+=`<line class="gl" x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}"/>`;
+    const a2=pos({d:1-t,c:t,p:0}),b2=pos({d:0,c:t,p:1-t}); s+=`<line class="gl" x1="${a2[0]}" y1="${a2[1]}" x2="${b2[0]}" y2="${b2[1]}"/>`;
+    const a3=pos({d:1-t,c:0,p:t}),b3=pos({d:0,c:1-t,p:t}); s+=`<line class="gl" x1="${a3[0]}" y1="${a3[1]}" x2="${b3[0]}" y2="${b3[1]}"/>`;
+  }
+  s+=`<polygon class="tri" points="${V.d} ${V.c} ${V.p}"/>`;
+  s+=`<text class="vl" x="${V.d[0]}" y="${V.d[1]-16}" text-anchor="middle">DATA</text>`;
+  s+=`<text class="vl" x="${V.c[0]}" y="${V.c[1]+26}" text-anchor="middle">CODE</text>`;
+  s+=`<text class="vl" x="${V.p[0]}" y="${V.p[1]+26}" text-anchor="middle">PRODUCT</text>`;
+  PROJ.forEach((w,i)=>{
+    const [x,y]=pos(w);
+    s+=`<g class="pt${i===CUR?' cur':''}" data-i="${i}" tabindex="0" aria-label="${d.pj[i]}"><circle class="h" cx="${x}" cy="${y}" r="12"/><circle class="d" cx="${x}" cy="${y}" r="4.5"/><text x="${x+9}" y="${y-9}">${String(i+1).padStart(2,'0')}</text></g>`;
+  });
+  svg.innerHTML=s;
+  const rn=document.getElementById('tr-n'),rv=document.getElementById('tr-v');
+  const show=i=>{const w=PROJ[i];rn.innerHTML=`<b>${String(i+1).padStart(2,'0')} · ${d.pj[i]}</b>`;rv.textContent=`data ${Math.round(w.d*100)} · code ${Math.round(w.c*100)} · product ${Math.round(w.p*100)}`};
+  svg.querySelectorAll('.pt').forEach(g=>{
+    const i=+g.dataset.i;
+    g.addEventListener('mouseenter',()=>show(i));g.addEventListener('focus',()=>show(i));
+    g.addEventListener('mouseleave',()=>show(CUR));g.addEventListener('blur',()=>show(CUR));
+  });
+  show(CUR);
+}
+
+/* ═══ language ═══ */
+function setLang(l){
+  if(!I18N[l])l='en'; LANG=l; const d=I18N[l];
+  document.documentElement.lang=l;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const v=d[el.dataset.i18n]; if(typeof v==='string')el.textContent=v});
+  document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));
+  renderFams();renderTern();
+  try{localStorage.setItem('cdb-lang',l)}catch(e){}
+}
+document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+(function(){
+  let l=new URLSearchParams(location.search).get('lang'); try{l=l||localStorage.getItem('cdb-lang')}catch(e){}
+  setLang(l||((navigator.language||'en').toLowerCase().startsWith('fr')?'fr':'en'));
+})();
+
+/* ═══ scroll reveal ═══ */
+(function(){
+  const els=document.querySelectorAll('.sr');
+  if(!('IntersectionObserver' in window)||new URLSearchParams(location.search).has('static')){els.forEach(e=>e.classList.add('in'));return}
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.08});
+  els.forEach(e=>io.observe(e));
+})();
+</script>
+<script>
+/* ═══ mobile menu (built from the desktop links) ═══ */
+(function(){
+  const btn=document.querySelector('.menu-btn'),links=document.querySelector('.nav-links'),head=document.querySelector('.nav');
+  if(!btn||!links||!head)return;
+  const T={en:{menu:'Menu',close:'Close'},fr:{menu:'Menu',close:'Fermer'}};
+  const lang=()=>document.documentElement.lang==='fr'?'fr':'en';
+  const cv=document.querySelector('.nav-r .pill');
+  const ov=document.createElement('div');ov.className='mnav';ov.id='mnav';ov.setAttribute('aria-hidden','true');
+  ov.innerHTML='<nav class="mnav-links" aria-label="Menu">'+[...links.querySelectorAll('a')].map((a,i)=>'<a href="'+a.getAttribute('href')+'"'+(a.hasAttribute('aria-current')?' aria-current="page"':'')+'><span data-i18n="'+a.dataset.i18n+'">'+a.textContent+'</span></a>').join('')+'</nav>'
+    +'<div class="mnav-foot"><a class="pill" href="'+(cv?cv.getAttribute('href'):'#')+'" data-i18n="nav_cv">CV ↗</a><a href="mailto:cheikhdaroubeye@gmail.com">cheikhdaroubeye@gmail.com</a></div>';
+  head.after(ov);
+  const label=()=>{btn.querySelector('.mb-l').textContent=T[lang()][btn.getAttribute('aria-expanded')==='true'?'close':'menu']};
+  const set=open=>{
+    btn.setAttribute('aria-expanded',String(open));ov.classList.toggle('open',open);ov.setAttribute('aria-hidden',String(!open));
+    document.documentElement.classList.toggle('menu-open',open);label();
+    if(open){const a=ov.querySelector('a');if(a)a.focus({preventScroll:true})}
+  };
+  btn.addEventListener('click',()=>set(btn.getAttribute('aria-expanded')!=='true'));
+  ov.addEventListener('click',e=>{if(e.target.closest('a'))set(false)});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')set(false)});
+  matchMedia('(min-width:981px)').addEventListener('change',e=>{if(e.matches)set(false)});
+  new MutationObserver(label).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+  label();
+  if(/[?&]menu\b/.test(location.search))set(true);
+})();
+</script>
+</body>
+</html>
