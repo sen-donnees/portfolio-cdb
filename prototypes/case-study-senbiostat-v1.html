@@ -85,7 +85,7 @@ html.menu-open{overflow:hidden}
 .meta > div{padding:18px 24px 0 0}
 .meta > div + div{padding-left:24px;border-left:1px solid var(--line)}
 .meta dt{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--subtle);margin-bottom:8px}
-.meta dd{font-size:15px;color:var(--ink)}
+.meta dd{font-size:15px;color:var(--ink);overflow-wrap:break-word}
 .meta a{border-bottom:1px solid var(--line-strong);transition:border-color .2s,color .2s}
 .meta a:hover{color:var(--accent-hi);border-color:var(--accent-hi)}
 
@@ -140,7 +140,7 @@ html.menu-open{overflow:hidden}
 .blk-b p.big{font-size:clamp(1.3rem,2.2vw,1.95rem);line-height:1.28;letter-spacing:-.02em;font-weight:450;max-width:30em}
 .blk-b p + p{margin-top:18px}
 .blk-b p.sm{max-width:44em;color:var(--muted);font-size:1.02rem;line-height:1.6}
-.stack{font-family:var(--mono);font-size:13px;letter-spacing:.02em;color:var(--muted);line-height:2}
+.stack{font-family:var(--mono);font-size:13px;letter-spacing:.02em;color:var(--muted);line-height:2;overflow-wrap:break-word}
 .stack b{font-weight:500;color:var(--ink)}
 .stack s{text-decoration:none;color:var(--subtle);margin:0 .5em}
 .stack s::after{content:"\200b"}
@@ -203,6 +203,11 @@ html.menu-open{overflow:hidden}
   .tern-wrap{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:600px){.spec-head{flex-direction:column;gap:6px}}
+@media (max-width:420px){
+  .meta{grid-template-columns:1fr}
+  .meta > div,.meta > div + div{padding:16px 0 0;border-left:0;border-top:1px solid var(--line)}
+  .meta > div:first-child{border-top:0;padding-top:0}
+}
 </style>
 </head>
 <body>
@@ -234,7 +239,7 @@ html.menu-open{overflow:hidden}
       <span>N°03 / 06</span>
       <span class="live"><span class="dot soon"></span><span data-i18n="tag">Product · Nearly ready</span></span>
     </div>
-    <h1 class="case-title rv" style="--i:2">Sen<span class="t2">BioStat</span></h1>
+    <h1 class="case-title rv" style="--i:2">Sen<span class="t2">Bio</span>Stat</h1>
     <p class="case-sub rv" style="--i:3"><span data-i18n="sub1">Statistical analysis,</span> <span class="x" data-i18n="sub2">without the code.</span></p>
 
     <dl class="meta rv" style="--i:4">
@@ -350,7 +355,7 @@ pp1:'DATASET',pp2:'METHOD',pp3:'STATISTICS',pp4:'INTERPRETATION',
 f1:'statistical methods, from chi-square to Kaplan-Meier survival curves',f2:'free analyses per month on the free tier, already usable',f3:'pricing tiers, priced in FCFA for the local market',
 k_ctx:'CONTEXT',b_ctx:'SenBioStat is my own product: conceived, designed and built alone, to make biostatistical analysis accessible without knowing R or Python.',
 k_prob:'PROBLEM',b_prob:'Students, researchers and health professionals who need to run a statistical test are often stuck between expensive software (SPSS) and coding it themselves. Few tools speak their language, or price themselves for their market.',
-k_sol:'SOLUTION',b_sol:'Upload a dataset, choose a method, get a chart and a plain-language result.',
+k_sol:'SOLUTION',b_sol:'Import your own data — CSV or Excel — choose a method, get a chart and a plain-language result.',
 b_sol2:'Creating an account is required, with email confirmation. It holds your profile — institution, specialty, country — and tracks your monthly quota. Every analysis is saved and can be exported as a PDF report.',
 k_eng:'AUTOMATIC INTERPRETATION',b_eng:"A statistic is only useful once it becomes a sentence.",
 b_eng2:"Each method computes the right effect size for the job — Cohen's d, eta-squared, Cramér's V — checks its assumptions (Levene's test, outliers), and turns the result into a sentence ready to quote in a report, in French.",
@@ -377,7 +382,7 @@ pp1:'JEU DE DONNÉES',pp2:'MÉTHODE',pp3:'STATISTIQUES',pp4:'INTERPRÉTATION',
 f1:'méthodes statistiques, du khi-deux aux courbes de survie de Kaplan-Meier',f2:'analyses gratuites par mois sur le palier gratuit, déjà utilisable',f3:'paliers tarifaires, en FCFA pour le marché local',
 k_ctx:'CONTEXTE',b_ctx:'SenBioStat est mon propre produit : conçu, dessiné et développé seul, pour rendre l’analyse biostatistique accessible sans connaître R ou Python.',
 k_prob:'PROBLÈME',b_prob:'Les étudiants, chercheurs et professionnels de santé qui doivent lancer un test statistique sont souvent coincés entre des logiciels coûteux (SPSS) et coder eux-mêmes leurs analyses. Peu d’outils parlent leur langue, ou sont pensés pour leur marché.',
-k_sol:'SOLUTION',b_sol:'Importer un jeu de données, choisir une méthode, obtenir un graphique et un résultat en langage clair.',
+k_sol:'SOLUTION',b_sol:'Importer ses propres données — CSV ou Excel — choisir une méthode, obtenir un graphique et un résultat en langage clair.',
 b_sol2:'Un compte est nécessaire, avec confirmation par e-mail. Il garde le profil — institution, spécialité, pays — et suit le quota mensuel. Chaque analyse est enregistrée et s’exporte en rapport PDF.',
 k_eng:'INTERPRÉTATION AUTOMATIQUE',b_eng:'Un résultat statistique n’est utile qu’une fois traduit en phrase.',
 b_eng2:'Chaque méthode calcule la taille d’effet adaptée — d de Cohen, êta carré, V de Cramér — vérifie ses conditions d’application (test de Levene, valeurs aberrantes), et transforme le résultat en une phrase prête à citer dans un rapport, en français.',

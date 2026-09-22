@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DocuSen — Case study prototype v1</title>
+<title>Miellée — Case study prototype v1</title>
 <meta name="theme-color" content="#070B14">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -76,9 +76,10 @@ html.menu-open{overflow:hidden}
 .case-top{display:flex;justify-content:space-between;align-items:center;margin-top:clamp(28px,6vh,64px);font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--subtle)}
 .case-top .live{display:inline-flex;align-items:center;gap:10px;color:var(--muted)}
 .dot{width:6px;height:6px;border-radius:50%;background:var(--accent-hi)}
+.dot.soon{background:var(--subtle)}
 .case-title{font-weight:600;font-size:clamp(4rem,15vw,15rem);line-height:.86;letter-spacing:-.06em;margin:clamp(14px,2.6vh,28px) 0 clamp(18px,3vh,32px);margin-left:-.04em}
 .case-title .t2{color:var(--dim)}
-.case-sub{font-size:clamp(1.2rem,2.3vw,2.1rem);font-weight:500;letter-spacing:-.025em;max-width:22em;line-height:1.2}
+.case-sub{font-size:clamp(1.2rem,2.3vw,2.1rem);font-weight:500;letter-spacing:-.025em;max-width:24em;line-height:1.2}
 .case-sub .x{font-size:1.25em;line-height:0}
 .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:clamp(32px,6vh,64px);border-top:1px solid var(--line)}
 .meta > div{padding:18px 24px 0 0}
@@ -88,7 +89,7 @@ html.menu-open{overflow:hidden}
 .meta a{border-bottom:1px solid var(--line-strong);transition:border-color .2s,color .2s}
 .meta a:hover{color:var(--accent-hi);border-color:var(--accent-hi)}
 
-/* specimen */
+/* pipeline (signature visual) */
 .spec{margin-top:clamp(48px,9vh,96px)}
 .frame{position:relative;border:1px solid var(--line);border-radius:4px;background:radial-gradient(110% 80% at 80% 0%,rgba(91,108,255,.06),transparent 60%),var(--surface);padding:clamp(20px,3vw,40px)}
 .c{position:absolute;width:14px;height:14px;border:0 solid var(--line-strong);pointer-events:none}
@@ -96,53 +97,29 @@ html.menu-open{overflow:hidden}
 .c.tr{top:-1px;right:-1px;border-top-width:1px;border-right-width:1px}
 .c.bl{bottom:-1px;left:-1px;border-bottom-width:1px;border-left-width:1px}
 .c.br{bottom:-1px;right:-1px;border-bottom-width:1px;border-right-width:1px}
-.spec-head{display:flex;justify-content:space-between;gap:16px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--subtle);margin-bottom:clamp(18px,3vw,32px)}
+.spec-head{display:flex;justify-content:space-between;gap:16px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--subtle);margin-bottom:clamp(22px,3.4vw,36px)}
 .spec-head b{font-weight:500;color:var(--ink)}
-.fam{display:grid;grid-template-columns:200px 1fr;gap:16px 24px;align-items:center;padding:16px 0;border-top:1px solid var(--line)}
-.fam:first-of-type{border-top:0;padding-top:0}
-.fam-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--muted)}
-.fam-label span{display:block;margin-top:4px;color:var(--subtle);letter-spacing:.06em}
-.tiles{display:flex;flex-wrap:wrap;align-items:flex-start;gap:18px 14px}
-.tile{display:block;width:clamp(84px,7.6vw,104px);text-align:left;color:rgba(236,234,228,.38);border-radius:3px;transition:color .25s,transform .35s cubic-bezier(.2,.7,.2,1)}
-.tile svg{display:block;width:62%;height:auto;aspect-ratio:60/78;overflow:visible;padding:0}
-.tile .tn{display:block;margin-top:10px;font-size:11.5px;line-height:1.3;letter-spacing:-.005em;color:var(--muted);transition:color .25s}
-.tile .tn i{display:block;font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--subtle);margin-bottom:2px;transition:color .25s}
-.tile:hover,.tile:focus-visible,.tile.on{color:var(--accent-hi);transform:translateY(-4px)}
-.tile:hover .tn,.tile:focus-visible .tn{color:var(--ink)}
-.tile:hover .tn i,.tile:focus-visible .tn i{color:var(--accent-hi)}
-.spec-cap{display:flex;justify-content:space-between;gap:16px;margin-top:20px;padding-top:16px;border-top:1px solid var(--line);font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--subtle);min-height:38px}
-.spec-cap b{font-weight:500;color:var(--ink)}
-.pipe{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-top:22px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--muted)}
-.pipe i{font-style:normal;color:var(--accent-hi)}
-.pipe em{font-style:normal;color:var(--ink)}
-
-/* facts */
-.facts{display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(48px,8vh,88px);border-top:1px solid var(--line)}
-.fact{padding:28px 24px 0 0}
-.fact + .fact{padding-left:24px;border-left:1px solid var(--line)}
-.fact b{display:block;font-weight:600;font-size:clamp(3rem,6.4vw,6.4rem);line-height:1;letter-spacing:-.05em}
-.fact span{display:block;margin-top:12px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--muted);max-width:22em}
+.pipeline{display:flex;flex-wrap:wrap;gap:0 24px}
+.node{position:relative;flex:1 1 160px;border:1px solid var(--line-strong);border-radius:3px;padding:16px 16px 15px;background:rgba(7,11,20,.55);color:var(--muted);font-size:13px;line-height:1.35;min-height:78px}
+.node b{display:block;font-weight:500;font-size:14.5px;color:var(--ink);margin-bottom:5px;letter-spacing:-.01em}
+.node small{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;color:var(--subtle)}
+.node + .node::before{content:"→";position:absolute;left:-19px;top:50%;transform:translateY(-50%);width:16px;text-align:center;font-family:var(--serif);font-style:italic;font-size:17px;color:var(--subtle)}
+.panel-note{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--subtle);max-width:52em}
 
 /* case blocks */
 .blocks{margin-top:clamp(56px,10vh,120px)}
 .blk{display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px 24px;padding:clamp(28px,5vh,56px) 0;border-top:1px solid var(--line)}
+.blk:first-child{border-top:0;padding-top:0}
 .blk-k{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--subtle)}
 .blk-k i{font-style:normal;color:var(--accent-hi);margin-right:10px}
 .blk-b{min-width:0}
-.blk-b p.big{font-size:clamp(1.3rem,2.2vw,1.95rem);line-height:1.28;letter-spacing:-.02em;font-weight:450}
-.blk-b p.big em{font-style:normal;color:var(--muted)}
+.blk-b p.big{font-size:clamp(1.3rem,2.2vw,1.95rem);line-height:1.28;letter-spacing:-.02em;font-weight:450;max-width:30em}
 .blk-b p + p{margin-top:18px}
-.blk-b p.big{max-width:30em}
-.blk-b p.sm{max-width:44em}
-.blk-b p.sm{color:var(--muted);font-size:1.02rem;line-height:1.6}
+.blk-b p.sm{max-width:44em;color:var(--muted);font-size:1.02rem;line-height:1.6}
 .stack{font-family:var(--mono);font-size:13px;letter-spacing:.02em;color:var(--muted);line-height:2;overflow-wrap:break-word}
 .stack b{font-weight:500;color:var(--ink)}
 .stack s{text-decoration:none;color:var(--subtle);margin:0 .5em}
 .stack s::after{content:"\200b"}
-.code{max-width:46em;margin-top:26px;border:1px solid var(--line);border-radius:4px;background:var(--surface);overflow:hidden}
-.code-h{display:flex;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--subtle)}
-.code pre{padding:16px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.75;color:var(--muted);tab-size:2}
-.code .k{color:var(--ink)} .code .s{color:var(--accent-hi)} .code .cm{color:var(--subtle)}
 
 /* ternary */
 .tern-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:center;padding:clamp(28px,5vh,56px) 0;border-top:1px solid var(--line)}
@@ -193,13 +170,14 @@ html.menu-open{overflow:hidden}
   .meta{grid-template-columns:1fr 1fr}
   .meta > div,.meta > div + div{padding:16px 16px 0 0;border-left:0}
   .meta > div:nth-child(even){padding-left:16px;border-left:1px solid var(--line)}
-  .fam,.blk{grid-template-columns:minmax(0,1fr)}
-  .facts{grid-template-columns:minmax(0,1fr)}
-  .fact,.fact + .fact{padding:24px 0;border-left:0}
-  .fact + .fact{border-top:1px solid var(--line)}
+  .blk{grid-template-columns:minmax(0,1fr)}
   .tern-wrap{grid-template-columns:minmax(0,1fr)}
 }
-@media (max-width:520px){.tiles{gap:16px 10px}.tile{width:calc((100% - 20px)/3)}.spec-head,.spec-cap{flex-direction:column;gap:6px}}
+@media (max-width:760px){
+  .pipeline{flex-direction:column;gap:8px}
+  .node + .node::before{content:"↓";left:14px;top:-15px;transform:none}
+}
+@media (max-width:600px){.spec-head{flex-direction:column;gap:6px}}
 @media (max-width:420px){
   .meta{grid-template-columns:1fr}
   .meta > div,.meta > div + div{padding:16px 0 0;border-left:0;border-top:1px solid var(--line)}
@@ -233,91 +211,71 @@ html.menu-open{overflow:hidden}
     <a class="back rv" style="--i:0" href="work-v1.html"><span>←</span><span data-i18n="back">All work</span></a>
 
     <div class="case-top rv" style="--i:1">
-      <span>N°04 / 06</span>
-      <span class="live"><span class="dot"></span><span data-i18n="tag">Product · Live in production</span></span>
+      <span>N°02 / 06</span>
+      <span class="live"><span class="dot soon"></span><span data-i18n="tag">Internal mission · confidential</span></span>
     </div>
-    <h1 class="case-title rv" style="--i:2">Docu<span class="t2">Sen</span></h1>
-    <p class="case-sub rv" style="--i:3"><span data-i18n="sub1">Professional documents,</span> <span class="x" data-i18n="sub2">ready in minutes.</span></p>
+    <h1 class="case-title rv" style="--i:2">Miel<span class="t2">lée</span></h1>
+    <p class="case-sub rv" style="--i:3"><span data-i18n="sub1">Connected beehive data,</span> <span class="x" data-i18n="sub2">made clear.</span></p>
 
     <dl class="meta rv" style="--i:4">
-      <div><dt data-i18n="m_role">ROLE</dt><dd data-i18n="m_role_v">Founder &amp; sole developer</dd></div>
-      <div><dt data-i18n="m_type">TYPE</dt><dd data-i18n="m_type_v">Web product · PDF generation</dd></div>
-      <div><dt data-i18n="m_stack">STACK</dt><dd>Django · WeasyPrint · SQLite · Docker · Render</dd></div>
-      <div><dt data-i18n="m_link">LINK</dt><dd><a href="https://www.getdocusen.com" target="_blank" rel="noopener noreferrer">getdocusen.com ↗</a></dd></div>
+      <div><dt data-i18n="m_role">ROLE</dt><dd data-i18n="m_role_v">Project lead &amp; data analyst</dd></div>
+      <div><dt data-i18n="m_type">TYPE</dt><dd data-i18n="m_type_v">Internal tool · connected beehive scales</dd></div>
+      <div><dt data-i18n="m_stack">STACK</dt><dd>R · Shiny · PostgreSQL · Docker · Plotly</dd></div>
+      <div><dt data-i18n="m_org">ORGANISATION</dt><dd>ITSAP – Institut de l’abeille (INRAE)</dd></div>
     </dl>
 
-    <!-- Specimen -->
+    <!-- Pipeline -->
     <section class="spec sr" aria-labelledby="spec-t">
       <div class="frame">
         <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
-        <div class="spec-head"><span id="spec-t"><b>27</b> <span data-i18n="spec_t">document types · 5 families</span></span><span data-i18n="spec_h">Hover a document</span></div>
-        <div id="fams"></div>
-        <div class="spec-cap"><span id="cap" data-i18n="cap0">One form per type. One clean PDF out.</span><span id="capn"></span></div>
-        <div class="pipe" aria-label="Pipeline">
-          <em data-i18n="pp1">FORM</em><i>→</i><em data-i18n="pp2">HTML TEMPLATE</em><i>→</i><em>WEASYPRINT</em><i>→</i><em>PDF</em>
+        <div class="spec-head"><span id="spec-t"><b>6</b> <span data-i18n="spec_t">stages, from raw scale data to report</span></span></div>
+        <div class="pipeline">
+          <div class="node"><b data-i18n="n1">Raw scale data</b><small data-i18n="n1s">connected hives</small></div>
+          <div class="node"><b data-i18n="n2">Cleaning &amp; correction</b><small>R</small></div>
+          <div class="node"><b data-i18n="n2b">Segmented regression</b><small data-i18n="n2bs">breakpoint detection</small></div>
+          <div class="node"><b data-i18n="n3">Shared model</b><small>PostgreSQL</small></div>
+          <div class="node"><b data-i18n="n4">Dashboard</b><small>Shiny · Plotly</small></div>
+          <div class="node"><b data-i18n="n5">Reports</b><small>R Markdown · LaTeX</small></div>
         </div>
+        <p class="panel-note" data-i18n="pnote">Described at the same level of detail as my CV — no real data, screenshots or partner names, for confidentiality.</p>
       </div>
-    </section>
-
-    <!-- Facts -->
-    <section class="facts sr" aria-label="Key figures">
-      <div class="fact"><b>27</b><span data-i18n="f1">document templates, from invoices to employment contracts</span></div>
-      <div class="fact"><b>690+</b><span data-i18n="f2">automated tests, run on every push</span></div>
-      <div class="fact"><b>5</b><span data-i18n="f3">document families, from invoices to residence attestations</span></div>
     </section>
 
     <!-- Story -->
     <section class="blocks">
       <div class="blk sr">
         <div class="blk-k"><i>01</i><span data-i18n="k_ctx">CONTEXT</span></div>
-        <div class="blk-b"><p class="big" data-i18n="b_ctx">DocuSen is my own product: conceived, designed, built and deployed alone. It now also lives inside YoonuJob, my second product.</p></div>
+        <div class="blk-b"><p class="big" data-i18n="b_ctx">Fourteen months at ITSAP – Institut de l’abeille (INRAE), in Avignon, first as an intern then on a fixed-term contract, leading the technical side of Miellée — an internal tool for the team’s connected beehive scales.</p></div>
       </div>
       <div class="blk sr">
         <div class="blk-k"><i>02</i><span data-i18n="k_prob">PROBLEM</span></div>
-        <div class="blk-b"><p class="big" data-i18n="b_prob">Invoices, contracts, HR letters, attestations: small businesses redo the same paperwork by hand, in templates that never quite look right. The documents that represent a company should look like they were made with care.</p></div>
+        <div class="blk-b"><p class="big" data-i18n="b_prob">Weight data from connected beehive scales has to be cleaned and standardised before it means anything: missing points, inconsistent time steps, values to correct before a weight curve is readable.</p></div>
       </div>
       <div class="blk sr">
         <div class="blk-k"><i>03</i><span data-i18n="k_sol">SOLUTION</span></div>
         <div class="blk-b">
-          <p class="big" data-i18n="b_sol">One clear form per document type, a live preview, and a clean PDF generated on the server.</p>
-          <p class="sm" data-i18n="b_sol2">An account is required to generate a document. Once signed in, you save your documents, reuse your company profile (logo, address, registration numbers) and share a document through a private link.</p>
+          <p class="big" data-i18n="b_sol">An R pipeline that cleans the data, corrects the weight curves, and fits a segmented regression to find where each nectar flow begins and ends.</p>
+          <p class="sm" data-i18n="b_sol2">Each year’s data is validated and corrected, then a piecewise linear model — with automatic breakpoint detection — locates the segments of fastest weight gain: the “miellées”. Results are stored in a shared PostgreSQL model and explored through a Shiny dashboard.</p>
         </div>
       </div>
       <div class="blk sr">
-        <div class="blk-k"><i>04</i><span data-i18n="k_eng">ENGINEERING</span></div>
+        <div class="blk-k"><i>04</i><span data-i18n="k_rep">REPORTING</span></div>
         <div class="blk-b">
-          <p class="big" data-i18n="b_eng">27 document types, one engine.</p>
-          <p class="sm" data-i18n="b_eng2">Each type started as hand-written views. A generic engine now lets them migrate one by one to pure configuration, and a startup check fails loudly if a type is declared in one place and forgotten in the other. The catalogue can grow without drifting.</p>
-          <div class="code" role="img" aria-label="Excerpt of the document registry configuration">
-            <div class="code-h"><span>registry.py</span><span data-i18n="code_h">excerpt</span></div>
-<pre><span class="cm"># one source of truth for the catalogue</span>
-<span class="k">DOCUMENT_ENGINE_CONFIG</span> = {
-  <span class="s">'avoir'</span>: {
-    <span class="s">'form_template'</span>:    <span class="s">'documents/creer/avoir/avoir.html'</span>,
-    <span class="s">'pdf_template'</span>:     <span class="s">'documents/creer/avoir/avoir_pdf.html'</span>,
-    <span class="s">'preview_template'</span>: <span class="s">'documents/creer/avoir/avoir_preview.html'</span>,
-    <span class="s">'has_logo'</span>: <span class="k">True</span>,
-  },
-}
-<span class="cm"># a slug missing from DOCUMENT_TYPES raises at startup,</span>
-<span class="cm"># so `manage.py check` catches it before anything ships</span></pre>
-          </div>
+          <p class="big" data-i18n="b_rep">Geolocated indicators, and a report at the end of the pipeline.</p>
+          <p class="sm" data-i18n="b_rep2">Weight-gain indicators are placed on a map, and the same data feeds automated reports — built with R Markdown and LaTeX (Beamer) — for the team and its partners.</p>
         </div>
       </div>
       <div class="blk sr">
         <div class="blk-k"><i>05</i><span data-i18n="k_role">MY ROLE</span></div>
-        <div class="blk-b">
-          <p class="big" data-i18n="b_role">Everything: product, interface, back end, PDF templates, tests and deployment.</p>
-          <p class="sm" data-i18n="b_role2">Usage events and one-click feedback tell me which templates to improve next.</p>
-        </div>
+        <div class="blk-b"><p class="big" data-i18n="b_role">The technical side, alone: the cleaning algorithm, the database model, the Shiny interface and its Dockerized deployment.</p></div>
       </div>
       <div class="blk sr">
         <div class="blk-k"><i>06</i><span data-i18n="k_stack">STACK</span></div>
-        <div class="blk-b"><p class="stack"><b>Python</b><s>/</s><b>Django</b><s>/</s><b>WeasyPrint</b><s>/</s><b>SQLite</b><s>/</s><b>HTML</b><s>/</s><b>CSS</b><s>/</s><b>Bootstrap</b><s>/</s><b>JavaScript</b><s>/</s><b>Docker</b><s>/</s><b>Render</b><s>/</s><b>GitHub Actions</b></p></div>
+        <div class="blk-b"><p class="stack"><b>R</b><s>/</s><b>Shiny</b><s>/</s><b>PostgreSQL</b><s>/</s><b>Plotly</b><s>/</s><b>Docker</b><s>/</s><b>R Markdown</b><s>/</s><b>LaTeX (Beamer)</b></p></div>
       </div>
       <div class="blk sr">
         <div class="blk-k"><i>07</i><span data-i18n="k_res">RESULT</span></div>
-        <div class="blk-b"><p class="big" data-i18n="b_res">Live at getdocusen.com with 27 templates, more than 690 automated tests, and now a building block of YoonuJob.</p></div>
+        <div class="blk-b"><p class="big" data-i18n="b_res">An internal tool the ITSAP team used throughout my 14 months there. It’s confidential: no public link or screenshots, described here at the same level of detail as on my CV.</p></div>
       </div>
     </section>
 
@@ -325,7 +283,7 @@ html.menu-open{overflow:hidden}
     <section class="tern-wrap sr" aria-labelledby="tern-t">
       <div>
         <h2 id="tern-t">Data <span class="x">×</span> Code <span class="x">×</span> Product</h2>
-        <p data-i18n="tern_p">Every project sits somewhere between the three. DocuSen is mostly code and product; the machine-learning work sits at the other end.</p>
+        <p data-i18n="tern_p">Miellée leans toward data and code: an internal data-engineering tool, not a product with users of its own.</p>
         <p class="tern-note" data-i18n="tern_n">Positions are self-assessed. Placeholder weights, to calibrate.</p>
       </div>
       <div class="tern">
@@ -334,9 +292,9 @@ html.menu-open{overflow:hidden}
       </div>
     </section>
 
-    <a class="next sr" href="case-study-yoonujob-v1.html">
-      <small data-i18n="next">NEXT PROJECT · N°05 / 06</small>
-      <strong><span>Yoonu<span class="t2">Job</span></span><span class="a">→</span></strong>
+    <a class="next sr" href="case-study-senbiostat-v1.html">
+      <small data-i18n="next">NEXT PROJECT · N°03 / 06</small>
+      <strong><span>Sen<span class="t2">Bio</span>Stat</span><span class="a">→</span></strong>
     </a>
   </main>
 
@@ -350,84 +308,46 @@ html.menu-open{overflow:hidden}
 /* ═══ i18n ═══ */
 const I18N={
 en:{nav_work:'Work',nav_approach:'Approach',nav_about:'About',nav_contact:'Contact',nav_cv:'CV ↗',back:'All work',
-tag:'Product · Live in production',sub1:'Professional documents,',sub2:'ready in minutes.',
-m_role:'ROLE',m_role_v:'Founder & sole developer',m_type:'TYPE',m_type_v:'Web product · PDF generation',m_stack:'STACK',m_link:'LINK',
-spec_t:'document types · 5 families',spec_h:'Hover a document',cap0:'One form per type. One clean PDF out.',pp1:'FORM',pp2:'HTML TEMPLATE',
-f1:'document templates, from invoices to employment contracts',f2:'automated tests, run on every push',f3:'document families, from invoices to residence attestations',
-k_ctx:'CONTEXT',b_ctx:'DocuSen is my own product: conceived, designed, built and deployed alone. It now also lives inside YoonuJob, my second product.',
-k_prob:'PROBLEM',b_prob:'Invoices, contracts, HR letters, attestations: small businesses redo the same paperwork by hand, in templates that never quite look right. The documents that represent a company should look like they were made with care.',
-k_sol:'SOLUTION',b_sol:'One clear form per document type, a live preview, and a clean PDF generated on the server.',
-b_sol2:'An account is required to generate a document. Once signed in, you save your documents, reuse your company profile (logo, address, registration numbers) and share a document through a private link.',
-k_eng:'ENGINEERING',b_eng:'27 document types, one engine.',
-b_eng2:'Each type started as hand-written views. A generic engine now lets them migrate one by one to pure configuration, and a startup check fails loudly if a type is declared in one place and forgotten in the other. The catalogue can grow without drifting.',
-code_h:'excerpt',k_role:'MY ROLE',b_role:'Everything: product, interface, back end, PDF templates, tests and deployment.',b_role2:'Usage events and one-click feedback tell me which templates to improve next.',
-k_stack:'STACK',k_res:'RESULT',b_res:'Live at getdocusen.com with 27 templates, more than 690 automated tests, and now a building block of YoonuJob.',
-tern_p:'Every project sits somewhere between the three. DocuSen is mostly code and product; the machine-learning work sits at the other end.',
-tern_n:'Positions are self-assessed. Placeholder weights, to calibrate.',next:'NEXT PROJECT · N°05 / 06',
-fam:['COMMERCIAL','CONTRACTS','PAYROLL','LETTERS','ATTESTATIONS'],
-docs:['Invoice','Credit note','Quote','Receipt','Purchase order','Delivery note',
-'Service contract','Fixed-term contract','Permanent contract','Lease agreement','Partnership agreement',
-'Payslip','Salary receipt',
-'Cover letter','Termination letter','Request letter','Resignation letter','Complaint letter','Recommendation letter','Thank-you letter',
-'Service certificate','Employment certificate','Payment certificate','Attendance certificate','Internship certificate','Salary certificate','Residence certificate'],
+tag:'Internal mission · confidential',sub1:'Connected beehive data,',sub2:'made clear.',
+m_role:'ROLE',m_role_v:'Project lead & data analyst',m_type:'TYPE',m_type_v:'Internal tool · connected beehive scales',m_stack:'STACK',m_org:'ORGANISATION',
+spec_t:'stages, from raw scale data to report',n2b:'Segmented regression',n2bs:'breakpoint detection',
+n1:'Raw scale data',n1s:'connected hives',n2:'Cleaning & validation',n3:'Shared model',n4:'Dashboard',n5:'Reports',
+pnote:'Described at the same level of detail as my CV — no real data, screenshots or partner names, for confidentiality.',
+k_ctx:'CONTEXT',b_ctx:'Fourteen months at ITSAP – Institut de l’abeille (INRAE), in Avignon, first as an intern then on a fixed-term contract, leading the technical side of Miellée — an internal tool for the team’s connected beehive scales.',
+k_prob:'PROBLEM',b_prob:'Weight data from connected beehive scales has to be cleaned and standardised before it means anything: missing points, inconsistent time steps, values to correct before a weight curve is readable.',
+k_sol:'SOLUTION',b_sol:'An R pipeline that cleans the data, corrects the weight curves, and fits a segmented regression to find where each nectar flow begins and ends.',
+b_sol2:'Each year’s data is validated and corrected, then a piecewise linear model — with automatic breakpoint detection — locates the segments of fastest weight gain: the “miellées”. Results are stored in a shared PostgreSQL model and explored through a Shiny dashboard.',
+k_rep:'REPORTING',b_rep:'Geolocated indicators, and a report at the end of the pipeline.',
+b_rep2:'Weight-gain indicators are placed on a map, and the same data feeds automated reports — built with R Markdown and LaTeX (Beamer) — for the team and its partners.',
+k_role:'MY ROLE',b_role:'The technical side, alone: the cleaning algorithm, the database model, the Shiny interface.',
+k_stack:'STACK',k_res:'RESULT',b_res:'An internal tool the ITSAP team used throughout my 14 months there. It’s confidential: no public link or screenshots, described here at the same level of detail as on my CV.',
+tern_p:'Miellée leans toward data and code: an internal data-engineering tool, not a product with users of its own.',
+tern_n:'Positions are self-assessed. Placeholder weights, to calibrate.',next:'NEXT PROJECT · N°03 / 06',
 pj:['Microbes / ML','Miellée','SenBioStat','DocuSen','YoonuJob','Client sites']},
 fr:{nav_work:'Projets',nav_approach:'Approche',nav_about:'À propos',nav_contact:'Contact',nav_cv:'CV ↗',back:'Tous les projets',
-tag:'Produit · En production',sub1:'Vos documents professionnels,',sub2:'prêts en quelques minutes.',
-m_role:'RÔLE',m_role_v:'Fondateur & développeur unique',m_type:'TYPE',m_type_v:'Produit web · Génération de PDF',m_stack:'STACK',m_link:'LIEN',
-spec_t:'types de documents · 5 familles',spec_h:'Survolez un document',cap0:'Un formulaire par type. Un PDF propre en sortie.',pp1:'FORMULAIRE',pp2:'TEMPLATE HTML',
-f1:'modèles de documents, de la facture au contrat de travail',f2:'tests automatisés, lancés à chaque push',f3:'familles de documents, de la facture à l’attestation de domicile',
-k_ctx:'CONTEXTE',b_ctx:'DocuSen est mon propre produit : conçu, dessiné, développé et déployé seul. Il vit aussi désormais dans YoonuJob, mon second produit.',
-k_prob:'PROBLÈME',b_prob:'Factures, contrats, courriers RH, attestations : les petites entreprises refont les mêmes documents à la main, dans des modèles jamais tout à fait propres. Les documents qui représentent une entreprise devraient avoir l’air soignés.',
-k_sol:'SOLUTION',b_sol:'Un formulaire clair par type de document, un aperçu en direct, et un PDF propre généré côté serveur.',
-b_sol2:'Un compte est nécessaire pour générer un document. Une fois connecté, vous enregistrez vos documents, réutilisez le profil de votre entreprise (logo, adresse, numéros d’immatriculation) et partagez un document par lien privé.',
-k_eng:'INGÉNIERIE',b_eng:'27 types de documents, un seul moteur.',
-b_eng2:'Chaque type est né de vues écrites à la main. Un moteur générique permet maintenant de les migrer un à un vers de la simple configuration, et une vérification au démarrage échoue bruyamment si un type est déclaré à un endroit et oublié à l’autre. Le catalogue peut grandir sans dériver.',
-code_h:'extrait',k_role:'MON RÔLE',b_role:'Tout : produit, interface, back end, templates PDF, tests et déploiement.',b_role2:'Des événements d’usage et un retour en un clic me disent quels modèles améliorer en priorité.',
-k_stack:'STACK',k_res:'RÉSULTAT',b_res:'En ligne sur getdocusen.com avec 27 modèles, plus de 690 tests automatisés, et désormais une brique de YoonuJob.',
-tern_p:'Chaque projet se situe quelque part entre les trois. DocuSen est surtout du code et du produit ; le travail de machine learning est à l’autre extrémité.',
-tern_n:'Positions auto-évaluées. Pondérations provisoires, à calibrer.',next:'PROJET SUIVANT · N°05 / 06',
-fam:['COMMERCIAL','CONTRATS','PAIE','COURRIERS','ATTESTATIONS'],
-docs:['Facture','Avoir','Devis','Reçu','Bon de commande','Bon de livraison',
-'Contrat de prestation','Contrat CDD','Contrat CDI','Contrat de location','Contrat de partenariat',
-'Fiche de paie','Reçu de salaire',
-'Lettre de motivation','Lettre de résiliation','Lettre de demande','Lettre de démission','Lettre de réclamation','Lettre de recommandation','Lettre de remerciement',
-'Attestation de service','Attestation de travail','Attestation de paiement','Attestation de présence','Attestation de stage','Attestation de salaire','Attestation de domicile'],
+tag:'Mission interne · confidentielle',sub1:'Les données des ruches connectées,',sub2:'mises en clair.',
+m_role:'RÔLE',m_role_v:'Chef de projet Data Analyst',m_type:'TYPE',m_type_v:'Outil interne · balances de ruches connectées',m_stack:'STACK',m_org:'ORGANISATION',
+spec_t:'étapes, de la donnée brute au rapport',n2b:'Régression segmentée',n2bs:'détection de ruptures',
+n1:'Données brutes',n1s:'balances connectées',n2:'Nettoyage & validation',n3:'Modèle commun',n4:'Tableau de bord',n5:'Rapports',
+pnote:'Décrit au même niveau de détail que mon CV — sans donnée réelle, capture d’écran ni nom de partenaire, par confidentialité.',
+k_ctx:'CONTEXTE',b_ctx:'Quatorze mois à l’ITSAP – Institut de l’abeille (INRAE), à Avignon, d’abord en stage puis en CDD, à la tête de la partie technique de Miellée — un outil interne pour les balances de ruches connectées de l’équipe.',
+k_prob:'PROBLÈME',b_prob:'Les données de poids des balances de ruches connectées doivent être nettoyées et standardisées avant d’être lisibles : points manquants, pas de temps irréguliers, valeurs à corriger avant qu’une courbe de poids ne veuille dire quelque chose.',
+k_sol:'SOLUTION',b_sol:'Un pipeline R qui nettoie les données, corrige les courbes de poids, et ajuste une régression segmentée pour situer le début et la fin de chaque miellée.',
+b_sol2:'Les données de chaque année sont validées et corrigées, puis un modèle linéaire segmenté — avec détection automatique des points de rupture — localise les segments de gain de poids le plus rapide : les miellées. Les résultats sont stockés dans un modèle PostgreSQL commun et explorés via un tableau de bord Shiny.',
+k_rep:'REPORTING',b_rep:'Des indicateurs géolocalisés, et un rapport au bout du pipeline.',
+b_rep2:'Les indicateurs de gain de poids sont placés sur une carte, et les mêmes données alimentent des rapports automatisés — construits avec R Markdown et LaTeX (Beamer) — pour l’équipe et ses partenaires.',
+k_role:'MON RÔLE',b_role:'Toute la partie technique, seul : l’algorithme de nettoyage, le modèle de données, l’interface Shiny.',
+k_stack:'STACK',k_res:'RÉSULTAT',b_res:'Un outil interne utilisé par l’équipe de l’ITSAP pendant mes 14 mois sur place. Il est confidentiel : pas de lien public ni de capture d’écran, décrit ici au même niveau de détail que sur mon CV.',
+tern_p:'Miellée penche du côté de la donnée et du code : un outil interne d’ingénierie de la donnée, pas un produit avec ses propres utilisateurs.',
+tern_n:'Positions auto-évaluées. Pondérations provisoires, à calibrer.',next:'PROJET SUIVANT · N°03 / 06',
 pj:['Microbes / ML','Miellée','SenBioStat','DocuSen','YoonuJob','Sites clients']}
 };
 let LANG='en';
 
-/* ═══ Specimen sheet ═══ */
-const FAM_SIZES=[6,5,2,7,7];
-const ln=(x1,y1,x2,y2,w)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"${w?` stroke-width="${w}"`:''}/>`;
-const PAGE='<rect x=".5" y=".5" width="59" height="77" rx="2"/>';
-const GLYPH=[
- /*commercial*/ PAGE+'<rect x="8" y="8" width="20" height="5" fill="currentColor" stroke="none"/>'+ln(38,10,52,10)+ln(8,28,52,28)+ln(8,36,44,36)+ln(8,44,48,44)+ln(8,52,40,52)+ln(8,60,52,60,.6)+'<rect x="34" y="65" width="18" height="6" fill="currentColor" stroke="none" opacity=".8"/>',
- /*contracts*/  PAGE+ln(14,11,46,11,1.6)+[22,28,34,40,46,52].map((y,i)=>ln(8,y,i%3===2?38:52,y)).join('')+ln(8,68,24,68)+ln(36,68,52,68),
- /*payroll*/    PAGE+'<rect x="8" y="8" width="44" height="8" fill="currentColor" stroke="none" opacity=".7"/>'+[26,34,42,50].map(y=>ln(8,y,28,y)+ln(34,y,52,y)).join('')+'<rect x="8" y="62" width="44" height="6" fill="currentColor" stroke="none" opacity=".8"/>',
- /*letters*/    PAGE+ln(8,10,24,10)+ln(8,15,20,15)+ln(40,10,52,10)+[30,36,42,48,54].map((y,i)=>ln(8,y,i===4?32:52,y)).join('')+ln(36,68,52,68),
- /*attestations*/PAGE+ln(16,12,44,12,1.6)+ln(22,17,38,17,.6)+[28,34,40,46].map((y,i)=>ln(8,y,i===3?36:52,y)).join('')+'<circle cx="44" cy="62" r="7"/>'+ln(8,66,26,66)
-];
-function renderFams(){
-  const box=document.getElementById('fams'); const d=I18N[LANG]; let n=0,html='';
-  FAM_SIZES.forEach((size,fi)=>{
-    let tiles='';
-    for(let i=0;i<size;i++){ n++; tiles+=`<button class="tile" type="button" data-n="${n}" aria-label="${d.docs[n-1]}"><svg viewBox="0 0 60 78" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">${GLYPH[fi]}</svg><span class="tn"><i>${String(n).padStart(2,'0')}</i>${d.docs[n-1]}</span></button>`; }
-    html+=`<div class="fam"><div class="fam-label">${String(fi+1).padStart(2,'0')} · ${d.fam[fi]}<span>${size} ${LANG==='fr'?'modèles':'templates'}</span></div><div class="tiles">${tiles}</div></div>`;
-  });
-  box.innerHTML=html;
-  const cap=document.getElementById('cap'),capn=document.getElementById('capn');
-  const show=t=>{const n=+t.dataset.n;cap.innerHTML=`<b>${d.docs[n-1]}</b>`;capn.textContent=`${String(n).padStart(2,'0')} / 27`};
-  const reset=()=>{cap.textContent=d.cap0;capn.textContent=''};
-  box.querySelectorAll('.tile').forEach(t=>{
-    t.addEventListener('mouseenter',()=>show(t));t.addEventListener('focus',()=>show(t));
-    t.addEventListener('mouseleave',reset);t.addEventListener('blur',reset);
-  });
-}
-
 /* ═══ Ternary ═══ */
 const V={d:[220,44],c:[52,344],p:[388,344]};
 const PROJ=[{d:.75,c:.20,p:.05},{d:.45,c:.30,p:.25},{d:.35,c:.35,p:.30},{d:.05,c:.45,p:.50},{d:.10,c:.30,p:.60},{d:0,c:.65,p:.35}];
-const CUR=3;
+const CURP=1;
 const pos=w=>[w.d*V.d[0]+w.c*V.c[0]+w.p*V.p[0], w.d*V.d[1]+w.c*V.c[1]+w.p*V.p[1]];
 function renderTern(){
   const svg=document.getElementById('tern'),d=I18N[LANG];
@@ -443,7 +363,7 @@ function renderTern(){
   s+=`<text class="vl" x="${V.p[0]}" y="${V.p[1]+26}" text-anchor="middle">PRODUCT</text>`;
   PROJ.forEach((w,i)=>{
     const [x,y]=pos(w);
-    s+=`<g class="pt${i===CUR?' cur':''}" data-i="${i}" tabindex="0" aria-label="${d.pj[i]}"><circle class="h" cx="${x}" cy="${y}" r="12"/><circle class="d" cx="${x}" cy="${y}" r="4.5"/><text x="${x+9}" y="${y-9}">${String(i+1).padStart(2,'0')}</text></g>`;
+    s+=`<g class="pt${i===CURP?' cur':''}" data-i="${i}" tabindex="0" aria-label="${d.pj[i]}"><circle class="h" cx="${x}" cy="${y}" r="12"/><circle class="d" cx="${x}" cy="${y}" r="4.5"/><text x="${x+9}" y="${y-9}">${String(i+1).padStart(2,'0')}</text></g>`;
   });
   svg.innerHTML=s;
   const rn=document.getElementById('tr-n'),rv=document.getElementById('tr-v');
@@ -451,9 +371,9 @@ function renderTern(){
   svg.querySelectorAll('.pt').forEach(g=>{
     const i=+g.dataset.i;
     g.addEventListener('mouseenter',()=>show(i));g.addEventListener('focus',()=>show(i));
-    g.addEventListener('mouseleave',()=>show(CUR));g.addEventListener('blur',()=>show(CUR));
+    g.addEventListener('mouseleave',()=>show(CURP));g.addEventListener('blur',()=>show(CURP));
   });
-  show(CUR);
+  show(CURP);
 }
 
 /* ═══ language ═══ */
@@ -462,7 +382,7 @@ function setLang(l){
   document.documentElement.lang=l;
   document.querySelectorAll('[data-i18n]').forEach(el=>{const v=d[el.dataset.i18n]; if(typeof v==='string')el.textContent=v});
   document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));
-  renderFams();renderTern();
+  renderTern();
   try{localStorage.setItem('cdb-lang',l)}catch(e){}
 }
 document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
