@@ -173,7 +173,7 @@ html.menu-open{overflow:hidden}
   <main>
     <section class="head">
       <div class="head-top rv" style="--i:0"><span data-i18n="h_top">Data <span class="x">×</span> Code <span class="x">×</span> Product</span><span>2021 — 2026</span></div>
-      <h1 class="rv" style="--i:1"><span data-i18n="h_title">Selected work</span><sup>06</sup></h1>
+      <h1 class="rv" style="--i:1"><span data-i18n="h_title">Selected work</span><sup>07</sup></h1>
       <p class="rv" style="--i:2" data-i18n="h_p">Six projects, placed between data, code and product. Hover one to locate it.</p>
     </section>
 
@@ -198,23 +198,25 @@ html.menu-open{overflow:hidden}
 <script>
 const I18N={
 en:{nav_work:'Work',nav_approach:'Approach',nav_about:'About',nav_contact:'Contact',nav_cv:'CV ↗',
-h_title:'Selected work',h_p:'Six projects, placed between data, code and product. Hover one to locate it.',hint:'Hover a project',hint_t:'Tap a point',open:'Open project',
+h_title:'Selected work',h_p:'Seven projects, placed between data, code and product. Hover one to locate it.',hint:'Hover a project',hint_t:'Tap a point',open:'Open project',
 p:[
  {t:'Microbes / ML',k:'RESEARCH',s:'Academic',d:'Detecting new microbial subtypes with metric learning and neural networks, on industrial-partner data.'},
  {t:'Miellée',k:'PROFESSIONAL',s:'2023 – 2024',d:'A data platform for connected beehive scales: cleaning, algorithm, interactive app and reporting.'},
  {t:'SenBioStat',k:'PRODUCT',s:'Nearly ready',d:'A web app that runs statistical tests — t-test, ANOVA, chi-square, regression, survival — and writes the report.'},
  {t:'DocuSen',k:'PRODUCT',s:'Live',d:'Professional documents, ready in minutes: 27 templates, one clean PDF each.'},
  {t:'YoonuJob',k:'PRODUCT',s:'Live',d:'A hiring platform: candidates, companies, applications and a CV builder. Co-founder and CTO.'},
- {t:'Client sites',k:'CLIENT WORK',s:'Delivered',d:'Websites for real clients: a football club, a municipality and a services company.'}]},
+ {t:'Sentazur',k:'CLIENT WORK',s:'In development',d:'A private security company: public site and a full back office — clients, planning, agent qualifications, quotes.'},
+ {t:'Client sites',k:'CLIENT WORK',s:'Delivered',d:'Websites for real clients: a football club and a local government.'}]},
 fr:{nav_work:'Projets',nav_approach:'Approche',nav_about:'À propos',nav_contact:'Contact',nav_cv:'CV ↗',
-h_title:'Projets sélectionnés',h_p:'Six projets, placés entre data, code et produit. Survolez-en un pour le situer.',hint:'Survolez un projet',hint_t:'Touchez un point',open:'Ouvrir le projet',
+h_title:'Projets sélectionnés',h_p:'Sept projets, placés entre data, code et produit. Survolez-en un pour le situer.',hint:'Survolez un projet',hint_t:'Touchez un point',open:'Ouvrir le projet',
 p:[
  {t:'Microbes / ML',k:'RECHERCHE',s:'Académique',d:'Détection de nouveaux sous-types microbiens par apprentissage de métrique et réseaux de neurones, sur des données d’un partenaire industriel.'},
  {t:'Miellée',k:'PROFESSIONNEL',s:'2023 – 2024',d:'Une plateforme de données pour balances de ruches connectées : nettoyage, algorithme, application interactive et reporting.'},
  {t:'SenBioStat',k:'PRODUIT',s:'Bientôt prêt',d:'Une application web qui exécute des tests statistiques — t-test, ANOVA, khi², régression, survie — et rédige le rapport.'},
  {t:'DocuSen',k:'PRODUIT',s:'En ligne',d:'Vos documents professionnels, prêts en quelques minutes : 27 modèles, un PDF propre pour chacun.'},
  {t:'YoonuJob',k:'PRODUIT',s:'En ligne',d:'Une plateforme de recrutement : candidats, entreprises, candidatures et créateur de CV. Cofondateur et directeur technique.'},
- {t:'Sites clients',k:'TRAVAIL CLIENT',s:'Livré',d:'Des sites pour de vrais clients : un club de football, une commune et une société de services.'}]}
+ {t:'Sentazur',k:'TRAVAIL CLIENT',s:'En développement',d:'Une société de sécurité privée : site public et back-office complet — clients, planning, qualifications des agents, devis.'},
+ {t:'Sites clients',k:'TRAVAIL CLIENT',s:'Livré',d:'Des sites pour de vrais clients : un club de football et une collectivité locale.'}]}
 };
 /* weights are placeholders, self-assessed */
 const ITEMS=[
@@ -223,7 +225,8 @@ const ITEMS=[
  {href:'case-study-senbiostat-v1.html',w:{d:.35,c:.35,p:.30}},
  {href:'case-study-v1.html',w:{d:.05,c:.45,p:.50}},
  {href:'case-study-yoonujob-v1.html',w:{d:.10,c:.30,p:.60}},
- {href:'#',w:{d:0,c:.65,p:.35}}
+ {href:'case-study-sentazur-v1.html',w:{d:.04,c:.55,p:.41}},
+ {href:'case-study-clients-v1.html',w:{d:0,c:.65,p:.35}}
 ];
 let LANG='en',CUR=-1;
 const TOUCH=()=>matchMedia('(hover:none)').matches;
