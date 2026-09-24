@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Approach — Cheikh Darou Beye (prototype v1)</title>
+<meta name="theme-color" content="#070B14">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070B14; --surface:#0E1424; --ink:#ECEAE4; --muted:#8A93A8; --dim:#5E6A85; --subtle:#7480A0;
+  --line:rgba(236,234,228,.10); --line-strong:rgba(236,234,228,.22);
+  --accent:#5B6CFF; --accent-hi:#8E9BFF;
+  --sans:'Geist',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'Geist Mono',ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --gutter:clamp(20px,4vw,56px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent-hi);outline-offset:3px;border-radius:4px}
+.page{max-width:1440px;margin:0 auto;padding:0 var(--gutter)}
+.x{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--accent-hi)}
+
+/* nav */
+.nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:80px}
+.logo{display:inline-flex;align-items:center;gap:10px;font-weight:600;letter-spacing:.14em;font-size:14px}
+.logo-mark{width:8px;height:8px;background:var(--accent);display:block}
+.nav-links{display:flex;gap:36px}
+.nav-links a{font-size:14px;color:var(--muted);position:relative;padding:6px 0;transition:color .25s}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.nav-links a:hover,.nav-links a[aria-current]{color:var(--ink)}
+.nav-links a:hover::after,.nav-links a[aria-current]::after{transform:scaleX(1)}
+.nav-r{display:flex;justify-content:flex-end;align-items:center;gap:20px}
+.lang{display:flex;gap:2px;font-family:var(--mono);font-size:12px}
+.lang button{padding:6px 8px;color:var(--subtle);letter-spacing:.06em;transition:color .2s}
+.lang button:hover{color:var(--muted)}
+.lang button[aria-pressed="true"]{color:var(--ink)}
+.pill{display:inline-flex;align-items:center;height:36px;padding:0 16px;border:1px solid var(--line-strong);border-radius:999px;font-size:13px;transition:border-color .25s,background .25s}
+.pill:hover{border-color:var(--ink);background:rgba(236,234,228,.05)}
+
+/* mobile menu */
+.menu-btn{display:none;align-items:center;gap:10px;height:36px;padding:0 14px;border:1px solid var(--line-strong);border-radius:999px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;transition:border-color .25s}
+.menu-btn:hover{border-color:var(--ink)}
+.mb-i{position:relative;width:14px;height:8px;display:block}
+.mb-i::before,.mb-i::after{content:"";position:absolute;left:0;right:0;height:1px;background:currentColor;transition:transform .3s cubic-bezier(.2,.7,.2,1),top .3s cubic-bezier(.2,.7,.2,1)}
+.mb-i::before{top:1px}.mb-i::after{top:7px}
+.menu-btn[aria-expanded="true"] .mb-i::before{top:4px;transform:rotate(45deg)}
+.menu-btn[aria-expanded="true"] .mb-i::after{top:4px;transform:rotate(-45deg)}
+.mnav{position:fixed;inset:0;z-index:55;background:var(--bg);padding:104px var(--gutter) 28px;display:flex;flex-direction:column;justify-content:space-between;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.mnav.open{opacity:1;visibility:visible}
+.mnav-links{display:flex;flex-direction:column}
+.mnav-links a{display:flex;align-items:baseline;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);font-weight:600;font-size:clamp(2.2rem,11vw,3.4rem);letter-spacing:-.05em;line-height:1.05}
+.mnav-links a[aria-current]{color:var(--accent-hi)}
+.mnav-foot{display:flex;flex-direction:column;align-items:flex-start;gap:16px;font-family:var(--mono);font-size:13px;color:var(--muted)}
+html.menu-open{overflow:hidden}
+@media (min-width:981px){.mnav{display:none}}
+@media (max-width:980px){
+  .menu-btn{display:inline-flex}
+  .nav{position:sticky;top:0;z-index:60;background:var(--bg);margin:0 calc(-1*var(--gutter));padding:0 var(--gutter);border-bottom:1px solid var(--line)}
+}
+@media (max-width:520px){.nav-r .pill{display:none}.nav-r{gap:12px}}
+
+/* header */
+.head{padding:clamp(28px,7vh,80px) 0 clamp(28px,5vh,56px)}
+.head-top{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--subtle)}
+.head h1{font-weight:600;font-size:clamp(3.4rem,10vw,9.5rem);line-height:.9;letter-spacing:-.06em;margin:clamp(14px,2.6vh,28px) 0 clamp(16px,3vh,28px) -.04em}
+.head h1 .t2{color:var(--dim)}
+.head p{max-width:34em;color:var(--muted);font-size:clamp(1.05rem,1.4vw,1.3rem);line-height:1.6}
+
+/* principle blocks (shared with case-study pages) */
+.blocks{margin-top:clamp(16px,4vh,40px);border-top:1px solid var(--line)}
+.blk{display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px 24px;padding:clamp(32px,6vh,64px) 0;border-top:1px solid var(--line)}
+.blk:first-child{border-top:0}
+.blk-k{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--subtle)}
+.blk-k i{font-style:normal;color:var(--accent-hi);margin-right:10px}
+.blk-b{min-width:0}
+.blk-b p.big{font-size:clamp(1.3rem,2.2vw,1.95rem);line-height:1.28;letter-spacing:-.02em;font-weight:450;max-width:32em}
+
+/* closing link */
+.next{display:block;padding:clamp(40px,8vh,88px) 0;border-top:1px solid var(--line)}
+.next small{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--subtle);margin-bottom:14px}
+.next strong{display:flex;align-items:baseline;gap:.25em;font-weight:600;font-size:clamp(2.6rem,9vw,9rem);line-height:.95;letter-spacing:-.055em}
+.next strong .a{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--accent-hi);transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+@media (hover:hover){.next:hover strong .a{transform:translateX(12px)}}
+.next .t2{color:var(--dim)}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:24px 0 36px;border-top:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--subtle)}
+.foot a:hover{color:var(--ink)}
+
+/* motion */
+.rv{opacity:0;transform:translateY(14px);animation:rv .9s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--i,0)*90ms + 100ms)}
+@keyframes rv{to{opacity:1;transform:none}}
+.js .sr{opacity:0;transform:translateY(18px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.js .sr.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{animation:none;opacity:1;transform:none}.js .sr{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+/* responsive */
+@media (max-width:520px){
+  .head h1{font-size:clamp(2.4rem,13vw,3.4rem)}
+  .next strong{font-size:clamp(2rem,10vw,2.8rem);flex-wrap:wrap}
+}
+@media (max-width:980px){
+  .nav-links{display:none}.nav{grid-template-columns:1fr auto}
+  .blk{grid-template-columns:minmax(0,1fr)}
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<div class="page">
+
+  <header class="nav">
+    <a class="logo" href="hero-v1.html" aria-label="Cheikh Darou Beye"><span class="logo-mark"></span>CDB</a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="work-v1.html" data-i18n="nav_work">Work</a>
+      <a href="approche-v1.html" aria-current="page" data-i18n="nav_approach">Approach</a>
+      <a href="#" data-i18n="nav_about">About</a>
+      <a href="#" data-i18n="nav_contact">Contact</a>
+    </nav>
+    <div class="nav-r">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+      </div>
+      <a class="pill" href="#" data-i18n="nav_cv">CV ↗</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav"><span class="mb-l">Menu</span><span class="mb-i" aria-hidden="true"></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="head">
+      <div class="head-top rv" style="--i:0"><span data-i18n="h_top">Data <span class="x">×</span> Code <span class="x">×</span> Product</span></div>
+      <h1 class="rv" style="--i:1" data-i18n="h_title">My <span class="t2">approach</span></h1>
+      <p class="rv" style="--i:2" data-i18n="h_p">Four things that stay true across seven very different projects — from a confidential research mission to a company I’m co-founding.</p>
+    </section>
+
+    <section class="blocks">
+      <div class="blk sr">
+        <div class="blk-k"><i>01</i><span data-i18n="k1">END TO END, ALONE</span></div>
+        <div class="blk-b"><p class="big" data-i18n="b1">Founder, sole developer, or the person doing “everything technical” as co-founder — on every project here, I go from the data to the interface myself, without handing off.</p></div>
+      </div>
+      <div class="blk sr">
+        <div class="blk-k"><i>02</i><span data-i18n="k2">A REAL PRODUCT, NOT JUST AN ANALYSIS</span></div>
+        <div class="blk-b"><p class="big" data-i18n="b2">SenBioStat doesn’t stop at a statistical test — it writes a PDF report. Miellée isn’t a notebook — it’s a dashboard someone actually uses. That’s the whole point of Data × Code × Product.</p></div>
+      </div>
+      <div class="blk sr">
+        <div class="blk-k"><i>03</i><span data-i18n="k3">TESTED BEFORE IT SHIPS</span></div>
+        <div class="blk-b"><p class="big" data-i18n="b3">693 tests on DocuSen, 300+ on YoonuJob, 102 on Sentazur. Not a box to tick afterward — part of what “done” means.</p></div>
+      </div>
+      <div class="blk sr">
+        <div class="blk-k"><i>04</i><span data-i18n="k4">HONEST ABOUT WHERE THINGS STAND</span></div>
+        <div class="blk-b"><p class="big" data-i18n="b4">Every project page says plainly what’s live, what’s in progress, what’s confidential — never “ready” when it isn’t.</p></div>
+      </div>
+    </section>
+
+    <a class="next sr" href="work-v1.html">
+      <small data-i18n="next">SEE THE WORK</small>
+      <strong><span data-i18n="next_t">Selected <span class="t2">work</span></span><span class="a">→</span></strong>
+    </a>
+  </main>
+
+  <footer class="foot">
+    <span>© 2026 Cheikh Darou Beye</span>
+    <a href="mailto:cheikhdaroubeye@gmail.com">cheikhdaroubeye@gmail.com</a>
+  </footer>
+</div>
+
+<script>
+const I18N={
+en:{nav_work:'Work',nav_approach:'Approach',nav_about:'About',nav_contact:'Contact',nav_cv:'CV ↗',
+h_top:'Data <span class="x">×</span> Code <span class="x">×</span> Product',
+h_title:'My <span class="t2">approach</span>',
+h_p:'Four things that stay true across seven very different projects — from a confidential research mission to a company I’m co-founding.',
+k1:'END TO END, ALONE',b1:'Founder, sole developer, or the person doing “everything technical” as co-founder — on every project here, I go from the data to the interface myself, without handing off.',
+k2:'A REAL PRODUCT, NOT JUST AN ANALYSIS',b2:'SenBioStat doesn’t stop at a statistical test — it writes a PDF report. Miellée isn’t a notebook — it’s a dashboard someone actually uses. That’s the whole point of Data × Code × Product.',
+k3:'TESTED BEFORE IT SHIPS',b3:'693 tests on DocuSen, 300+ on YoonuJob, 102 on Sentazur. Not a box to tick afterward — part of what “done” means.',
+k4:'HONEST ABOUT WHERE THINGS STAND',b4:'Every project page says plainly what’s live, what’s in progress, what’s confidential — never “ready” when it isn’t.',
+next:'SEE THE WORK',next_t:'Selected <span class="t2">work</span>'},
+fr:{nav_work:'Projets',nav_approach:'Approche',nav_about:'À propos',nav_contact:'Contact',nav_cv:'CV ↗',
+h_top:'Data <span class="x">×</span> Code <span class="x">×</span> Product',
+h_title:'Mon <span class="t2">approche</span>',
+h_p:'Quatre constantes qui reviennent sur sept projets très différents — d’une mission de recherche confidentielle à une société que je cofonde.',
+k1:'DE BOUT EN BOUT, SEUL',b1:'Fondateur, développeur unique, ou « tout le technique » en tant que cofondateur — sur chaque projet ici, je vais de la donnée à l’interface moi-même, sans passer la main.',
+k2:'UN VRAI PRODUIT, PAS JUSTE UNE ANALYSE',b2:'SenBioStat ne s’arrête pas à un test statistique — il rédige un rapport PDF. Miellée n’est pas un notebook — c’est un tableau de bord que quelqu’un utilise vraiment. C’est tout le sens de Data × Code × Product.',
+k3:'TESTÉ AVANT D’ÊTRE LIVRÉ',b3:'693 tests sur DocuSen, 300+ sur YoonuJob, 102 sur Sentazur. Pas une case à cocher après coup — une partie de ce que veut dire « terminé ».',
+k4:'HONNÊTE SUR L’AVANCEMENT',b4:'Chaque page projet dit clairement ce qui tourne, ce qui est en cours, ce qui est confidentiel — jamais « prêt » quand ça ne l’est pas.',
+next:'VOIR LES PROJETS',next_t:'Projets <span class="t2">sélectionnés</span>'}
+};
+let LANG='en';
+const HTML_KEYS=new Set(['h_top','h_title','next_t']);
+function setLang(l){
+  if(!I18N[l])l='en';LANG=l;const d=I18N[l];
+  document.documentElement.lang=l;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const v=d[el.dataset.i18n];if(typeof v==='string'){
+    if(HTML_KEYS.has(el.dataset.i18n)){el.innerHTML=v}else el.textContent=v}});
+  document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));
+  try{localStorage.setItem('cdb-lang',l)}catch(e){}
+}
+document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+(function(){
+  let l=new URLSearchParams(location.search).get('lang');try{l=l||localStorage.getItem('cdb-lang')}catch(e){}
+  setLang(l||((navigator.language||'en').toLowerCase().startsWith('fr')?'fr':'en'));
+})();
+
+(function(){
+  const els=document.querySelectorAll('.sr');
+  if(!('IntersectionObserver' in window)||new URLSearchParams(location.search).has('static')){els.forEach(e=>e.classList.add('in'));return}
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.08});
+  els.forEach(e=>io.observe(e));
+})();
+</script>
+<script>
+/* ═══ mobile menu (built from the desktop links) ═══ */
+(function(){
+  const btn=document.querySelector('.menu-btn'),links=document.querySelector('.nav-links'),head=document.querySelector('.nav');
+  if(!btn||!links||!head)return;
+  const T={en:{menu:'Menu',close:'Close'},fr:{menu:'Menu',close:'Fermer'}};
+  const lang=()=>document.documentElement.lang==='fr'?'fr':'en';
+  const cv=document.querySelector('.nav-r .pill');
+  const ov=document.createElement('div');ov.className='mnav';ov.id='mnav';ov.setAttribute('aria-hidden','true');
+  ov.innerHTML='<nav class="mnav-links" aria-label="Menu">'+[...links.querySelectorAll('a')].map((a,i)=>'<a href="'+a.getAttribute('href')+'"'+(a.hasAttribute('aria-current')?' aria-current="page"':'')+'><span data-i18n="'+a.dataset.i18n+'">'+a.textContent+'</span></a>').join('')+'</nav>'
+    +'<div class="mnav-foot"><a class="pill" href="'+(cv?cv.getAttribute('href'):'#')+'" data-i18n="nav_cv">CV ↗</a><a href="mailto:cheikhdaroubeye@gmail.com">cheikhdaroubeye@gmail.com</a></div>';
+  head.after(ov);
+  const label=()=>{btn.querySelector('.mb-l').textContent=T[lang()][btn.getAttribute('aria-expanded')==='true'?'close':'menu']};
+  const set=open=>{
+    btn.setAttribute('aria-expanded',String(open));ov.classList.toggle('open',open);ov.setAttribute('aria-hidden',String(!open));
+    document.documentElement.classList.toggle('menu-open',open);label();
+    if(open){const a=ov.querySelector('a');if(a)a.focus({preventScroll:true})}
+  };
+  btn.addEventListener('click',()=>set(btn.getAttribute('aria-expanded')!=='true'));
+  ov.addEventListener('click',e=>{if(e.target.closest('a'))set(false)});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')set(false)});
+  matchMedia('(min-width:981px)').addEventListener('change',e=>{if(e.matches)set(false)});
+  new MutationObserver(label).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+  label();
+  if(/[?&]menu\b/.test(location.search))set(true);
+})();
+</script>
+</body>
+</html>
