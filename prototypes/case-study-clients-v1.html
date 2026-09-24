@@ -184,13 +184,13 @@ html.menu-open{overflow:hidden}
         <div class="client-body">
           <div>
             <p class="client-lede" data-i18n="ajel_lede">The official site of a professional football club: news, squad, calendar and results, photo gallery, a merch shop, and a page for sponsors.</p>
-            <p class="client-p" data-i18n="ajel_p">Built alone over 136 commits and deployed on Render. The shop takes orders without online payment — a deliberate choice for this stage of the club’s digital presence.</p>
+            <p class="client-p" data-i18n="ajel_p">Built alone over 136 commits. The shop takes orders without online payment — a deliberate choice for this stage of the club’s digital presence. Already tested live on Render for a demo; currently offline.</p>
             <div class="client-tags" aria-hidden="true"><span>News</span><span>Squad</span><span>Calendar &amp; results</span><span>Gallery</span><span>Shop</span><span>Sponsors</span></div>
           </div>
           <dl class="client-spec">
             <dt data-i18n="s_role">ROLE</dt><dd data-i18n="s_role_ajel">Sole developer</dd>
             <dt data-i18n="s_stack">STACK</dt><dd>Django · PostgreSQL · Tailwind</dd>
-            <dt data-i18n="s_status">STATUS</dt><dd data-i18n="s_soon">Built · not yet deployed</dd>
+            <dt data-i18n="s_status">STATUS</dt><dd data-i18n="s_offline">Tested on Render · currently offline</dd>
           </dl>
         </div>
       </div>
@@ -201,14 +201,14 @@ html.menu-open{overflow:hidden}
         </div>
         <div class="client-body">
           <div>
-            <p class="client-lede" data-i18n="ckm_lede">The official site of a Senegalese commune made up of several villages: news, agenda, projects, photo gallery, partners, and an appointment-booking page for residents.</p>
-            <p class="client-p" data-i18n="ckm_p">Built alone over 54 commits and deployed on Render, with HTMX for the interactive parts and a static map on the “location” page.</p>
-            <div class="client-tags" aria-hidden="true"><span>News</span><span>Agenda</span><span>Projects</span><span>Gallery</span><span>Partners</span><span>Appointments</span></div>
+            <p class="client-lede" data-i18n="ckm_lede">The official site of a Senegalese commune made up of several villages: news, agenda, projects, a directory of the villages, partners, and a contact form organized by service for residents.</p>
+            <p class="client-p" data-i18n="ckm_p">Built alone over 54 commits, with a static map on the “location” page. Already tested live on Render for a demo; currently offline.</p>
+            <div class="client-tags" aria-hidden="true"><span>News</span><span>Agenda</span><span>Projects</span><span>Villages</span><span>Partners</span></div>
           </div>
           <dl class="client-spec">
             <dt data-i18n="s_role">ROLE</dt><dd data-i18n="s_role_ckm">Sole developer</dd>
-            <dt data-i18n="s_stack">STACK</dt><dd>Django · PostgreSQL · HTMX</dd>
-            <dt data-i18n="s_status">STATUS</dt><dd data-i18n="s_soon">Built · not yet deployed</dd>
+            <dt data-i18n="s_stack">STACK</dt><dd>Django · PostgreSQL</dd>
+            <dt data-i18n="s_status">STATUS</dt><dd data-i18n="s_offline">Tested on Render · currently offline</dd>
           </dl>
         </div>
       </div>
@@ -244,22 +244,22 @@ const I18N={
 en:{nav_work:'Work',nav_approach:'Approach',nav_about:'About',nav_contact:'Contact',nav_cv:'CV ↗',back:'All work',
 title1:'Client',title2:'sites',lede:'Two more websites built end to end, for two real clients outside my own products: a professional football club, and a local government.',
 ajel_tag:'Football club · Senegalese Ligue 1',ajel_lede:'The official site of a professional football club: news, squad, calendar and results, photo gallery, a merch shop, and a page for sponsors.',
-ajel_p:'Built alone over 136 commits, running locally for now — going live on Render soon. The shop takes orders without online payment — a deliberate choice for this stage of the club’s digital presence.',
+ajel_p:'Built alone over 136 commits. The shop takes orders without online payment — a deliberate choice for this stage of the club’s digital presence. Already tested live on Render for a demo; currently offline.',
 ckm_name:'Commune of <span class="t2">Keur Moussa</span>',ckm_tag:'Local government · institutional site',
-ckm_lede:'The official site of a Senegalese commune made up of several villages: news, agenda, projects, photo gallery, partners, and an appointment-booking page for residents.',
-ckm_p:'Built alone over 54 commits, with HTMX for the interactive parts and a static map on the “location” page. Running locally for now — going live on Render soon.',
-s_role:'ROLE',s_role_ajel:'Sole developer',s_role_ckm:'Sole developer',s_stack:'STACK',s_status:'STATUS',s_soon:'Built · not yet deployed',
+ckm_lede:'The official site of a Senegalese commune made up of several villages: news, agenda, projects, a directory of the villages, partners, and a contact form organized by service for residents.',
+ckm_p:'Built alone over 54 commits, with a static map on the “location” page. Already tested live on Render for a demo; currently offline.',
+s_role:'ROLE',s_role_ajel:'Sole developer',s_role_ckm:'Sole developer',s_stack:'STACK',s_status:'STATUS',s_offline:'Tested on Render · currently offline',
 tern_p:'Institutional websites: mostly code, delivered as finished products, with no data-science work involved.',
 tern_n:'Positions are self-assessed. Placeholder weights, to calibrate.',next:'BACK TO THE START · N°01 / 07',next_t:'Microbes <span class="t2">/ ML</span>',
 pj:['Microbes / ML','Miellée','SenBioStat','DocuSen','YoonuJob','Sentazur','Client sites']},
 fr:{nav_work:'Projets',nav_approach:'Approche',nav_about:'À propos',nav_contact:'Contact',nav_cv:'CV ↗',back:'Tous les projets',
 title1:'Sites',title2:'clients',lede:'Deux sites de plus, construits de bout en bout, pour deux vrais clients en dehors de mes propres produits : un club de football professionnel, et une collectivité locale.',
 ajel_tag:'Club de football · Ligue 1 sénégalaise',ajel_lede:'Le site officiel d’un club de football professionnel : actualités, effectif, calendrier et résultats, galerie photo, une boutique, et une page pour les sponsors.',
-ajel_p:'Construit seul en 136 commits, en local pour le moment — mise en ligne sur Render prochainement. La boutique prend des commandes sans paiement en ligne — un choix assumé pour cette étape de la présence numérique du club.',
+ajel_p:'Construit seul en 136 commits. La boutique prend des commandes sans paiement en ligne — un choix assumé pour cette étape de la présence numérique du club. Déjà testé en ligne sur Render pour une démonstration ; actuellement hors ligne.',
 ckm_name:'Commune de <span class="t2">Keur Moussa</span>',ckm_tag:'Collectivité locale · site institutionnel',
-ckm_lede:'Le site officiel d’une commune sénégalaise composée de plusieurs villages : actualités, agenda, projets, galerie photo, partenaires, et une page de prise de rendez-vous pour les habitants.',
-ckm_p:'Construit seul en 54 commits, avec HTMX pour les parties interactives et une carte statique sur la page « situation géographique ». En local pour le moment — mise en ligne sur Render prochainement.',
-s_role:'RÔLE',s_role_ajel:'Développeur unique',s_role_ckm:'Développeur unique',s_stack:'STACK',s_status:'STATUT',s_soon:'Terminé · pas encore déployé',
+ckm_lede:'Le site officiel d’une commune sénégalaise composée de plusieurs villages : actualités, agenda, projets, un annuaire des villages, partenaires, et un formulaire de contact organisé par service pour les habitants.',
+ckm_p:'Construit seul en 54 commits, avec une carte statique sur la page « situation géographique ». Déjà testé en ligne sur Render pour une démonstration ; actuellement hors ligne.',
+s_role:'RÔLE',s_role_ajel:'Développeur unique',s_role_ckm:'Développeur unique',s_stack:'STACK',s_status:'STATUT',s_offline:'Testé sur Render · actuellement hors ligne',
 tern_p:'Sites institutionnels : surtout du code, livré comme des produits finis, sans travail de science des données.',
 tern_n:'Positions auto-évaluées. Pondérations provisoires, à calibrer.',next:'RETOUR AU DÉPART · N°01 / 07',next_t:'Microbes <span class="t2">/ ML</span>',
 pj:['Microbes / ML','Miellée','SenBioStat','DocuSen','YoonuJob','Sentazur','Sites clients']}

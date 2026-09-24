@@ -127,6 +127,20 @@ html.menu-open{overflow:hidden}
 .fact b{display:block;font-weight:600;font-size:clamp(3rem,6.4vw,6.4rem);line-height:1;letter-spacing:-.05em}
 .fact span{display:block;margin-top:12px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--muted);max-width:22em}
 
+/* roadmap */
+.roadmap{margin-top:clamp(48px,8vh,88px);border-top:1px solid var(--line);padding-top:clamp(28px,5vh,56px)}
+.roadmap-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:clamp(20px,3.5vh,32px)}
+.roadmap-head h3{font-weight:600;font-size:clamp(1.5rem,2.8vw,2.1rem);letter-spacing:-.03em}
+.roadmap-legend{display:flex;gap:20px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--subtle)}
+.roadmap-legend span{display:inline-flex;align-items:center;gap:7px}
+.rdot{width:7px;height:7px;border-radius:50%;display:inline-block;flex:none}
+.rdot.done{background:var(--accent-hi)}
+.rdot.active{background:transparent;border:1.5px solid var(--accent-hi)}
+.rdot.planned{background:transparent;border:1.5px solid var(--line-strong)}
+.roadmap-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 32px;list-style:none}
+.roadmap-list li{display:flex;align-items:center;gap:10px;font-size:14.5px;color:var(--subtle)}
+.roadmap-list li.done,.roadmap-list li.active{color:var(--ink)}
+
 /* blocks */
 .blocks{margin-top:clamp(56px,10vh,120px)}
 .blk{display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px 24px;padding:clamp(28px,5vh,56px) 0;border-top:1px solid var(--line)}
@@ -198,6 +212,7 @@ html.menu-open{overflow:hidden}
   .fact,.fact + .fact{padding:24px 0;border-left:0}
   .fact + .fact{border-top:1px solid var(--line)}
   .tern-wrap{grid-template-columns:minmax(0,1fr)}
+  .roadmap-list{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:640px){
   .lane{grid-template-columns:minmax(0,1fr);gap:8px}
@@ -265,7 +280,34 @@ html.menu-open{overflow:hidden}
     <section class="facts sr" aria-label="Key figures">
       <div class="fact"><b>102</b><span data-i18n="f1">automated tests</span></div>
       <div class="fact"><b>8</b><span data-i18n="f2">types of service: guarding, patrols, event security, fire safety…</span></div>
-      <div class="fact"><b>5</b><span data-i18n="f3">business modules in the back office</span></div>
+      <div class="fact"><b>13</b><span data-i18n="f3">modules planned for the back office</span></div>
+    </section>
+
+    <!-- Roadmap -->
+    <section class="roadmap sr" aria-labelledby="road-t">
+      <div class="roadmap-head">
+        <h3 id="road-t" data-i18n="road_t">Back-office roadmap</h3>
+        <div class="roadmap-legend">
+          <span><span class="rdot done" aria-hidden="true"></span><span data-i18n="road_done">Done</span></span>
+          <span><span class="rdot active" aria-hidden="true"></span><span data-i18n="road_active">In progress</span></span>
+          <span><span class="rdot planned" aria-hidden="true"></span><span data-i18n="road_planned">Planned</span></span>
+        </div>
+      </div>
+      <ul class="roadmap-list">
+        <li class="done"><span class="rdot done" aria-hidden="true"></span><span data-i18n="rm1">Clients &amp; sites</span></li>
+        <li class="done"><span class="rdot done" aria-hidden="true"></span><span data-i18n="rm2">Quotes</span></li>
+        <li class="done"><span class="rdot done" aria-hidden="true"></span><span data-i18n="rm3">Quote requests</span></li>
+        <li class="done"><span class="rdot done" aria-hidden="true"></span><span data-i18n="rm4">Agents / staff</span></li>
+        <li class="active"><span class="rdot active" aria-hidden="true"></span><span data-i18n="rm5">Scheduling</span></li>
+        <li class="planned"><span class="rdot planned" aria-hidden="true"></span><span data-i18n="rm6">Absences &amp; replacements</span></li>
+        <li class="planned"><span class="rdot planned" aria-hidden="true"></span><span data-i18n="rm7">Reports</span></li>
+        <li class="planned"><span class="rdot planned" aria-hidden="true"></span><span data-i18n="rm8">Time tracking</span></li>
+        <li class="planned"><span class="rdot planned" aria-hidden="true"></span><span data-i18n="rm9">Invoicing</span></li>
+        <li class="planned"><span class="rdot planned" aria-hidden="true"></span><span data-i18n="rm10">Dashboard &amp; stats</span></li>
+        <li class="planned"><span class="rdot planned" aria-hidden="true"></span><span data-i18n="rm11">PDF &amp; email sending</span></li>
+        <li class="planned"><span class="rdot planned" aria-hidden="true"></span><span data-i18n="rm12">Notifications &amp; alerts</span></li>
+        <li class="planned"><span class="rdot planned" aria-hidden="true"></span><span data-i18n="rm13">Agent portal</span></li>
+      </ul>
     </section>
 
     <!-- Story -->
@@ -305,7 +347,7 @@ html.menu-open{overflow:hidden}
       </div>
       <div class="blk sr">
         <div class="blk-k"><i>07</i><span data-i18n="k_res">RESULT</span></div>
-        <div class="blk-b"><p class="big" data-i18n="b_res">A public site and a complete back office, covered by 102 tests and ready to go live — the last steps before deployment are underway.</p></div>
+        <div class="blk-b"><p class="big" data-i18n="b_res">The public site and the core of the back office — clients, quotes and staff — are already running, covered by 102 tests. Scheduling is being built now, with billing, reporting and the rest of the roadmap next, before going live.</p></div>
       </div>
     </section>
 
@@ -340,7 +382,9 @@ en:{nav_work:'Work',nav_approach:'Approach',nav_about:'About',nav_contact:'Conta
 tag:'Co-founded · in development',sub1:'Private security,',sub2:'run end to end.',
 m_role:'ROLE',m_role_v:'Co-founder & developer of the site and back office',m_type:'TYPE',m_type_v:'Public site + back office · private security',m_stack:'STACK',m_status:'STATUS',m_status_v:'In development · not yet deployed',
 spec_t:'stages · quote to duty',spec_h:'Hover a step',cap0:'A quote becomes a client, a mission, and an agent on site.',
-f1:'automated tests',f2:'types of service: guarding, patrols, event security, fire safety…',f3:'business modules in the back office',
+f1:'automated tests',f2:'types of service: guarding, patrols, event security, fire safety…',f3:'modules planned for the back office',
+road_t:'Back-office roadmap',road_done:'Done',road_active:'In progress',road_planned:'Planned',
+rm1:'Clients & sites',rm2:'Quotes',rm3:'Quote requests',rm4:'Agents / staff',rm5:'Scheduling',rm6:'Absences & replacements',rm7:'Reports',rm8:'Time tracking',rm9:'Invoicing',rm10:'Dashboard & stats',rm11:'PDF & email sending',rm12:'Notifications & alerts',rm13:'Agent portal',
 k_ctx:'CONTEXT',b_ctx:'Sentazur is a private security company I’m co-founding with a colleague, based in Avignon: guarding, patrols, event security, access control, fire-safety agents. My colleague is setting up the business side; I designed and built the public website and the internal back office, alone.',
 k_prob:'PROBLEM',b_prob:'Running a security company by hand gets heavy fast: which agent is qualified and free for which site, whose certification is about to expire, which quote was sent and to whom.',
 k_sol:'SOLUTION',b_sol:'A public site to be found, a private back office to run the business.',
@@ -348,7 +392,7 @@ b_sol2:'Visitors browse services by sector and city, and request a quote online.
 k_comp:'COMPLIANCE',b_comp:'An agent without a valid certification can’t legally work a site.',
 b_comp2:'Each agent’s qualifications and documents — like the SSIAP fire-safety certification — carry a validity date. The system raises an alert automatically before one expires, instead of someone finding out on site.',
 k_role:'MY ROLE',b_role:'Everything technical: the public site, the back office, the quote and PDF system, and 102 automated tests.',b_role2:'My colleague is setting up the business side of the company.',
-k_stack:'STACK',k_res:'RESULT',b_res:'A public site and a complete back office, covered by 102 tests and ready to go live — the last steps before deployment are underway.',
+k_stack:'STACK',k_res:'RESULT',b_res:'The public site and the core of the back office — clients, quotes and staff — are already running, covered by 102 tests. Scheduling is being built now, with billing, reporting and the rest of the roadmap next, before going live.',
 tern_p:'Sentazur is mostly product and code, close to YoonuJob: a real business run through the platform, with little data science involved.',
 tern_n:'Positions are self-assessed. Placeholder weights, to calibrate.',next:'NEXT PROJECT · N°07 / 07',next_t:'Client sites',
 lanes:[{l:'QUOTE',s:'public → pro'},{l:'OPERATIONS',s:'client, site, mission'},{l:'COMPLIANCE',s:'agent qualifications'}],
@@ -362,7 +406,9 @@ fr:{nav_work:'Projets',nav_approach:'Approche',nav_about:'À propos',nav_contact
 tag:'Cofondé · en développement',sub1:'La sécurité privée,',sub2:'organisée de bout en bout.',
 m_role:'RÔLE',m_role_v:'Cofondateur et développeur du site et du back-office',m_type:'TYPE',m_type_v:'Site public + back-office · sécurité privée',m_stack:'STACK',m_status:'STATUT',m_status_v:'En développement · pas encore déployé',
 spec_t:'étapes · du devis à la mission',spec_h:'Survolez une étape',cap0:'Un devis devient un client, une mission, et un agent sur site.',
-f1:'tests automatisés',f2:'types de prestations : gardiennage, rondes, événementiel, sécurité incendie…',f3:'modules métier dans le back-office',
+f1:'tests automatisés',f2:'types de prestations : gardiennage, rondes, événementiel, sécurité incendie…',f3:'modules prévus dans le back-office',
+road_t:'Feuille de route du back-office',road_done:'Fait',road_active:'En cours',road_planned:'Prévu',
+rm1:'Clients & sites',rm2:'Devis',rm3:'Demandes de devis',rm4:'Agents / personnel',rm5:'Planning',rm6:'Absences & remplacements',rm7:'Rapports / comptes-rendus',rm8:'Suivi des heures',rm9:'Facturation',rm10:'Tableau de bord / statistiques',rm11:'PDF & envoi d’e-mails',rm12:'Notifications / alertes',rm13:'Portail agent',
 k_ctx:'CONTEXTE',b_ctx:'Sentazur est une société de sécurité privée que je cofonde avec un collègue, basée à Avignon : gardiennage, rondes, sécurité événementielle, contrôle d’accès, agents SSIAP. Mon collègue met en place la partie entreprise ; j’ai conçu et développé seul le site public et le back-office interne.',
 k_prob:'PROBLÈME',b_prob:'Gérer une société de sécurité à la main devient vite lourd : quel agent est qualifié et disponible pour quel site, quelle certification arrive bientôt à expiration, quel devis a été envoyé et à qui.',
 k_sol:'SOLUTION',b_sol:'Un site public pour être trouvé, un back-office privé pour faire tourner l’entreprise.',
@@ -370,7 +416,7 @@ b_sol2:'Les visiteurs parcourent les services par secteur et par ville, et deman
 k_comp:'CONFORMITÉ',b_comp:'Un agent sans certification valide ne peut pas légalement travailler sur un site.',
 b_comp2:'Les qualifications et documents de chaque agent — comme la certification incendie SSIAP — portent une date de validité. Le système déclenche une alerte automatiquement avant l’expiration, plutôt que quelqu’un ne le découvre sur place.',
 k_role:'MON RÔLE',b_role:'Tout le technique : le site public, le back-office, le système de devis et de PDF, et 102 tests automatisés.',b_role2:'Mon collègue met en place la partie entreprise.',
-k_stack:'STACK',k_res:'RÉSULTAT',b_res:'Un site public et un back-office complet, couverts par 102 tests et prêts à passer en production — les derniers réglages avant le déploiement sont en cours.',
+k_stack:'STACK',k_res:'RÉSULTAT',b_res:'Le site public et le cœur du back-office — clients, devis et personnel — tournent déjà, couverts par 102 tests. Le planning est en cours de développement, avec la facturation, les rapports et le reste de la feuille de route à suivre, avant la mise en ligne.',
 tern_p:'Sentazur est surtout du produit et du code, proche de YoonuJob : une vraie entreprise pilotée par la plateforme, avec peu de science des données.',
 tern_n:'Positions auto-évaluées. Pondérations provisoires, à calibrer.',next:'PROJET SUIVANT · N°07 / 07',next_t:'Sites clients',
 lanes:[{l:'DEVIS',s:'public → pro'},{l:'OPÉRATIONS',s:'client, site, mission'},{l:'CONFORMITÉ',s:'qualifications des agents'}],
