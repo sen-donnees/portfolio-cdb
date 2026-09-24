@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Approach — Cheikh Darou Beye (prototype v1)</title>
+<title>About — Cheikh Darou Beye (prototype v1)</title>
 <meta name="theme-color" content="#070B14">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -76,7 +76,18 @@ html.menu-open{overflow:hidden}
 .head h1 .t2{color:var(--dim)}
 .head p{max-width:34em;color:var(--muted);font-size:clamp(1.05rem,1.4vw,1.3rem);line-height:1.6}
 
-/* principle blocks (shared with case-study pages) */
+/* bio */
+.bio{max-width:38em;color:var(--ink);font-size:clamp(1.1rem,1.6vw,1.35rem);line-height:1.55;padding-bottom:clamp(28px,5vh,48px)}
+.bio p+p{margin-top:16px}
+
+/* facts grid (shared with case-study pages) */
+.meta{display:grid;grid-template-columns:repeat(4,1fr);margin-top:clamp(8px,2vh,16px);border-top:1px solid var(--line)}
+.meta > div{padding:18px 24px 0 0}
+.meta > div + div{padding-left:24px;border-left:1px solid var(--line)}
+.meta dt{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--subtle);margin-bottom:8px}
+.meta dd{font-size:15px;color:var(--ink);overflow-wrap:break-word}
+
+/* parcours blocks (shared with case-study pages) */
 .blocks{margin-top:clamp(16px,4vh,40px);border-top:1px solid var(--line)}
 .blk{display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px 24px;padding:clamp(32px,6vh,64px) 0;border-top:1px solid var(--line)}
 .blk:first-child{border-top:0}
@@ -84,6 +95,7 @@ html.menu-open{overflow:hidden}
 .blk-k i{font-style:normal;color:var(--accent-hi);margin-right:10px}
 .blk-b{min-width:0}
 .blk-b p.big{font-size:clamp(1.3rem,2.2vw,1.95rem);line-height:1.28;letter-spacing:-.02em;font-weight:450;max-width:32em}
+.blk-b p.sm{max-width:44em;color:var(--muted);font-size:1.02rem;line-height:1.6;margin-top:14px}
 
 /* closing link */
 .next{display:block;padding:clamp(40px,8vh,88px) 0;border-top:1px solid var(--line)}
@@ -110,6 +122,14 @@ html.menu-open{overflow:hidden}
 @media (max-width:980px){
   .nav-links{display:none}.nav-inner{grid-template-columns:minmax(0,1fr) auto}
   .blk{grid-template-columns:minmax(0,1fr)}
+  .meta{grid-template-columns:1fr 1fr}
+  .meta > div,.meta > div + div{padding:16px 16px 0 0;border-left:0}
+  .meta > div:nth-child(even){padding-left:16px;border-left:1px solid var(--line)}
+}
+@media (max-width:420px){
+  .meta{grid-template-columns:1fr}
+  .meta > div,.meta > div + div{padding:16px 0 0;border-left:0;border-top:1px solid var(--line)}
+  .meta > div:first-child{border-top:0;padding-top:0}
 }
 </style>
 </head>
@@ -120,8 +140,8 @@ html.menu-open{overflow:hidden}
     <a class="logo" href="hero-v1.html" aria-label="Cheikh Darou Beye"><span class="logo-mark"></span>CDB</a>
     <nav class="nav-links" aria-label="Main">
       <a href="work-v1.html" data-i18n="nav_work">Work</a>
-      <a href="approche-v1.html" aria-current="page" data-i18n="nav_approach">Approach</a>
-      <a href="about-v1.html" data-i18n="nav_about">About</a>
+      <a href="approche-v1.html" data-i18n="nav_approach">Approach</a>
+      <a href="about-v1.html" aria-current="page" data-i18n="nav_about">About</a>
       <a href="#" data-i18n="nav_contact">Contact</a>
     </nav>
     <div class="nav-r">
@@ -140,32 +160,35 @@ html.menu-open{overflow:hidden}
   <main>
     <section class="head">
       <div class="head-top rv" style="--i:0"><span data-i18n="h_top">Data <span class="x">×</span> Code <span class="x">×</span> Product</span></div>
-      <h1 class="rv" style="--i:1" data-i18n="h_title">My <span class="t2">approach</span></h1>
-      <p class="rv" style="--i:2" data-i18n="h_p">Four things that stay true across seven very different projects — from a confidential research mission to a company I’m co-founding.</p>
+      <h1 class="rv" style="--i:1" data-i18n="h_title">Who <span class="t2">I am</span></h1>
+      <p class="rv" style="--i:2" data-i18n="h_p">Data scientist and full-stack developer, currently open to new opportunities.</p>
     </section>
+
+    <div class="bio rv sr" style="--i:3">
+      <p data-i18n="bio1">I started in statistics — a Master's in Statistics and Data Science at Université Grenoble Alpes — working with neural networks on microbial classification for bioMérieux. Since then I've built that background into full end-to-end products: statistical tools, recruitment platforms, and a security company I'm now co-founding.</p>
+      <p data-i18n="bio2">On every project here, I go from the data to the interface myself. See how on the <a class="x" href="approche-v1.html">Approach</a> page.</p>
+    </div>
+
+    <dl class="meta sr">
+      <div><dt data-i18n="m_formation">FORMATION</dt><dd data-i18n="m_formation_v">Master 2 · Statistics &amp; Data Science — Université Grenoble Alpes (2022–2023)</dd></div>
+      <div><dt data-i18n="m_lang">LANGUAGES</dt><dd data-i18n="m_lang_v">French (native), English (B2), Wolof, Spanish</dd></div>
+      <div><dt data-i18n="m_loc">LOCATION</dt><dd data-i18n="m_loc_v">France ↔ Senegal</dd></div>
+      <div><dt data-i18n="m_status">STATUS</dt><dd data-i18n="m_status_v">Open to opportunities</dd></div>
+    </dl>
 
     <section class="blocks">
       <div class="blk sr">
-        <div class="blk-k"><i>01</i><span data-i18n="k1">END TO END, ALONE</span></div>
-        <div class="blk-b"><p class="big" data-i18n="b1">Founder, sole developer, or the person doing “everything technical” as co-founder — on every project here, I go from the data to the interface myself, without handing off.</p></div>
-      </div>
-      <div class="blk sr">
-        <div class="blk-k"><i>02</i><span data-i18n="k2">A REAL PRODUCT, NOT JUST AN ANALYSIS</span></div>
-        <div class="blk-b"><p class="big" data-i18n="b2">SenBioStat doesn’t stop at a statistical test — it writes a PDF report. Miellée isn’t a notebook — it’s a dashboard someone actually uses. That’s the whole point of Data × Code × Product.</p></div>
-      </div>
-      <div class="blk sr">
-        <div class="blk-k"><i>03</i><span data-i18n="k3">TESTED BEFORE IT SHIPS</span></div>
-        <div class="blk-b"><p class="big" data-i18n="b3">693 tests on DocuSen, 300+ on YoonuJob, 102 on Sentazur. Not a box to tick afterward — part of what “done” means.</p></div>
-      </div>
-      <div class="blk sr">
-        <div class="blk-k"><i>04</i><span data-i18n="k4">HONEST ABOUT WHERE THINGS STAND</span></div>
-        <div class="blk-b"><p class="big" data-i18n="b4">Every project page says plainly what’s live, what’s in progress, what’s confidential — never “ready” when it isn’t.</p></div>
+        <div class="blk-k"><i>01</i><span data-i18n="k1">ALSO</span></div>
+        <div class="blk-b">
+          <p class="big" data-i18n="b1">Two more things from my studies, not full case studies but part of the path.</p>
+          <p class="sm" data-i18n="b1sm">A Master's project mapping cooperative bank locations across France against socio-economic data (team of 5, R/Shiny, Université Grenoble Alpes, 2021–2022). A Business Intelligence internship analyzing global energy data with Power BI and Qlik Sense (Marie Thieulin, Grenoble, 2022).</p>
+        </div>
       </div>
     </section>
 
-    <a class="next sr" href="work-v1.html">
-      <small data-i18n="next">SEE THE WORK</small>
-      <strong><span data-i18n="next_t">Selected <span class="t2">work</span></span><span class="a">→</span></strong>
+    <a class="next sr" href="mailto:cheikhdaroubeye@gmail.com">
+      <small data-i18n="next">GET IN TOUCH</small>
+      <strong><span data-i18n="next_t">Say <span class="t2">hello</span></span><span class="a">→</span></strong>
     </a>
   </main>
 
@@ -179,22 +202,30 @@ html.menu-open{overflow:hidden}
 const I18N={
 en:{nav_work:'Work',nav_approach:'Approach',nav_about:'About',nav_contact:'Contact',nav_cv:'CV ↗',
 h_top:'Data <span class="x">×</span> Code <span class="x">×</span> Product',
-h_title:'My <span class="t2">approach</span>',
-h_p:'Four things that stay true across seven very different projects — from a confidential research mission to a company I’m co-founding.',
-k1:'END TO END, ALONE',b1:'Founder, sole developer, or the person doing “everything technical” as co-founder — on every project here, I go from the data to the interface myself, without handing off.',
-k2:'A REAL PRODUCT, NOT JUST AN ANALYSIS',b2:'SenBioStat doesn’t stop at a statistical test — it writes a PDF report. Miellée isn’t a notebook — it’s a dashboard someone actually uses. That’s the whole point of Data × Code × Product.',
-k3:'TESTED BEFORE IT SHIPS',b3:'693 tests on DocuSen, 300+ on YoonuJob, 102 on Sentazur. Not a box to tick afterward — part of what “done” means.',
-k4:'HONEST ABOUT WHERE THINGS STAND',b4:'Every project page says plainly what’s live, what’s in progress, what’s confidential — never “ready” when it isn’t.',
-next:'SEE THE WORK',next_t:'Selected <span class="t2">work</span>'},
+h_title:'Who <span class="t2">I am</span>',
+h_p:'Data scientist and full-stack developer, currently open to new opportunities.',
+bio1:'I started in statistics — a Master’s in Statistics and Data Science at Université Grenoble Alpes — working with neural networks on microbial classification for bioMérieux. Since then I’ve built that background into full end-to-end products: statistical tools, recruitment platforms, and a security company I’m now co-founding.',
+bio2:'On every project here, I go from the data to the interface myself. See how on the Approach page.',
+m_formation:'FORMATION',m_formation_v:'Master 2 · Statistics & Data Science — Université Grenoble Alpes (2022–2023)',
+m_lang:'LANGUAGES',m_lang_v:'French (native), English (B2), Wolof, Spanish',
+m_loc:'LOCATION',m_loc_v:'France ↔ Senegal',
+m_status:'STATUS',m_status_v:'Open to opportunities',
+k1:'ALSO',b1:'Two more things from my studies, not full case studies but part of the path.',
+b1sm:'A Master’s project mapping cooperative bank locations across France against socio-economic data (team of 5, R/Shiny, Université Grenoble Alpes, 2021–2022). A Business Intelligence internship analyzing global energy data with Power BI and Qlik Sense (Marie Thieulin, Grenoble, 2022).',
+next:'GET IN TOUCH',next_t:'Say <span class="t2">hello</span>'},
 fr:{nav_work:'Projets',nav_approach:'Approche',nav_about:'À propos',nav_contact:'Contact',nav_cv:'CV ↗',
 h_top:'Data <span class="x">×</span> Code <span class="x">×</span> Product',
-h_title:'Mon <span class="t2">approche</span>',
-h_p:'Quatre constantes qui reviennent sur sept projets très différents — d’une mission de recherche confidentielle à une société que je cofonde.',
-k1:'DE BOUT EN BOUT, SEUL',b1:'Fondateur, développeur unique, ou « tout le technique » en tant que cofondateur — sur chaque projet ici, je vais de la donnée à l’interface moi-même, sans passer la main.',
-k2:'UN VRAI PRODUIT, PAS JUSTE UNE ANALYSE',b2:'SenBioStat ne s’arrête pas à un test statistique — il rédige un rapport PDF. Miellée n’est pas un notebook — c’est un tableau de bord que quelqu’un utilise vraiment. C’est tout le sens de Data × Code × Product.',
-k3:'TESTÉ AVANT D’ÊTRE LIVRÉ',b3:'693 tests sur DocuSen, 300+ sur YoonuJob, 102 sur Sentazur. Pas une case à cocher après coup — une partie de ce que veut dire « terminé ».',
-k4:'HONNÊTE SUR L’AVANCEMENT',b4:'Chaque page projet dit clairement ce qui tourne, ce qui est en cours, ce qui est confidentiel — jamais « prêt » quand ça ne l’est pas.',
-next:'VOIR LES PROJETS',next_t:'Projets <span class="t2">sélectionnés</span>'}
+h_title:'Qui <span class="t2">je suis</span>',
+h_p:'Data scientist et développeur full-stack, actuellement ouvert à de nouvelles opportunités.',
+bio1:'J’ai commencé par les statistiques — un Master en Statistiques et Science des Données à l’Université Grenoble Alpes — en travaillant sur la classification microbienne pour bioMérieux avec des réseaux de neurones. Depuis, j’ai transformé ce socle en produits complets de bout en bout : outils statistiques, plateformes de recrutement, et la société de sécurité que je cofonde aujourd’hui.',
+bio2:'Sur chaque projet ici, je vais de la donnée à l’interface moi-même. Le détail sur la page Approche.',
+m_formation:'FORMATION',m_formation_v:'Master 2 · Statistiques &amp; Science des Données — Université Grenoble Alpes (2022–2023)',
+m_lang:'LANGUES',m_lang_v:'Français (natif), Anglais (B2), Wolof, Espagnol',
+m_loc:'LOCALISATION',m_loc_v:'France ↔ Sénégal',
+m_status:'STATUT',m_status_v:'Ouvert aux opportunités',
+k1:'AUSSI',b1:'Deux autres choses issues de mes études, pas des études de cas complètes mais qui font partie du parcours.',
+b1sm:'Un projet de master sur la cartographie des banques coopératives en France, mise en relation avec des données socio-économiques (groupe de 5, R/Shiny, Université Grenoble Alpes, 2021–2022). Un stage Business Intelligence sur les données mondiales d’énergie avec Power BI et Qlik Sense (Marie Thieulin, Grenoble, 2022).',
+next:'ME CONTACTER',next_t:'Dites <span class="t2">bonjour</span>'}
 };
 let LANG='en';
 const HTML_KEYS=new Set(['h_top','h_title','next_t']);
