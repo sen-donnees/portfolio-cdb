@@ -84,6 +84,9 @@ html.menu-open{overflow:hidden}
 .blk-k i{font-style:normal;color:var(--accent-hi);margin-right:10px}
 .blk-b{min-width:0}
 .blk-b p.big{font-size:clamp(1.3rem,2.2vw,1.95rem);line-height:1.28;letter-spacing:-.02em;font-weight:450;max-width:32em}
+.mini-facts{display:flex;flex-wrap:wrap;gap:clamp(28px,5vw,64px);margin-top:clamp(20px,3.5vh,32px)}
+.mini-facts b{display:block;font-weight:600;font-size:clamp(2.2rem,4vw,3.2rem);line-height:1;letter-spacing:-.03em;color:var(--ink)}
+.mini-facts span{display:block;margin-top:8px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--subtle)}
 
 /* closing link */
 .next{display:block;padding:clamp(40px,8vh,88px) 0;border-top:1px solid var(--line)}
@@ -122,14 +125,14 @@ html.menu-open{overflow:hidden}
       <a href="work-v1.html" data-i18n="nav_work">Work</a>
       <a href="approche-v1.html" aria-current="page" data-i18n="nav_approach">Approach</a>
       <a href="about-v1.html" data-i18n="nav_about">About</a>
-      <a href="#" data-i18n="nav_contact">Contact</a>
+      <a href="contact-v1.html" data-i18n="nav_contact">Contact</a>
     </nav>
     <div class="nav-r">
       <div class="lang" role="group" aria-label="Language">
         <button type="button" data-lang="en" aria-pressed="true">EN</button>
         <button type="button" data-lang="fr" aria-pressed="false">FR</button>
       </div>
-      <a class="pill" href="#" data-i18n="nav_cv">CV ↗</a>
+      <a class="pill" href="assets/cv-cheikh-darou-beye.pdf" target="_blank" rel="noopener" data-i18n="nav_cv">CV ↗</a>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav"><span class="mb-l">Menu</span><span class="mb-i" aria-hidden="true"></span></button>
     </div>
     </div>
@@ -155,7 +158,14 @@ html.menu-open{overflow:hidden}
       </div>
       <div class="blk sr">
         <div class="blk-k"><i>03</i><span data-i18n="k3">TESTED BEFORE IT SHIPS</span></div>
-        <div class="blk-b"><p class="big" data-i18n="b3">693 tests on DocuSen, 300+ on YoonuJob, 102 on Sentazur. Not a box to tick afterward — part of what “done” means.</p></div>
+        <div class="blk-b">
+          <p class="big" data-i18n="b3">693 tests on DocuSen, 300+ on YoonuJob, 102 on Sentazur. Not a box to tick afterward — part of what “done” means.</p>
+          <div class="mini-facts">
+            <div><b>693</b><span>DocuSen</span></div>
+            <div><b>300+</b><span>YoonuJob</span></div>
+            <div><b>102</b><span>Sentazur</span></div>
+          </div>
+        </div>
       </div>
       <div class="blk sr">
         <div class="blk-k"><i>04</i><span data-i18n="k4">HONEST ABOUT WHERE THINGS STAND</span></div>

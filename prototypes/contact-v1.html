@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>About — Cheikh Darou Beye (prototype v1)</title>
+<title>Contact — Cheikh Darou Beye (prototype v1)</title>
 <meta name="theme-color" content="#070B14">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -70,37 +70,36 @@ html.menu-open{overflow:hidden}
 @media (max-width:520px){.nav-r .pill{display:none}.nav-r{gap:12px}}
 
 /* header */
-.head{padding:clamp(28px,7vh,80px) 0 clamp(28px,5vh,56px)}
+.head{padding:clamp(28px,7vh,80px) 0 clamp(20px,4vh,40px)}
 .head-top{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--subtle)}
 .head h1{font-weight:600;font-size:clamp(3.4rem,10vw,9.5rem);line-height:.9;letter-spacing:-.06em;margin:clamp(14px,2.6vh,28px) 0 clamp(16px,3vh,28px) -.04em}
 .head h1 .t2{color:var(--dim)}
 .head p{max-width:34em;color:var(--muted);font-size:clamp(1.05rem,1.4vw,1.3rem);line-height:1.6}
 
-/* bio + side info */
-.bio-wrap{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr);gap:clamp(24px,5vw,80px);align-items:start;margin-top:clamp(8px,2vh,16px);padding-bottom:clamp(28px,5vh,48px)}
-.bio{color:var(--ink);font-size:clamp(1.1rem,1.6vw,1.35rem);line-height:1.55}
-.bio p+p{margin-top:16px}
-.meta{border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:22px}
-.meta > div{padding-top:20px;border-top:1px solid var(--line)}
-.meta > div:first-child{padding-top:0;border-top:0}
-.meta dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--subtle);margin-bottom:10px}
-.meta dd{font-size:15px;color:var(--ink);overflow-wrap:break-word}
-.edu-item+.edu-item{margin-top:14px}
-.edu-item b{display:block;font-weight:500;color:var(--ink);font-size:14px;line-height:1.4;letter-spacing:-.005em}
-.edu-item span{display:block;margin-top:4px;font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--subtle)}
+/* mail frame */
+.frame{position:relative;margin-top:clamp(24px,5vh,48px);border:1px solid var(--line);border-radius:6px;background:radial-gradient(120% 90% at 18% 0%,rgba(91,108,255,.08),transparent 60%),var(--surface);padding:clamp(32px,7vw,72px) clamp(24px,5vw,56px)}
+.c{position:absolute;width:16px;height:16px;border:0 solid var(--line-strong);pointer-events:none}
+.c.tl{top:-1px;left:-1px;border-top-width:1px;border-left-width:1px}
+.c.tr{top:-1px;right:-1px;border-top-width:1px;border-right-width:1px}
+.c.bl{bottom:-1px;left:-1px;border-bottom-width:1px;border-left-width:1px}
+.c.br{bottom:-1px;right:-1px;border-bottom-width:1px;border-right-width:1px}
+.mail-kicker{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--subtle);margin-bottom:clamp(14px,2.5vh,22px)}
+.mail-link{display:block}
+.mail-link strong{display:flex;flex-wrap:wrap;align-items:baseline;gap:.15em;font-weight:600;font-size:clamp(1.5rem,6vw,5.2rem);line-height:1.15;letter-spacing:-.03em;overflow-wrap:break-word;transition:color .3s}
+.mail-link .u{word-break:keep-all}
+.mail-link .a{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--accent-hi);font-size:.7em;transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+.mail-link:hover strong,.mail-link:focus-visible strong{color:var(--accent-hi)}
+@media (hover:hover){.mail-link:hover .a{transform:translateX(14px)}}
 
-/* parcours blocks (shared with case-study pages) */
-.blocks{margin-top:clamp(16px,4vh,40px);border-top:1px solid var(--line)}
-.blk{display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px 24px;padding:clamp(32px,6vh,64px) 0;border-top:1px solid var(--line)}
-.blk:first-child{border-top:0}
-.blk-k{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--subtle)}
-.blk-k i{font-style:normal;color:var(--accent-hi);margin-right:10px}
-.blk-b{min-width:0}
-.blk-b p.big{font-size:clamp(1.3rem,2.2vw,1.95rem);line-height:1.28;letter-spacing:-.02em;font-weight:450;max-width:32em}
-.blk-b p.sm{max-width:44em;color:var(--muted);font-size:1.02rem;line-height:1.6;margin-top:14px}
+/* secondary row */
+.also{display:flex;flex-wrap:wrap;gap:clamp(28px,5vw,64px);margin-top:clamp(28px,5vh,48px);padding-top:clamp(24px,4vh,40px);border-top:1px solid var(--line)}
+.also dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--subtle);margin-bottom:8px}
+.also dd{font-size:15px;color:var(--ink)}
+.also a{border-bottom:1px solid var(--line-strong);transition:color .2s,border-color .2s}
+.also a:hover{color:var(--accent-hi);border-color:var(--accent-hi)}
 
 /* closing link */
-.next{display:block;padding:clamp(40px,8vh,88px) 0;border-top:1px solid var(--line)}
+.next{display:block;padding:clamp(40px,8vh,88px) 0;border-top:1px solid var(--line);margin-top:clamp(40px,8vh,88px)}
 .next small{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--subtle);margin-bottom:14px}
 .next strong{display:flex;align-items:baseline;gap:.25em;font-weight:600;font-size:clamp(2.6rem,9vw,9rem);line-height:.95;letter-spacing:-.055em}
 .next strong .a{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--accent-hi);transition:transform .4s cubic-bezier(.2,.7,.2,1)}
@@ -123,8 +122,6 @@ html.menu-open{overflow:hidden}
 }
 @media (max-width:980px){
   .nav-links{display:none}.nav-inner{grid-template-columns:minmax(0,1fr) auto}
-  .blk{grid-template-columns:minmax(0,1fr)}
-  .bio-wrap{grid-template-columns:minmax(0,1fr)}
 }
 </style>
 </head>
@@ -136,8 +133,8 @@ html.menu-open{overflow:hidden}
     <nav class="nav-links" aria-label="Main">
       <a href="work-v1.html" data-i18n="nav_work">Work</a>
       <a href="approche-v1.html" data-i18n="nav_approach">Approach</a>
-      <a href="about-v1.html" aria-current="page" data-i18n="nav_about">About</a>
-      <a href="contact-v1.html" data-i18n="nav_contact">Contact</a>
+      <a href="about-v1.html" data-i18n="nav_about">About</a>
+      <a href="contact-v1.html" aria-current="page" data-i18n="nav_contact">Contact</a>
     </nav>
     <div class="nav-r">
       <div class="lang" role="group" aria-label="Language">
@@ -155,37 +152,27 @@ html.menu-open{overflow:hidden}
   <main>
     <section class="head">
       <div class="head-top rv" style="--i:0"><span data-i18n="h_top">Data <span class="x">×</span> Code <span class="x">×</span> Product</span></div>
-      <h1 class="rv" style="--i:1" data-i18n="h_title">Who <span class="t2">I am</span></h1>
-      <p class="rv" style="--i:2" data-i18n="h_p">Data scientist and full-stack developer, currently open to new opportunities.</p>
+      <h1 class="rv" style="--i:1" data-i18n="h_title">Say <span class="t2">hello</span></h1>
+      <p class="rv" style="--i:2" data-i18n="h_p">Open to new opportunities — data science, full-stack development, France or Senegal.</p>
     </section>
 
-    <div class="bio-wrap rv sr" style="--i:3">
-      <div class="bio">
-        <p data-i18n="bio1">I started in statistics, with a Master's in Statistics and Data Science at Université Grenoble Alpes, where I worked on microbial classification using neural networks.</p>
-        <p data-i18n="bio2">Since then, I've expanded that foundation toward building complete products: from statistical analysis and machine learning to web platforms running in production, notably in recruitment, document generation, private security, client websites, and many more.</p>
-        <p data-i18n="bio3">On my projects, I build the whole chain myself: data, business logic, backend, interface and deployment — more on the <a class="x" href="approche-v1.html">Approach</a> page.</p>
-      </div>
-      <dl class="meta">
-        <div><dt data-i18n="m_formation">FORMATION</dt><dd data-i18n="m_formation_v"><div class="edu-item"><b>Master's in Mathematics and Applications, Statistics &amp; Data Science track</b><span>Université Grenoble Alpes · 2021–2023</span></div><div class="edu-item"><b>Licence 3 in Mathematics &amp; Master's in Mathematics, Applied Analysis and Mathematical Physics track</b><span>Université de Toulon · 2018–2021</span></div><div class="edu-item"><b>Bachelor's in Mathematics, Physics &amp; Computer Science</b><span>Université Cheikh Anta Diop · 2017–2018</span></div></dd></div>
-        <div><dt data-i18n="m_lang">LANGUAGES</dt><dd data-i18n="m_lang_v">French (native), English (B2), Wolof, Spanish</dd></div>
-        <div><dt data-i18n="m_loc">LOCATION</dt><dd data-i18n="m_loc_v">France ↔ Senegal</dd></div>
-        <div><dt data-i18n="m_status">STATUS</dt><dd data-i18n="m_status_v">Open to opportunities</dd></div>
+    <div class="frame rv sr" style="--i:3">
+      <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+      <div class="mail-kicker" data-i18n="mail_k">Email</div>
+      <a class="mail-link" href="mailto:cheikhdaroubeye@gmail.com">
+        <strong><span class="u">cheikhdaroubeye@<wbr>gmail.com</span><span class="a">↗</span></strong>
+      </a>
+      <dl class="also">
+        <div><dt data-i18n="a_github">GITHUB</dt><dd><a href="https://github.com/sen-donnees" target="_blank" rel="noopener noreferrer">sen-donnees ↗</a></dd></div>
+        <div><dt data-i18n="a_linkedin">LINKEDIN</dt><dd><a href="https://www.linkedin.com/in/cheikh-darou-beye-9544991b8/" target="_blank" rel="noopener noreferrer">cheikh-darou-beye ↗</a></dd></div>
+        <div><dt data-i18n="a_loc">LOCATION</dt><dd data-i18n="a_loc_v">France ↔ Senegal</dd></div>
+        <div><dt data-i18n="a_status">STATUS</dt><dd data-i18n="a_status_v">Open to opportunities</dd></div>
       </dl>
     </div>
 
-    <section class="blocks">
-      <div class="blk sr">
-        <div class="blk-k"><i>01</i><span data-i18n="k1">ALSO</span></div>
-        <div class="blk-b">
-          <p class="big" data-i18n="b1">Two more things from my studies, not full case studies but part of the path.</p>
-          <p class="sm" data-i18n="b1sm">A Master's project mapping cooperative bank locations across France against socio-economic data (team of 5, R/Shiny, Université Grenoble Alpes, 2021–2022). A Business Intelligence internship analyzing global energy data with Power BI and Qlik Sense (Marie Thieulin, Grenoble, 2022).</p>
-        </div>
-      </div>
-    </section>
-
-    <a class="next sr" href="mailto:cheikhdaroubeye@gmail.com">
-      <small data-i18n="next">GET IN TOUCH</small>
-      <strong><span data-i18n="next_t">Say <span class="t2">hello</span></span><span class="a">→</span></strong>
+    <a class="next sr" href="work-v1.html">
+      <small data-i18n="next">SEE THE WORK</small>
+      <strong><span data-i18n="next_t">Selected <span class="t2">work</span></span><span class="a">→</span></strong>
     </a>
   </main>
 
@@ -199,35 +186,21 @@ html.menu-open{overflow:hidden}
 const I18N={
 en:{nav_work:'Work',nav_approach:'Approach',nav_about:'About',nav_contact:'Contact',nav_cv:'CV ↗',
 h_top:'Data <span class="x">×</span> Code <span class="x">×</span> Product',
-h_title:'Who <span class="t2">I am</span>',
-h_p:'Data scientist and full-stack developer, currently open to new opportunities.',
-bio1:'I started in statistics, with a Master’s in Statistics and Data Science at Université Grenoble Alpes, where I worked on microbial classification using neural networks.',
-bio2:'Since then, I’ve expanded that foundation toward building complete products: from statistical analysis and machine learning to web platforms running in production, notably in recruitment, document generation, private security, client websites, and many more.',
-bio3:'On my projects, I build the whole chain myself: data, business logic, backend, interface and deployment — more on the <a class="x" href="approche-v1.html">Approach</a> page.',
-m_formation:'FORMATION',m_formation_v:'<div class="edu-item"><b>Master’s in Mathematics and Applications, Statistics & Data Science track</b><span>Université Grenoble Alpes · 2021–2023</span></div><div class="edu-item"><b>Licence 3 in Mathematics & Master’s in Mathematics, Applied Analysis and Mathematical Physics track</b><span>Université de Toulon · 2018–2021</span></div><div class="edu-item"><b>Bachelor’s in Mathematics, Physics & Computer Science</b><span>Université Cheikh Anta Diop · 2017–2018</span></div>',
-m_lang:'LANGUAGES',m_lang_v:'French (native), English (B2), Wolof, Spanish',
-m_loc:'LOCATION',m_loc_v:'France ↔ Senegal',
-m_status:'STATUS',m_status_v:'Open to opportunities',
-k1:'ALSO',b1:'Two more things from my studies, not full case studies but part of the path.',
-b1sm:'A Master’s project mapping cooperative bank locations across France against socio-economic data (team of 5, R/Shiny, Université Grenoble Alpes, 2021–2022). A Business Intelligence internship analyzing global energy data with Power BI and Qlik Sense (Marie Thieulin, Grenoble, 2022).',
-next:'GET IN TOUCH',next_t:'Say <span class="t2">hello</span>'},
+h_title:'Say <span class="t2">hello</span>',
+h_p:'Open to new opportunities — data science, full-stack development, France or Senegal.',
+mail_k:'Email',
+a_github:'GITHUB',a_linkedin:'LINKEDIN',a_loc:'LOCATION',a_loc_v:'France ↔ Senegal',a_status:'STATUS',a_status_v:'Open to opportunities',
+next:'SEE THE WORK',next_t:'Selected <span class="t2">work</span>'},
 fr:{nav_work:'Projets',nav_approach:'Approche',nav_about:'À propos',nav_contact:'Contact',nav_cv:'CV ↗',
 h_top:'Data <span class="x">×</span> Code <span class="x">×</span> Product',
-h_title:'Qui <span class="t2">je suis</span>',
-h_p:'Data scientist et développeur full-stack, actuellement ouvert à de nouvelles opportunités.',
-bio1:'J’ai commencé par les statistiques, avec un Master en Statistiques et Science des Données à l’Université Grenoble Alpes, où j’ai notamment travaillé sur la classification microbienne à l’aide de réseaux de neurones.',
-bio2:'Depuis, j’ai élargi ce socle vers la conception de produits complets : de l’analyse statistique et du machine learning jusqu’au développement de plateformes web en production, notamment dans le recrutement, la génération de documents, la sécurité privée, les sites clients, et bien d’autres.',
-bio3:'Sur mes projets, je construis l’ensemble de la chaîne : données, logique métier, backend, interface et mise en production — le détail sur la page <a class="x" href="approche-v1.html">Approche</a>.',
-m_formation:'FORMATION',m_formation_v:'<div class="edu-item"><b>Master 1 & 2 Mathématiques et Applications, parcours Statistiques et Science des Données</b><span>Université Grenoble Alpes · 2021–2023</span></div><div class="edu-item"><b>Licence 3 Mathématiques & Master 1 Mathématiques parcours Analyse Appliquée et Physique Mathématiques</b><span>Université de Toulon · 2018–2021</span></div><div class="edu-item"><b>Licence Mathématiques, Physique & Informatique</b><span>Université Cheikh Anta Diop · 2017–2018</span></div>',
-m_lang:'LANGUES',m_lang_v:'Français (natif), Anglais (B2), Wolof, Espagnol',
-m_loc:'LOCALISATION',m_loc_v:'France ↔ Sénégal',
-m_status:'STATUT',m_status_v:'Ouvert aux opportunités',
-k1:'AUSSI',b1:'Deux autres choses issues de mes études, pas des études de cas complètes mais qui font partie du parcours.',
-b1sm:'Un projet de master sur la cartographie des banques coopératives en France, mise en relation avec des données socio-économiques (groupe de 5, R/Shiny, Université Grenoble Alpes, 2021–2022). Un stage Business Intelligence sur les données mondiales d’énergie avec Power BI et Qlik Sense (Marie Thieulin, Grenoble, 2022).',
-next:'ME CONTACTER',next_t:'Dites <span class="t2">bonjour</span>'}
+h_title:'Dites <span class="t2">bonjour</span>',
+h_p:'Ouvert à de nouvelles opportunités — data science, développement full-stack, France ou Sénégal.',
+mail_k:'E-mail',
+a_github:'GITHUB',a_linkedin:'LINKEDIN',a_loc:'LOCALISATION',a_loc_v:'France ↔ Sénégal',a_status:'STATUT',a_status_v:'Ouvert aux opportunités',
+next:'VOIR LES PROJETS',next_t:'Projets <span class="t2">sélectionnés</span>'}
 };
 let LANG='en';
-const HTML_KEYS=new Set(['h_top','h_title','next_t','bio3','m_formation_v']);
+const HTML_KEYS=new Set(['h_top','h_title','next_t']);
 function setLang(l){
   if(!I18N[l])l='en';LANG=l;const d=I18N[l];
   document.documentElement.lang=l;

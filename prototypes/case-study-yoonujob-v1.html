@@ -155,7 +155,10 @@ html.menu-open{overflow:hidden}
 .tern-note{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--subtle);margin-top:18px}
 .tern svg{display:block;width:100%;height:auto;max-height:560px;overflow:visible}
 .tern .vl{font-family:var(--mono);font-size:11px;letter-spacing:.16em;fill:var(--muted)}
-.tern .tri{fill:none;stroke:rgba(236,234,228,.28);stroke-width:1}
+.tern .vl.d{fill:var(--accent-hi)}
+.tern .vl.c{fill:var(--muted)}
+.tern .vl.p{fill:var(--subtle)}
+.tern .tri{fill:url(#ternGlow);stroke:rgba(236,234,228,.28);stroke-width:1}
 .tern .gl{stroke:rgba(236,234,228,.07);stroke-width:1}
 .tern .pt{cursor:pointer}
 .tern .pt circle.d{fill:rgba(236,234,228,.5);transition:fill .25s}
@@ -227,14 +230,14 @@ html.menu-open{overflow:hidden}
       <a href="work-v1.html" aria-current="page" data-i18n="nav_work">Work</a>
       <a href="approche-v1.html" data-i18n="nav_approach">Approach</a>
       <a href="about-v1.html" data-i18n="nav_about">About</a>
-      <a href="#" data-i18n="nav_contact">Contact</a>
+      <a href="contact-v1.html" data-i18n="nav_contact">Contact</a>
     </nav>
     <div class="nav-r">
       <div class="lang" role="group" aria-label="Language">
         <button type="button" data-lang="en" aria-pressed="true">EN</button>
         <button type="button" data-lang="fr" aria-pressed="false">FR</button>
       </div>
-      <a class="pill" href="#" data-i18n="nav_cv">CV ↗</a>
+      <a class="pill" href="assets/cv-cheikh-darou-beye.pdf" target="_blank" rel="noopener" data-i18n="nav_cv">CV ↗</a>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav"><span class="mb-l">Menu</span><span class="mb-i" aria-hidden="true"></span></button>
     </div>
     </div>
@@ -466,13 +469,13 @@ const PROJ=[{d:.75,c:.20,p:.05},{d:.45,c:.30,p:.25},{d:.35,c:.35,p:.30},{d:.05,c
 const CUR=4;
 const pos=w=>[w.d*V.d[0]+w.c*V.c[0]+w.p*V.p[0], w.d*V.d[1]+w.c*V.c[1]+w.p*V.p[1]];
 function renderTern(){
-  const svg=document.getElementById('tern'),d=I18N[LANG];let s='';
+  const svg=document.getElementById('tern'),d=I18N[LANG];let s='<defs><radialGradient id="ternGlow" cx="50%" cy="38%" r="75%"><stop offset="0%" stop-color="#5B6CFF" stop-opacity=".10"/><stop offset="100%" stop-color="#5B6CFF" stop-opacity="0"/></radialGradient></defs>';
   for(const t of [.25,.5,.75]){
     const l=(a,b)=>{const p=pos(a),q=pos(b);return `<line class="gl" x1="${p[0]}" y1="${p[1]}" x2="${q[0]}" y2="${q[1]}"/>`};
     s+=l({d:t,c:1-t,p:0},{d:t,c:0,p:1-t})+l({d:1-t,c:t,p:0},{d:0,c:t,p:1-t})+l({d:1-t,c:0,p:t},{d:0,c:1-t,p:t});
   }
   s+=`<polygon class="tri" points="${V.d} ${V.c} ${V.p}"/>`;
-  s+=`<text class="vl" x="${V.d[0]}" y="${V.d[1]-16}" text-anchor="middle">DATA</text><text class="vl" x="${V.c[0]}" y="${V.c[1]+26}" text-anchor="middle">CODE</text><text class="vl" x="${V.p[0]}" y="${V.p[1]+26}" text-anchor="middle">PRODUCT</text>`;
+  s+=`<text class="vl d" x="${V.d[0]}" y="${V.d[1]-16}" text-anchor="middle">DATA</text><text class="vl c" x="${V.c[0]}" y="${V.c[1]+26}" text-anchor="middle">CODE</text><text class="vl p" x="${V.p[0]}" y="${V.p[1]+26}" text-anchor="middle">PRODUCT</text>`;
   PROJ.forEach((w,i)=>{const [x,y]=pos(w);
     s+=`<g class="pt${i===CUR?' cur':''}" data-i="${i}" tabindex="0" aria-label="${d.pj[i]}"><circle class="h" cx="${x}" cy="${y}" r="12"/><circle class="d" cx="${x}" cy="${y}" r="4.5"/><text x="${x+9}" y="${y-9}">${String(i+1).padStart(2,'0')}</text></g>`;});
   svg.innerHTML=s;
