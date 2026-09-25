@@ -1,5 +1,7 @@
 # Portfolio CDB
 
+**[→ Voir le site](https://sen-donnees.github.io/portfolio-cdb/)**
+
 Portfolio de **Cheikh Darou Beye** : Data Scientist & développeur full stack.
 Direction artistique : *Data × Code × Product*, sombre, bilingue FR/EN.
 
