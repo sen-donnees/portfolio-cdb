@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sen-donnees.github.io/portfolio-cdb/sitemap.xml

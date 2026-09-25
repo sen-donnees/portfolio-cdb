@@ -1,6 +1,5 @@
 /* ─────────────────────────────────────────────────────────────
    CDB — design tokens (source unique de vérité)
-   Utilisés par prototypes/design-system-v1.html.
    À déplacer dans static/css/tokens.css quand le site passera en
    templates Django. Les pages prototypes ont encore ces valeurs
    recopiées dans leur <style> : toute modification doit être

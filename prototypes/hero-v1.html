@@ -3,9 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cheikh Darou Beye — Hero prototype v1</title>
+<title>Cheikh Darou Beye — Data Scientist &amp; Full-Stack Developer</title>
 <meta name="theme-color" content="#070B14">
+<meta name="description" content="Portfolio of Cheikh Darou Beye, Data Scientist and Full-Stack Developer: statistics, machine learning and production web platforms, from DocuSen to YoonuJob.">
+<link rel="canonical" href="https://sen-donnees.github.io/portfolio-cdb/prototypes/hero-v1.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cheikh Darou Beye — Data Scientist &amp; Full-Stack Developer">
+<meta property="og:description" content="Portfolio of Cheikh Darou Beye, Data Scientist and Full-Stack Developer: statistics, machine learning and production web platforms, from DocuSen to YoonuJob.">
+<meta property="og:url" content="https://sen-donnees.github.io/portfolio-cdb/prototypes/hero-v1.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cheikh Darou Beye — Data Scientist &amp; Full-Stack Developer">
+<meta name="twitter:description" content="Portfolio of Cheikh Darou Beye, Data Scientist and Full-Stack Developer: statistics, machine learning and production web platforms, from DocuSen to YoonuJob.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
@@ -105,9 +117,10 @@ html.menu-open{overflow:hidden}
 .btn-primary:hover{background:#fff}
 .btn-ghost:hover{border-color:var(--ink);background:rgba(236,234,228,.05)}
 
-.links{display:flex;flex-wrap:wrap;gap:8px 26px;list-style:none;margin-top:clamp(18px,3.2vh,32px);font-family:var(--mono);font-size:12.5px;color:var(--subtle)}
-.links a{display:inline-flex;gap:6px;transition:color .2s}
-.links a:hover{color:var(--ink)}
+.links{display:flex;flex-wrap:wrap;gap:10px;list-style:none;margin-top:clamp(18px,3.2vh,32px)}
+.links a{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border:1px solid var(--line-strong);border-radius:999px;font-family:var(--mono);font-size:12.5px;color:var(--subtle);transition:border-color .25s,color .25s,background .25s}
+.links a:hover{color:var(--ink);border-color:var(--ink);background:rgba(236,234,228,.05)}
+.links svg{width:15px;height:15px;flex:none;display:block}
 
 /* ── Plot frame ───────────────────────────── */
 .frame{position:relative;height:clamp(380px,64vh,640px);border:1px solid var(--line);border-radius:4px;
@@ -142,7 +155,8 @@ html.menu-open{overflow:hidden}
   .nav-links{display:none}
   .nav-inner{grid-template-columns:minmax(0,1fr) auto}
   .hero{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto}
-  .links a{word-break:break-all}
+  .links a{max-width:100%;height:auto;min-height:40px;padding:8px 16px}
+  .links a span{overflow-wrap:anywhere;word-break:break-word}
   .hero-l{padding-top:32px}
   .frame{height:auto;aspect-ratio:1/1;max-height:520px}
   .pillars{grid-template-columns:1fr}
@@ -184,15 +198,15 @@ html.menu-open{overflow:hidden}
       <p class="eyebrow rv" style="--i:0"><span class="dot"></span><span data-i18n="eyebrow">Open to opportunities</span></p>
       <h1 class="name rv" style="--i:1"><span>Cheikh Darou</span><span class="n2">Beye</span></h1>
       <p class="role rv" style="--i:2"><span data-i18n="role1">Data Scientist</span><i class="x">×</i><span data-i18n="role2">Full-Stack Developer</span></p>
-      <p class="lede rv" style="--i:3" data-i18n="lede">Statistician by training, builder by habit. I turn data into products that ship — from statistical analysis to web platforms running in production.</p>
+      <p class="lede rv" style="--i:3" data-i18n="lede">Statistician and data scientist by training, builder by habit. I turn data into products that ship — from statistical analysis to web platforms running in production, backed by 1,000+ automated tests.</p>
       <div class="cta rv" style="--i:4">
         <a class="btn btn-primary" href="work-v1.html"><span data-i18n="cta1">View selected work</span><span class="arr">→</span></a>
         <a class="btn btn-ghost" href="assets/cv-cheikh-darou-beye.pdf" target="_blank" rel="noopener" download><span data-i18n="cta2">Download CV</span><span class="arr">↓</span></a>
       </div>
       <ul class="links rv" style="--i:5">
-        <li><a href="https://github.com/sen-donnees" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
-        <li><a href="https://www.linkedin.com/in/cheikh-darou-beye-9544991b8/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
-        <li><a href="mailto:cheikhdaroubeye@gmail.com">cheikhdaroubeye@gmail.com</a></li>
+        <li><a href="https://github.com/sen-donnees" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.98 5.24.98 11.52c0 5.02 3.26 9.28 7.77 10.78.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.16.69-3.83-1.34-3.83-1.34-.52-1.31-1.26-1.66-1.26-1.66-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.17 1.74 1.17 1.01 1.73 2.65 1.23 3.3.94.1-.73.4-1.23.72-1.51-2.52-.29-5.17-1.26-5.17-5.6 0-1.24.44-2.25 1.17-3.04-.12-.29-.51-1.45.11-3.02 0 0 .96-.31 3.14 1.16a10.9 10.9 0 0 1 5.72 0c2.18-1.47 3.14-1.16 3.14-1.16.62 1.57.23 2.73.11 3.02.73.79 1.17 1.8 1.17 3.04 0 4.35-2.65 5.31-5.18 5.59.41.35.77 1.04.77 2.1 0 1.52-.01 2.74-.01 3.11 0 .3.2.66.79.55 4.5-1.5 7.76-5.76 7.76-10.78C23.02 5.24 18.27.5 12 .5z"/></svg><span>GitHub</span></a></li>
+        <li><a href="https://www.linkedin.com/in/cheikh-darou-beye-9544991b8/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.58c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45z"/></svg><span>LinkedIn</span></a></li>
+        <li><a href="mailto:cheikhdaroubeye@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5h15A1.5 1.5 0 0 1 21 6.5v11a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5v-11Z"/><path d="M4 6.5l8 6 8-6"/></svg><span>cheikhdaroubeye@gmail.com</span></a></li>
       </ul>
     </div>
 
@@ -227,7 +241,7 @@ html.menu-open{overflow:hidden}
 const I18N = {
   en:{nav_work:'Work',nav_approach:'Approach',nav_about:'About',nav_contact:'Contact',nav_cv:'CV ↗',
       eyebrow:'Open to opportunities',role1:'Data Scientist',role2:'Full-Stack Developer',
-      lede:'Statistician and data scientist by training, builder by habit. I turn data into products that ship — from statistical analysis to web platforms running in production.',
+      lede:'Statistician and data scientist by training, builder by habit. I turn data into products that ship — from statistical analysis to web platforms running in production, backed by 1,000+ automated tests.',
       cta1:'View selected work',cta2:'Download CV',
       hint:'x · position   y · bandwidth',
       p1:'Statistics, machine learning, spatial analysis.',
@@ -236,7 +250,7 @@ const I18N = {
       alt:'Interactive scatter plot with a fitted curve: the cursor moves a local regression window across the data.'},
   fr:{nav_work:'Projets',nav_approach:'Approche',nav_about:'À propos',nav_contact:'Contact',nav_cv:'CV ↗',
       eyebrow:'Ouvert aux opportunités',role1:'Data Scientist',role2:'Développeur Full-Stack',
-      lede:'Statisticien et data scientist de formation, bâtisseur par habitude. Je transforme la donnée en produits qui fonctionnent — de l’analyse statistique aux plateformes web en production.',
+      lede:'Statisticien et data scientist de formation, bâtisseur par habitude. Je transforme la donnée en produits qui fonctionnent — de l’analyse statistique aux plateformes web en production, avec plus de 1 000 tests automatisés.',
       cta1:'Voir les projets',cta2:'Télécharger le CV',
       hint:'x · position   y · fenêtre',
       p1:'Statistique, machine learning, analyse spatiale.',
