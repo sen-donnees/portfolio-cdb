@@ -112,6 +112,9 @@ html.menu-open{overflow:hidden}
 .blk-b{min-width:0}
 .blk-b p.big{font-size:clamp(1.3rem,2.2vw,1.95rem);line-height:1.28;letter-spacing:-.02em;font-weight:450;max-width:32em}
 .blk-b p.sm{max-width:44em;color:var(--muted);font-size:1.02rem;line-height:1.6;margin-top:14px}
+.also-list{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:12px}
+.also-list li{max-width:44em;color:var(--muted);font-size:1.02rem;line-height:1.5;padding-left:18px;position:relative}
+.also-list li::before{content:"";position:absolute;left:0;top:.6em;width:6px;height:6px;border-radius:50%;background:var(--line-strong)}
 
 /* closing link */
 .next{display:block;padding:clamp(40px,8vh,88px) 0;border-top:1px solid var(--line)}
@@ -193,8 +196,14 @@ html.menu-open{overflow:hidden}
         <div class="blk-k"><i>01</i><span data-i18n="k1">ALSO</span></div>
         <div class="blk-b">
           <p class="big" data-i18n="b1">A few more things from my studies, not full case studies but part of the path.</p>
-          <p class="sm" data-i18n="b1sm">A Master's project mapping cooperative bank locations across France against socio-economic data (team of 5, R/Shiny, Université Grenoble Alpes, 2021–2022). A Business Intelligence internship analyzing global energy data with Power BI and Qlik Sense (Marie Thieulin, Grenoble, 2022).</p>
-          <p class="sm" data-i18n="b1sm2">A few more from later coursework: a geomarketing study of a retail catchment area using public socio-economic data (Excel/Access, team of 2); nonlinear dimensionality reduction comparing Isomap to PCA and MDS (R, team of 2); a machine learning pipeline predicting antibiotic resistance from genomic data, with custom feature selection (Python/scikit-learn, team of 2); and a survival analysis using the Kaplan-Meier estimator and a Cox proportional-hazards model (R).</p>
+          <ul class="also-list">
+            <li data-i18n="b1_1">A Master's project mapping cooperative bank locations across France against socio-economic data (team of 5, R/Shiny, Université Grenoble Alpes, 2021–2022).</li>
+            <li data-i18n="b1_2">A Business Intelligence internship analyzing global energy data with Power BI and Qlik Sense (Marie Thieulin, Grenoble, 2022).</li>
+            <li data-i18n="b1_3">A geomarketing study of a retail catchment area using public socio-economic data (Excel/Access, team of 2).</li>
+            <li data-i18n="b1_4">Nonlinear dimensionality reduction, comparing Isomap to PCA and MDS (R, team of 2).</li>
+            <li data-i18n="b1_5">A machine learning pipeline predicting antibiotic resistance from genomic data, with custom feature selection (Python/scikit-learn, team of 2).</li>
+            <li data-i18n="b1_6">A survival analysis using the Kaplan-Meier estimator and a Cox proportional-hazards model (R).</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -225,8 +234,12 @@ m_lang:'LANGUAGES',m_lang_v:'French (native), English (B2), Wolof, Spanish',
 m_loc:'LOCATION',m_loc_v:'France',
 m_status:'STATUS',m_status_v:'Open to opportunities',
 k1:'ALSO',b1:'A few more things from my studies, not full case studies but part of the path.',
-b1sm:'A Master’s project mapping cooperative bank locations across France against socio-economic data (team of 5, R/Shiny, Université Grenoble Alpes, 2021–2022). A Business Intelligence internship analyzing global energy data with Power BI and Qlik Sense (Marie Thieulin, Grenoble, 2022).',
-b1sm2:'A few more from later coursework: a geomarketing study of a retail catchment area using public socio-economic data (Excel/Access, team of 2); nonlinear dimensionality reduction comparing Isomap to PCA and MDS (R, team of 2); a machine learning pipeline predicting antibiotic resistance from genomic data, with custom feature selection (Python/scikit-learn, team of 2); and a survival analysis using the Kaplan-Meier estimator and a Cox proportional-hazards model (R).',
+b1_1:'A Master’s project mapping cooperative bank locations across France against socio-economic data (team of 5, R/Shiny, Université Grenoble Alpes, 2021–2022).',
+b1_2:'A Business Intelligence internship analyzing global energy data with Power BI and Qlik Sense (Marie Thieulin, Grenoble, 2022).',
+b1_3:'A geomarketing study of a retail catchment area using public socio-economic data (Excel/Access, team of 2).',
+b1_4:'Nonlinear dimensionality reduction, comparing Isomap to PCA and MDS (R, team of 2).',
+b1_5:'A machine learning pipeline predicting antibiotic resistance from genomic data, with custom feature selection (Python/scikit-learn, team of 2).',
+b1_6:'A survival analysis using the Kaplan-Meier estimator and a Cox proportional-hazards model (R).',
 next:'GET IN TOUCH',next_t:'Say <span class="t2">hello</span>'},
 fr:{nav_work:'Projets',nav_approach:'Approche',nav_about:'À propos',nav_contact:'Contact',nav_cv:'CV ↗',
 h_top:'Data <span class="x">×</span> Code <span class="x">×</span> Product',
@@ -240,8 +253,12 @@ m_lang:'LANGUES',m_lang_v:'Français (natif), Anglais (B2), Wolof, Espagnol',
 m_loc:'LOCALISATION',m_loc_v:'France',
 m_status:'STATUT',m_status_v:'Ouvert aux opportunités',
 k1:'AUSSI',b1:'Quelques autres choses issues de mes études, pas des études de cas complètes mais qui font partie du parcours.',
-b1sm:'Un projet de master sur la cartographie des banques coopératives en France, mise en relation avec des données socio-économiques (groupe de 5, R/Shiny, Université Grenoble Alpes, 2021–2022). Un stage Business Intelligence sur les données mondiales d’énergie avec Power BI et Qlik Sense (Marie Thieulin, Grenoble, 2022).',
-b1sm2:'Quelques autres, plus tard dans le cursus : une étude de géomarketing sur la zone de chalandise d’un commerce à partir de données socio-économiques publiques (Excel/Access, en binôme) ; une réduction de dimension non linéaire comparant Isomap à l’ACP et au MDS (R, en binôme) ; un pipeline de machine learning prédisant la résistance aux antibiotiques à partir de données génomiques, avec sélection de variables sur mesure (Python/scikit-learn, en binôme) ; et une analyse de survie par estimateur de Kaplan-Meier et modèle de Cox (R).',
+b1_1:'Un projet de master sur la cartographie des banques coopératives en France, mise en relation avec des données socio-économiques (groupe de 5, R/Shiny, Université Grenoble Alpes, 2021–2022).',
+b1_2:'Un stage Business Intelligence sur les données mondiales d’énergie avec Power BI et Qlik Sense (Marie Thieulin, Grenoble, 2022).',
+b1_3:'Une étude de géomarketing sur la zone de chalandise d’un commerce à partir de données socio-économiques publiques (Excel/Access, en binôme).',
+b1_4:'Une réduction de dimension non linéaire comparant Isomap à l’ACP et au MDS (R, en binôme).',
+b1_5:'Un pipeline de machine learning prédisant la résistance aux antibiotiques à partir de données génomiques, avec sélection de variables sur mesure (Python/scikit-learn, en binôme).',
+b1_6:'Une analyse de survie par estimateur de Kaplan-Meier et modèle de Cox (R).',
 next:'ME CONTACTER',next_t:'Dites <span class="t2">bonjour</span>'}
 };
 let LANG='en';
