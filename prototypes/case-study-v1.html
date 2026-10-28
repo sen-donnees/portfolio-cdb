@@ -263,7 +263,7 @@ html.menu-open{overflow:hidden}
       <div><dt data-i18n="m_role">ROLE</dt><dd data-i18n="m_role_v">Founder &amp; sole developer</dd></div>
       <div><dt data-i18n="m_type">TYPE</dt><dd data-i18n="m_type_v">Web product · PDF generation</dd></div>
       <div><dt data-i18n="m_stack">STACK</dt><dd>Django · WeasyPrint · SQLite · Docker · Render</dd></div>
-      <div><dt data-i18n="m_link">LINK</dt><dd><a href="https://www.getdocusen.com" target="_blank" rel="noopener noreferrer">getdocusen.com ↗</a></dd></div>
+      <div><dt data-i18n="m_link">STATUS</dt><dd data-i18n="m_link_v">Discontinued as a standalone product · not profitable on its own</dd></div>
     </dl>
 
     <!-- Specimen -->
@@ -337,7 +337,7 @@ html.menu-open{overflow:hidden}
       </div>
       <div class="blk sr">
         <div class="blk-k"><i>07</i><span data-i18n="k_res">RESULT</span></div>
-        <div class="blk-b"><p class="big" data-i18n="b_res">Live at getdocusen.com with 27 templates, more than 690 automated tests, and now a building block of YoonuJob.</p></div>
+        <div class="blk-b"><p class="big" data-i18n="b_res">Built 27 templates and more than 690 automated tests. Discontinued as a standalone product — not profitable on its own — with its core now a building block of YoonuJob.</p></div>
       </div>
     </section>
 
@@ -370,8 +370,8 @@ html.menu-open{overflow:hidden}
 /* ═══ i18n ═══ */
 const I18N={
 en:{nav_work:'Work',nav_approach:'Approach',nav_about:'About',nav_contact:'Contact',nav_cv:'CV ↗',back:'All work',
-tag:'Product · Live in production',sub1:'Professional documents,',sub2:'ready in minutes.',
-m_role:'ROLE',m_role_v:'Founder & sole developer',m_type:'TYPE',m_type_v:'Web product · PDF generation',m_stack:'STACK',m_link:'LINK',
+tag:'Product · Discontinued · integrated into YoonuJob',sub1:'Professional documents,',sub2:'ready in minutes.',
+m_role:'ROLE',m_role_v:'Founder & sole developer',m_type:'TYPE',m_type_v:'Web product · PDF generation',m_stack:'STACK',m_link:'STATUS',m_link_v:'Discontinued as a standalone product · not profitable on its own',
 spec_t:'document types · 5 families',spec_h:'Hover a document',cap0:'One form per type. One clean PDF out.',pp1:'FORM',pp2:'HTML TEMPLATE',
 f1:'document templates, from invoices to employment contracts',f2:'automated tests, run on every push',f3:'document families, from invoices to residence attestations',
 k_ctx:'CONTEXT',b_ctx:'DocuSen is my own product: conceived, designed, built and deployed alone. It now also lives inside YoonuJob, my second product.',
@@ -381,7 +381,7 @@ b_sol2:'An account is required to generate a document. Once signed in, you save 
 k_eng:'ENGINEERING',b_eng:'27 document types, one engine.',
 b_eng2:'Each type started as hand-written views. A generic engine now lets them migrate one by one to pure configuration, and a startup check fails loudly if a type is declared in one place and forgotten in the other. The catalogue can grow without drifting.',
 code_h:'excerpt',k_role:'MY ROLE',b_role:'Everything: product, interface, back end, PDF templates, tests and deployment.',b_role2:'Usage events and one-click feedback tell me which templates to improve next.',
-k_stack:'STACK',k_res:'RESULT',b_res:'Live at getdocusen.com with 27 templates, more than 690 automated tests, and now a building block of YoonuJob.',
+k_stack:'STACK',k_res:'RESULT',b_res:'Built 27 templates and more than 690 automated tests. Discontinued as a standalone product — not profitable on its own — with its core now a building block of YoonuJob.',
 tern_p:'Every project sits somewhere between the three. DocuSen is mostly code and product; the machine-learning work sits at the other end.',
 tern_n:'Positions are self-assessed. Placeholder weights, to calibrate.',next:'NEXT PROJECT · N°05 / 07',
 fam:['COMMERCIAL','CONTRACTS','PAYROLL','LETTERS','ATTESTATIONS'],
@@ -392,8 +392,8 @@ docs:['Invoice','Credit note','Quote','Receipt','Purchase order','Delivery note'
 'Service certificate','Employment certificate','Payment certificate','Attendance certificate','Internship certificate','Salary certificate','Residence certificate'],
 pj:['Microbes / ML','Miellée','SenBioStat','DocuSen','YoonuJob','Sentazur','Client sites']},
 fr:{nav_work:'Projets',nav_approach:'Approche',nav_about:'À propos',nav_contact:'Contact',nav_cv:'CV ↗',back:'Tous les projets',
-tag:'Produit · En production',sub1:'Vos documents professionnels,',sub2:'prêts en quelques minutes.',
-m_role:'RÔLE',m_role_v:'Fondateur & développeur unique',m_type:'TYPE',m_type_v:'Produit web · Génération de PDF',m_stack:'STACK',m_link:'LIEN',
+tag:'Produit · Arrêté · intégré à YoonuJob',sub1:'Vos documents professionnels,',sub2:'prêts en quelques minutes.',
+m_role:'RÔLE',m_role_v:'Fondateur & développeur unique',m_type:'TYPE',m_type_v:'Produit web · Génération de PDF',m_stack:'STACK',m_link:'STATUT',m_link_v:'Arrêté en tant que produit autonome · pas rentable seul',
 spec_t:'types de documents · 5 familles',spec_h:'Survolez un document',cap0:'Un formulaire par type. Un PDF propre en sortie.',pp1:'FORMULAIRE',pp2:'TEMPLATE HTML',
 f1:'modèles de documents, de la facture au contrat de travail',f2:'tests automatisés, lancés à chaque push',f3:'familles de documents, de la facture à l’attestation de domicile',
 k_ctx:'CONTEXTE',b_ctx:'DocuSen est mon propre produit : conçu, dessiné, développé et déployé seul. Il vit aussi désormais dans YoonuJob, mon second produit.',
@@ -403,7 +403,7 @@ b_sol2:'Un compte est nécessaire pour générer un document. Une fois connecté
 k_eng:'INGÉNIERIE',b_eng:'27 types de documents, un seul moteur.',
 b_eng2:'Chaque type est né de vues écrites à la main. Un moteur générique permet maintenant de les migrer un à un vers de la simple configuration, et une vérification au démarrage échoue bruyamment si un type est déclaré à un endroit et oublié à l’autre. Le catalogue peut grandir sans dériver.',
 code_h:'extrait',k_role:'MON RÔLE',b_role:'Tout : produit, interface, back end, templates PDF, tests et déploiement.',b_role2:'Des événements d’usage et un retour en un clic me disent quels modèles améliorer en priorité.',
-k_stack:'STACK',k_res:'RÉSULTAT',b_res:'En ligne sur getdocusen.com avec 27 modèles, plus de 690 tests automatisés, et désormais une brique de YoonuJob.',
+k_stack:'STACK',k_res:'RÉSULTAT',b_res:'27 modèles construits et plus de 690 tests automatisés. Arrêté en tant que produit autonome — pas rentable seul — sa base technique est désormais une brique de YoonuJob.',
 tern_p:'Chaque projet se situe quelque part entre les trois. DocuSen est surtout du code et du produit ; le travail de machine learning est à l’autre extrémité.',
 tern_n:'Positions auto-évaluées. Pondérations provisoires, à calibrer.',next:'PROJET SUIVANT · N°05 / 07',
 fam:['COMMERCIAL','CONTRATS','PAIE','COURRIERS','ATTESTATIONS'],
