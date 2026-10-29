@@ -185,6 +185,12 @@ bullet("102 tests automatisés ; système d'alertes automatiques avant expiratio
 bullet("Stack : Django, PostgreSQL, Tailwind CSS, WeasyPrint.")
 
 role_line("Fondateur & Développeur unique", "2026")
+org_line("SenOcaz — Marketplace automobile, Sénégal")
+bullet("Achat, vente et location de véhicules : annonces avec filtres avancés, connexion sans mot de passe (WhatsApp Business API, SMS Orange), réservations avec prévention des doublons.")
+bullet("352 tests automatisés ; intégration continue complète (style, typage, sécurité, audit des dépendances, vérification de déploiement).")
+bullet("Stack : Django, PostgreSQL, Redis, HTMX, Tailwind CSS.")
+
+role_line("Fondateur & Développeur unique", "2026")
 org_line("SenBioStat — Application web d'analyse statistique")
 bullet("Outil en ligne exécutant des tests statistiques (Khi², t-test, ANOVA, régression, Kaplan-Meier) avec interprétation automatique en français et export PDF (WeasyPrint).")
 
